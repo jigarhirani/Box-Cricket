@@ -1,0 +1,86 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BOXCricket.Areas.MST_Rate.Models.MST_RateModel;
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Vertical Layouts</h4>
+
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Basic Layout</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Save" method="post">
+                                <input type="hidden" asp-for="RateID"/>
+
+                                <div class="mb-3">
+                                    <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Id</label>
+                                    <Select type="text" class="form-select" aria-label="Default select example" asp-for="GroundID" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                                        <option value="">Select Ground</option>
+                                    </Select>
+                                </div>                                
+                                <div class="mb-3">
+                                    <label asp-for="UserID" class="form-label" for="basic-default-company">User Id</label>
+                                    <input asp-for="UserID" type="text" class="form-control" id="basic-default-company" placeholder="Enter User Id" />
+                                </div>                               
+                                <div class="mb-3">
+                                    <label asp-for="DayOfWeek" for="exampleFormControlSelect1" class="form-label">City Id</label>
+                                    <select asp-for="DayOfWeek" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                                        <option selected>Open this select Day Of Week</option>
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+                                </div>                                
+                                <div class="mb-3">                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label asp-for="StartTime" for="html5-time-input" class="form-label">Start Time</label>
+                                            <input asp-for="StartTime" class="form-control" type="time"  id="html5-time-input" />
+                                        </div>
+
+                                        
+                                        <div class="col-md-6">
+                                            <label asp-for="EndTime" for="html5-time-input" class="form-label">End Time</label>
+                                            <input asp-for="EndTime" class="form-control" type="time" id="html5-time-input" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="HourlyRate" class="form-label" for="basic-default-company">Hourly Rate</label>
+                                    <input asp-for="HourlyRate" type="text" class="form-control" id="basic-default-company" placeholder="Enter Hourly Rate" />
+                                </div>
+                                <div class="demo-inline-spacing">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <a asp-action="RateList" class="btn btn-primary">Cancle</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+    <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }

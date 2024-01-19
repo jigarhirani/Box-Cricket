@@ -1,0 +1,75 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BOXCricket.Areas.MST_Booking.Models.MST_BookingModel;
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Vertical Layouts</h4>
+
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Basic Layout</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Save" method="post">
+                                <input type="hidden" asp-for="BookingID" />
+                                <div class="mb-3">
+                                    <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Id</label>
+                                    <Select type="text" class="form-select" aria-label="Default select example" asp-for="GroundID" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                                        <option value="">Select Ground</option>
+                                    </Select>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="UserID" class="form-label" for="basic-default-company">Book By</label>
+                                    <input asp-for="UserID" type="text" class="form-control" id="basic-default-company" placeholder="Enter User ID" />
+                                </div>
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label asp-for="FromTime" for="html5-time-input" class="form-label">Start Time</label>
+                                            <input asp-for="FromTime" class="form-control" type="time" id="html5-time-input" />
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <label asp-for="ToTime" for="html5-time-input" class="form-label">End Time</label>
+                                            <input asp-for="ToTime" class="form-control" type="time" id="html5-time-input" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="BookingDate" for="html5-date-input" class="form-label">Date</label>
+                                    <div class="col-md-10">
+                                        <input asp-for="BookingDate" class="form-control" type="date" value="2021-06-18" id="html5-date-input" />
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Status" class="form-label" for="basic-default-company">Status/Remark</label>
+                                    <input asp-for="Status" type="text" class="form-control" id="basic-default-company" placeholder="Enter" />
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a asp-action="BookingList" class="btn btn-secondary ms-2">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+    <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }

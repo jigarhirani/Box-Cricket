@@ -1,0 +1,161 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+                @if (!string.IsNullOrWhiteSpace(successMessage))
+                {
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        @successMessage
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                else if (!string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        @errorMessage
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <form asp-action="BookingSearch" asp-controller="MST_Booking" asp-area="MST_Booking" class="row mb-3">                  
+
+                    <div class="col-md-3 mb-2">
+                        <Select class="form-select" name="GroundID" id="GroundID" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                            <option disabled selected>Select Ground</option>
+                        </Select>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <input type="text" class="form-control" name="UserName" id="UserName" placeholder="User Name" />
+                    </div>                    
+                    <div class="col-md-1 mb-2">
+                        <button type="submit" class="btn btn-outline-success w-100">Search</button>
+                    </div>
+                </form>
+
+                <!-- Hoverable Table rows -->
+                <div class="card">
+                    <div class="card-header flex-column flex-md-row d-flex justify-content-between align-items-center">
+                        <div class="head-label text-left">
+                            <h5 class="card-title mb-0">Booking List</h5>
+                        </div>
+                        <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                            <a asp-action="Add" class="dt-button create-new btn btn-success" tabindex="0"
+                               aria-controls="DataTables_Table_0">
+                                <span>
+                                    <i class="bx bx-plus me-sm-1"></i>
+                                    <span class="d-none d-sm-inline-block">Add New Booking</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ground Name</th>
+                                    <th>User Name</th>
+                                    <th>From Time</th>
+                                    <th>To Time</th>
+                                    <th>Booking Date</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th>Modified</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @{
+                                    if (Model.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow dr in Model.Rows)
+                                        {
+                                            <tr>
+                                                <td>@dr["GroundName"]</td>
+                                                <td>@dr["UserName"]</td>
+                                                <td>@dr["FromTime"]</td>
+                                                <td>@dr["ToTime"]</td>
+                                                <td>@dr["BookingDate"]</td>
+                                                <td>@dr["Status"]</td>
+                                                <td>@dr["Created"]</td>
+                                                <td>@dr["Modified"]</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" asp-action="Add" asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])">
+                                                                <i class="bx bx-edit-alt me-1"></i>
+                                                                Edit
+                                                            </a>
+                                                            <a class="dropdown-item" asp-action="Delete" asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])" data-confirm="Are you sure you want to delete this Rate?">
+                                                                <i class="bx bx-trash me-1"></i>
+                                                                Delete
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="8" class="text-center">
+                                                <p class="col-form-label">No Record Found</p>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <!--/ Hoverable Table rows -->
+            </div>
+            <!-- / Content -->
+
+
+            <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+
+<!-- / Layout wrapper -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('[data-confirm]');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const confirmationMessage = this.getAttribute('data-confirm');
+                if (!confirm(confirmationMessage)) {
+                    e.preventDefault(); // Cancel the form submission if the user cancels the confirmation
+                }
+            });
+        });
+    });
+</script>

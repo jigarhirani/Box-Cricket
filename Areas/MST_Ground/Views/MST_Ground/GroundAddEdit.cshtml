@@ -1,0 +1,173 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BOXCricket.Areas.MST_Ground.Models.MST_GroundModel;
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Vertical Layouts</h4>
+
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Basic Layout</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Save" method="post">
+                                <input type="hidden" asp-for="GroundID"/>
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="GroundName" for="basic-default-fullname">Ground Name</label>
+                                    
+                                    <input asp-for="GroundName" type="text" class="form-control" id="basic-default-fullname" placeholder="Enter Ground Name" />
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="UserID" class="form-label" for="basic-default-company">User Id</label>
+                                    
+                                    <input asp-for="UserID" type="text" class="form-control" id="basic-default-company" placeholder="Enter User Id" />
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="GroundCapacity" class="form-label" for="basic-default-company">GroundCapacity</label>
+                                    <input asp-for="GroundCapacity" class="form-control" type="number" value="40" id="html5-number-input" />
+                                </div>
+                               
+                                <div class="mb-3">
+                                    <label asp-for="GroundWidth"  class="form-label" for="basic-default-company">Ground Width</label>
+                                    
+                                    <input asp-for ="GroundWidth" type="text" class="form-control" id="basic-default-company" placeholder="Enter Ground Width" />
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="GroundHeight" class="form-label" for="basic-default-company">Ground Height</label>
+                                    
+                                    <input asp-for="GroundHeight" type="text" class="form-control" id="basic-default-company" placeholder="Enter Ground Height" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlSelect1" class="form-label">Country Id</label>
+                                    <Select type ="text" class="form-select" aria-label="Default select example" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))" onchange="funOnStateChange();">
+                                        <option value="">Select Country</option>
+                                    </Select>
+                                </div>
+                                <div class="mb-3">
+                                    <label  for="exampleFormControlSelect1" class="form-label">State Id</label>
+                                    <Select type="text" class="form-select" aria-label="Default select example" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))" onchange="funOnCityChange();">
+                                        <option value="">Select State</option>
+                                    </Select>                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlSelect1" class="form-label">City Id</label>
+                                    <Select type="text" class="form-select" aria-label="Default select example" asp-for="CityID" asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
+                                        <option value="">Select City</option>
+                                    </Select>
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for ="Address" class="form-label" for="basic-default-message">Address</label>
+                                    
+                                    <textarea asp-for="Address" id="basic-default-message"
+                                              class="form-control"
+                                              placeholder="Enter Address"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="IsAllowedBooking" class="form-label" for="basic-default-company">Booking permission Allow or Not</label>
+
+                                    <input asp-for="IsAllowedBooking" type="text" class="form-control" id="basic-default-company" placeholder="0 / 1" />
+                                </div>
+                                @* <div class="form-check form-switch mb-2">
+                                    <input asp-for="IsAllowedBooking" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+                                    <label asp-for="IsAllowedBooking" class="form-check-label" for="flexSwitchUnheckChecked">Checked switch checkbox input</label>
+                                </div> *@
+                                                               
+                                                        
+
+                                <button type="submit" class="btn btn-primary">Save</button> 
+                                <a asp-action="GroundList" class="btn btn-secondary ms-2">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->   
+    <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+
+
+
+
+@section Scripts {
+
+   
+
+
+    @*dropdown fill *@
+    <script>
+
+        function funOnStateChange() {
+            var CountryID = $("#CountryID").val();
+
+            $("#StateID").empty();
+            $("#StateID").append($("<option></option>").val("").html("Select State"));
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+            if (CountryID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StateDropdownByCountry", "MST_Ground")" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                            });
+                        },
+                        error: function (err) {
+                            //alert(err.toString();
+                            alert("Error while fetch data");
+                        }
+                    }
+                )
+            }
+        }
+        function funOnCityChange() {
+            var StateID = $("#StateID").val();
+
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+            if (StateID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("CityDropdownByState", "MST_Ground")" + "?&StateID=" + StateID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error white fetch data");
+                        }
+                    }
+                )
+            }
+        }
+
+
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
