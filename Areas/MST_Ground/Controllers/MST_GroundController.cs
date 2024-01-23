@@ -4,17 +4,15 @@ using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
-
 namespace BOXCricket.Areas.MST_Ground.Controllers
-
-
 {
     [CheckAccess]
     [Area("MST_Ground")]
     [Route("MST_Ground/[controller]/[action]")]
     public class MST_GroundController : Controller
     {
-        MST_GroundDALBase dalMST_GroundDAL = new MST_GroundDALBase();
+        MST_GroundDALBase dalMST_GroundDALBase = new MST_GroundDALBase();
+        MST_GroundDAL dalMST_GroundDAL = new MST_GroundDAL();
         public MST_GroundController()
         {
 
@@ -23,7 +21,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         #region Select All 
         public IActionResult GroundList()
         {
-            DataTable dt = dalMST_GroundDAL.dbo_PR_MST_Ground_SelectAll();
+            DataTable dt = dalMST_GroundDALBase.dbo_PR_MST_Ground_SelectAll();
             return View("GroundList", dt);
         }
         #endregion
@@ -31,7 +29,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         #region Delete
         public IActionResult Delete(int GroundID)
         {
-            if (Convert.ToBoolean(dalMST_GroundDAL.dbo_PR_MST_Ground_DeleteByPK(GroundID)))
+            if (Convert.ToBoolean(dalMST_GroundDALBase.dbo_PR_MST_Ground_DeleteByPK(GroundID)))
                 return RedirectToAction("GroundList");
             return View("GroundList");
         }
@@ -43,7 +41,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         {
 
             #region Dropdown For Country           
-            DataTable dtCountry = dalMST_GroundDAL.dbo_PR_MST_Country_SelectByDropdownList();
+            DataTable dtCountry = dalMST_GroundDALBase.dbo_PR_MST_Country_SelectByDropdownList();
 
             List<MST_CountryDropDownModel> MST_CountryDropdown_List = new List<MST_CountryDropDownModel>();
             foreach (DataRow dr in dtCountry.Rows)
@@ -73,7 +71,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
             #region Record Select by PK
             if (GroundID != null)
             {
-                DataTable dt = dalMST_GroundDAL.dbo_PR_MST_Ground_SelectByPK(GroundID);
+                DataTable dt = dalMST_GroundDALBase.dbo_PR_MST_Ground_SelectByPK(GroundID);
                 if (dt.Rows.Count > 0)
                 {
                     MST_GroundModel model = new MST_GroundModel();
@@ -109,13 +107,13 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
             {
                 if (modelMST_Ground.GroundID == null)
                 {
-                    if (Convert.ToBoolean(dalMST_GroundDAL.dbo_PR_MST_Ground_Insert(modelMST_Ground)))
+                    if (Convert.ToBoolean(dalMST_GroundDALBase.dbo_PR_MST_Ground_Insert(modelMST_Ground)))
                         TempData["successMessage"] = "Record Inserted Successfully";
                     return RedirectToAction("GroundList");
                 }
                 else
                 {
-                    if (Convert.ToBoolean(dalMST_GroundDAL.dbo_PR_MST_Ground_UpdateByPK(modelMST_Ground)))
+                    if (Convert.ToBoolean(dalMST_GroundDALBase.dbo_PR_MST_Ground_UpdateByPK(modelMST_Ground)))
                         TempData["successMessage"] = "Record Updated Successfully";
                     return RedirectToAction("GroundList");
                 }
@@ -128,7 +126,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         #region Dropdown For State
         public IActionResult StateDropdownByCountry(int CountryID)
         {
-            DataTable dtState = dalMST_GroundDAL.dbo_PR_MST_State_DropdownByCountry(CountryID);
+            DataTable dtState = dalMST_GroundDALBase.dbo_PR_MST_State_DropdownByCountry(CountryID);
 
             List<MST_StateDropDownModel> MST_StateDropdownByCountry_List = new List<MST_StateDropDownModel>();
             foreach (DataRow dr in dtState.Rows)
@@ -147,7 +145,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         #region Dropdown For City 
         public IActionResult CityDropdownByState(int StateID)
         {
-            DataTable dtCity = dalMST_GroundDAL.dbo_PR_MST_City_DropdownByState(StateID);
+            DataTable dtCity = dalMST_GroundDALBase.dbo_PR_MST_City_DropdownByState(StateID);
 
             List<MST_CityDropDownModel> MST_CityDropdownByState_List = new List<MST_CityDropDownModel>();
             foreach (DataRow dr in dtCity.Rows)

@@ -1,7 +1,7 @@
-﻿using BOXCricket.Models;
+﻿using BOXCricket.BAL;
+using BOXCricket.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using BOXCricket.BAL;
 namespace BOXCricket.Controllers
 {
 
@@ -30,7 +30,8 @@ namespace BOXCricket.Controllers
             return View();
         }
 
-        public IActionResult Dashboard() {
+        public IActionResult Dashboard()
+        {
             return View();
         }
         public IActionResult Privacy()

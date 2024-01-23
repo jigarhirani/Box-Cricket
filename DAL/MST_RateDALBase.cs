@@ -1,8 +1,8 @@
 ﻿
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
-using System.Data.Common;
-using System.Data;
 using BOXCricket.Areas.MST_Rate.Models;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+using System.Data;
+using System.Data.Common;
 
 namespace BOXCricket.DAL
 {
@@ -23,7 +23,7 @@ namespace BOXCricket.DAL
                 }
                 return dt;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -42,7 +42,7 @@ namespace BOXCricket.DAL
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -61,14 +61,14 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rates.DayOfWeek);
                 sqlDB.AddInParameter(dbCMD, "@StartTime", SqlDbType.DateTime, modelMST_Rates.StartTime);
                 sqlDB.AddInParameter(dbCMD, "@EndTime", SqlDbType.DateTime, modelMST_Rates.EndTime);
-                sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rates.HourlyRate);                
+                sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rates.HourlyRate);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -92,7 +92,7 @@ namespace BOXCricket.DAL
 
                 return dt;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -118,7 +118,7 @@ namespace BOXCricket.DAL
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -140,44 +140,11 @@ namespace BOXCricket.DAL
 
                 return dt;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
         }
         #endregion    
-
-        #region Method: dbo_PR_MST_Rate_Search
-        public DataTable dbo_PR_MST_Rate_Search(string DayOfWeek, decimal HourlyRate)
-        {
-            try
-            {
-                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_Search");
-
-                if (DayOfWeek != null)
-                {
-                    sqlDB.AddInParameter(dbCMD, "DayOfWeek", SqlDbType.VarChar, DayOfWeek);
-                }
-
-                if (HourlyRate != -1)
-                {
-                    sqlDB.AddInParameter(dbCMD, "HourlyRate", SqlDbType.Decimal, HourlyRate);
-                }
-
-                DataTable dt = new DataTable();
-                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
-                {
-                    dt.Load(dr);
-                }
-
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-        #endregion
     }
 }

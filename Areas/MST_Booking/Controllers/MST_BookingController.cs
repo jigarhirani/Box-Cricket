@@ -1,5 +1,4 @@
 ﻿using BOXCricket.Areas.MST_Booking.Models;
-using BOXCricket.Areas.MST_Booking.Models;
 using BOXCricket.BAL;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,9 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
     [Route("MST_Booking/[controller]/[action]")]
     public class MST_BookingController : Controller
     {
-        MST_BookingDALBase dalMST_BookingDAL = new MST_BookingDALBase();
+        MST_BookingDALBase dalMST_BookingDALBase = new MST_BookingDALBase();
+
+        MST_BookingDAL dalMST_BookingDAL = new MST_BookingDAL();
         public MST_BookingController()
         {
 
@@ -22,7 +23,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         public IActionResult BookingList()
         {
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_BookingDALBase.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)
@@ -35,7 +36,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             ViewBag.GroundList = MST_GroundDropdown_List;
             #endregion
 
-            DataTable dt = dalMST_BookingDAL.dbo_PR_MST_Booking_SelectAll();
+            DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAll();
             return View("BookingList", dt);
         }
         #endregion
@@ -43,7 +44,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         #region Delete
         public IActionResult Delete(int BookingID)
         {
-            if (Convert.ToBoolean(dalMST_BookingDAL.dbo_PR_MST_Booking_DeleteByPK(BookingID)))
+            if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_DeleteByPK(BookingID)))
                 return RedirectToAction("BookingList");
             return View("BookingList");
         }
@@ -55,7 +56,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         {
 
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_BookingDALBase.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)
@@ -71,7 +72,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             #region Record Select by PK
             if (BookingID != null)
             {
-                DataTable dt = dalMST_BookingDAL.dbo_PR_MST_Booking_SelectByPK(BookingID);
+                DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectByPK(BookingID);
                 if (dt.Rows.Count > 0)
                 {
                     MST_BookingModel model = new MST_BookingModel();
@@ -103,13 +104,13 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             {
                 if (modelMST_Booking.BookingID == null)
                 {
-                    if (Convert.ToBoolean(dalMST_BookingDAL.dbo_PR_MST_Booking_Insert(modelMST_Booking)))
+                    if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_Insert(modelMST_Booking)))
                         TempData["successMessage"] = "Record Inserted Successfully";
                     return RedirectToAction("BookingList");
                 }
                 else
                 {
-                    if (Convert.ToBoolean(dalMST_BookingDAL.dbo_PR_MST_Booking_UpdateByPK(modelMST_Booking)))
+                    if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_UpdateByPK(modelMST_Booking)))
                         TempData["successMessage"] = "Record Updated Successfully";
                     return RedirectToAction("BookingList");
                 }
@@ -123,7 +124,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         public IActionResult BookingSearch(string UserName, int GroundID)
         {
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_BookingDALBase.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)

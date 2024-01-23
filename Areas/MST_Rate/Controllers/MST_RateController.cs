@@ -11,7 +11,9 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
     [Route("MST_Rate/[controller]/[action]")]
     public class MST_RateController : Controller
     {
-        MST_RateDALBase dalMST_RateDAL = new MST_RateDALBase();
+        MST_RateDALBase dalMST_RateDALBase = new MST_RateDALBase();
+
+        MST_RateDAL dalMST_RateDAL = new MST_RateDAL();
         public MST_RateController()
         {
 
@@ -20,7 +22,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         #region Select All 
         public IActionResult RateList()
         {
-            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_SelectAll();
+            DataTable dt = dalMST_RateDALBase.dbo_PR_MST_Rate_SelectAll();
             return View("RateList", dt);
         }
         #endregion
@@ -28,7 +30,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         #region Delete
         public IActionResult Delete(int RateID)
         {
-            if (Convert.ToBoolean(dalMST_RateDAL.dbo_PR_MST_Rate_DeleteByPK(RateID)))
+            if (Convert.ToBoolean(dalMST_RateDALBase.dbo_PR_MST_Rate_DeleteByPK(RateID)))
                 return RedirectToAction("RateList");
             return View("RateList");
         }
@@ -40,7 +42,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         {
 
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_RateDAL.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_RateDALBase.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)
@@ -56,7 +58,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
             #region Record Select by PK
             if (RateID != null)
             {
-                DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_SelectByPK(RateID);
+                DataTable dt = dalMST_RateDALBase.dbo_PR_MST_Rate_SelectByPK(RateID);
                 if (dt.Rows.Count > 0)
                 {
                     MST_RateModel model = new MST_RateModel();
@@ -88,13 +90,13 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
             {
                 if (modelMST_Rate.RateID == null)
                 {
-                    if (Convert.ToBoolean(dalMST_RateDAL.dbo_PR_MST_Rate_Insert(modelMST_Rate)))
+                    if (Convert.ToBoolean(dalMST_RateDALBase.dbo_PR_MST_Rate_Insert(modelMST_Rate)))
                         TempData["successMessage"] = "Record Inserted Successfully";
                     return RedirectToAction("RateList");
                 }
                 else
                 {
-                    if (Convert.ToBoolean(dalMST_RateDAL.dbo_PR_MST_Rate_UpdateByPK(modelMST_Rate)))
+                    if (Convert.ToBoolean(dalMST_RateDALBase.dbo_PR_MST_Rate_UpdateByPK(modelMST_Rate)))
                         TempData["successMessage"] = "Record Updated Successfully";
                     return RedirectToAction("RateList");
                 }
