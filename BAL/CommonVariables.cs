@@ -18,8 +18,7 @@
             //if it contains then return the value contained by the key.
             if (_httpContextAccessor.HttpContext.Session.GetString("UserID") != null)
             {
-                UserID =
-               Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetString("UserID").ToString());
+                UserID = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetString("UserID").ToString());
             }
             return UserID;
         }
@@ -28,8 +27,7 @@
             string? UserName = null;
             if (_httpContextAccessor.HttpContext.Session.GetString("UserName") != null)
             {
-                UserName =
-               _httpContextAccessor.HttpContext.Session.GetString("UserName").ToString();
+                UserName = _httpContextAccessor.HttpContext.Session.GetString("UserName").ToString();
             }
 
             return UserName;

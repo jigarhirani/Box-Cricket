@@ -6,7 +6,6 @@ namespace BOXCricket.DAL
 {
     public class MST_BookingDAL : DAL_Helper
     {
-
         #region Method: dbo_PR_MST_Booking_Search
         public DataTable dbo_PR_MST_Booking_Search(string UserName, int GroundID)
         {

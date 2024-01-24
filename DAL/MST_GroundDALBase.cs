@@ -1,4 +1,5 @@
 ﻿using BOXCricket.Areas.MST_Ground.Models;
+using BOXCricket.BAL;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
@@ -56,10 +57,9 @@ namespace BOXCricket.DAL
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_Insert");
+
                 sqlDB.AddInParameter(dbCMD, "@GroundName", SqlDbType.VarChar, modelMST_Ground.GroundName);
-
-
-                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, modelMST_Ground.UserID);
+                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@GroundCapacity", SqlDbType.Int, modelMST_Ground.GroundCapacity);
                 sqlDB.AddInParameter(dbCMD, "@GroundWidth", SqlDbType.Decimal, modelMST_Ground.GroundWidth);
                 sqlDB.AddInParameter(dbCMD, "@GroundHeight", SqlDbType.Decimal, modelMST_Ground.GroundHeight);
@@ -114,7 +114,7 @@ namespace BOXCricket.DAL
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_UpdateByPK");
                 sqlDB.AddInParameter(dbCMD, "GroundID", SqlDbType.Int, modelMST_Ground.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@GroundName", SqlDbType.VarChar, modelMST_Ground.GroundName);
-                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, modelMST_Ground.UserID);
+                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@GroundCapacity", SqlDbType.Int, modelMST_Ground.GroundCapacity);
                 sqlDB.AddInParameter(dbCMD, "@GroundWidth", SqlDbType.Decimal, modelMST_Ground.GroundWidth);
                 sqlDB.AddInParameter(dbCMD, "@GroundHeight", SqlDbType.Decimal, modelMST_Ground.GroundHeight);

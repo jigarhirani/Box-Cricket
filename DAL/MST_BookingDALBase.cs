@@ -1,4 +1,5 @@
 ﻿using BOXCricket.Areas.MST_Booking.Models;
+using BOXCricket.BAL;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
@@ -56,7 +57,7 @@ namespace BOXCricket.DAL
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_Insert");
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
-                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, modelMST_Bookings.UserID);
+                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
                 sqlDB.AddInParameter(dbCMD, "@FromTime", SqlDbType.DateTime, modelMST_Bookings.FromTime);
                 sqlDB.AddInParameter(dbCMD, "@ToTime", SqlDbType.DateTime, modelMST_Bookings.ToTime);
@@ -106,7 +107,7 @@ namespace BOXCricket.DAL
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_UpdateByPK");
                 sqlDB.AddInParameter(dbCMD, "BookingID", SqlDbType.Int, modelMST_Bookings.BookingID);
-                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
+                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, modelMST_Bookings.UserID);
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
                 sqlDB.AddInParameter(dbCMD, "@FromTime", SqlDbType.DateTime, modelMST_Bookings.FromTime);

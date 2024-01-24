@@ -1,12 +1,11 @@
 ﻿using BOXCricket.Areas.MST_Booking.Models;
-using BOXCricket.BAL;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace BOXCricket.Areas.MST_Booking.Controllers
 {
-    [CheckAccess]
+    //[CheckAccess]
     [Area("MST_Booking")]
     [Route("MST_Booking/[controller]/[action]")]
     public class MST_BookingController : Controller
@@ -16,6 +15,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         MST_BookingDAL dalMST_BookingDAL = new MST_BookingDAL();
         public MST_BookingController()
         {
+
 
         }
 

@@ -67,10 +67,10 @@
                         </div>
                     </div>
                     <div class="table-responsive text-nowrap">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Ground Name</th>
+                                    <th class="sticky-left">Ground Name</th>
                                     <th>User Name</th>
                                     <th>Ground Capacity</th>
                                     <th>Ground Width</th>
@@ -81,7 +81,7 @@
                                     <th>Is AllowedBooking</th>
                                     <th>Created</th>
                                     <th>Modified</th>
-                                    <th>Actions</th>
+                                    <th class="sticky-right">Actions</th>
 
                                 </tr>
                             </thead>
@@ -92,7 +92,7 @@
                                         foreach (DataRow dr in Model.Rows)
                                         {
                                             <tr>
-                                                <td>@dr["GroundName"]</td>
+                                                <td class="sticky-left">@dr["GroundName"]</td>
                                                 <td>@dr["UserName"]</td>
                                                 <td>@dr["GroundCapacity"]</td>
                                                 <td>@dr["GroundWidth"]</td>
@@ -103,7 +103,7 @@
                                                 <td>@dr["IsAllowedBooking"]</td>
                                                 <td>@dr["Created"]</td>
                                                 <td>@dr["Modified"]</td>
-                                                <td>
+                                                <td class="sticky-right">
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                                                 data-bs-toggle="dropdown">

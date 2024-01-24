@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Repos\\BOXCricket\\BOXCricket.csproj": {}
+    "D:\\Repos\\BOXCricket\\BOXCricket.csproj": {}
   },
   "projects": {
-    "d:\\Repos\\BOXCricket\\BOXCricket.csproj": {
+    "D:\\Repos\\BOXCricket\\BOXCricket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Repos\\BOXCricket\\BOXCricket.csproj",
+        "projectUniqueName": "D:\\Repos\\BOXCricket\\BOXCricket.csproj",
         "projectName": "BOXCricket",
-        "projectPath": "d:\\Repos\\BOXCricket\\BOXCricket.csproj",
+        "projectPath": "D:\\Repos\\BOXCricket\\BOXCricket.csproj",
         "packagesPath": "C:\\Users\\hiran\\.nuget\\packages\\",
-        "outputPath": "d:\\Repos\\BOXCricket\\obj\\",
+        "outputPath": "D:\\Repos\\BOXCricket\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hiran\\AppData\\Roaming\\NuGet\\NuGet.Config",

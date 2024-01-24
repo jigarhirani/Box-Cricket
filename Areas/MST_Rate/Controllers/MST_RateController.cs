@@ -1,12 +1,11 @@
 ﻿using BOXCricket.Areas.MST_Rate.Models;
-using BOXCricket.BAL;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace BOXCricket.Areas.MST_Rate.Controllers
 {
-    [CheckAccess]
+    //[CheckAccess]
     [Area("MST_Rate")]
     [Route("MST_Rate/[controller]/[action]")]
     public class MST_RateController : Controller

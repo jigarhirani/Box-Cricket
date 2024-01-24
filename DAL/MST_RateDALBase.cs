@@ -1,5 +1,6 @@
 ﻿
 using BOXCricket.Areas.MST_Rate.Models;
+using BOXCricket.BAL;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
@@ -57,7 +58,7 @@ namespace BOXCricket.DAL
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_Insert");
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rates.GroundID);
-                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, modelMST_Rates.UserID);
+                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rates.DayOfWeek);
                 sqlDB.AddInParameter(dbCMD, "@StartTime", SqlDbType.DateTime, modelMST_Rates.StartTime);
                 sqlDB.AddInParameter(dbCMD, "@EndTime", SqlDbType.DateTime, modelMST_Rates.EndTime);
@@ -108,7 +109,7 @@ namespace BOXCricket.DAL
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_UpdateByPK");
                 sqlDB.AddInParameter(dbCMD, "RateID", SqlDbType.Int, modelMST_Rates.RateID);
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rates.GroundID);
-                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, modelMST_Rates.UserID);
+                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rates.DayOfWeek);
                 sqlDB.AddInParameter(dbCMD, "@StartTime", SqlDbType.DateTime, modelMST_Rates.StartTime);
                 sqlDB.AddInParameter(dbCMD, "@EndTime", SqlDbType.DateTime, modelMST_Rates.EndTime);
