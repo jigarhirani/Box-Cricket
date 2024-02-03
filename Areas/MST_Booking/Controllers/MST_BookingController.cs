@@ -2,6 +2,7 @@
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using static BOXCricket.Models.MST_DropDownModel;
 
 namespace BOXCricket.Areas.MST_Booking.Controllers
 {
@@ -23,15 +24,15 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         public IActionResult BookingList()
         {
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDALBase.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)
             {
-                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
-                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
-                vlst.GroundName = dr["GroundName"].ToString();
-                MST_GroundDropdown_List.Add(vlst);
+                MST_GroundDropDownModel mst_Grounddropdownmodel = new MST_GroundDropDownModel();
+                mst_Grounddropdownmodel.GroundID = Convert.ToInt32(dr["GroundID"]);
+                mst_Grounddropdownmodel.GroundName = dr["GroundName"].ToString();
+                MST_GroundDropdown_List.Add(mst_Grounddropdownmodel);
             }
             ViewBag.GroundList = MST_GroundDropdown_List;
             #endregion
@@ -54,17 +55,16 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         #region Add/Edit
         public IActionResult Add(int? BookingID)
         {
-
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDALBase.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)
             {
-                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
-                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
-                vlst.GroundName = dr["GroundName"].ToString();
-                MST_GroundDropdown_List.Add(vlst);
+                MST_GroundDropDownModel mst_Grounddropdownmodel = new MST_GroundDropDownModel();
+                mst_Grounddropdownmodel.GroundID = Convert.ToInt32(dr["GroundID"]);
+                mst_Grounddropdownmodel.GroundName = dr["GroundName"].ToString();
+                MST_GroundDropdown_List.Add(mst_Grounddropdownmodel);
             }
             ViewBag.GroundList = MST_GroundDropdown_List;
             #endregion            
@@ -80,10 +80,10 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
                     {
                         model.BookingID = Convert.ToInt32(dr["BookingID"]);
                         model.GroundID = Convert.ToInt32(dr["GroundID"]);
-                        model.UserID = Convert.ToInt32(dr["UserID"]);
+                        model.BookedBy = Convert.ToInt32(dr["BookedBy"]);
+                        model.BookingDate = Convert.ToDateTime(dr["BookingDate"].ToString());
                         model.FromTime = Convert.ToDateTime(dr["FromTime"].ToString());
                         model.ToTime = Convert.ToDateTime(dr["ToTime"].ToString());
-                        model.BookingDate = Convert.ToDateTime(dr["BookingDate"].ToString());
                         model.Status = dr["Status"].ToString();
                     }
                     return View("BookingAddEdit", model);
@@ -124,7 +124,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         public IActionResult BookingSearch(string UserName, int GroundID)
         {
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDALBase.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)

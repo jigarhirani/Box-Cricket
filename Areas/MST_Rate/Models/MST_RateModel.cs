@@ -1,22 +1,30 @@
-﻿namespace BOXCricket.Areas.MST_Rate.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BOXCricket.Areas.MST_Rate.Models
 {
     public class MST_RateModel
     {
         public int? RateID { get; set; }
+
+        [Required(ErrorMessage = "Please choose the Ground.")]
         public int GroundID { get; set; }
+
         public int UserID { get; set; }
-        public string? UserName { get; set; }
+
+        [Required(ErrorMessage = "Please choose the Day Of Week.")]
         public string DayOfWeek { get; set; }
+
+        [Required(ErrorMessage = "Please choose the Start Time.")]
         public DateTime StartTime { get; set; }
+
+        [Required(ErrorMessage = "Please choose the End Time.")]
         public DateTime EndTime { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Hourly Rate in INR.")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Please enter a valid amount in INR.")]
         public decimal HourlyRate { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
-    }
-
-    public class MST_GroundDropDownModel
-    {
-        public int? GroundID { get; set; }
-        public string GroundName { get; set; }
     }
 }

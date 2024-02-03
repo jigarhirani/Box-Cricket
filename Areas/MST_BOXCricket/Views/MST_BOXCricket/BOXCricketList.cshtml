@@ -1,0 +1,169 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">BOXCricket /</span> BOXCricket List</h4>
+                @if (!string.IsNullOrWhiteSpace(successMessage))
+                {
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        @successMessage
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                else if (!string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        @errorMessage
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                @* <form asp-action="BOXCricketSearch" asp-controller="MST_BOXCricket" asp-area="MST_BOXCricket" class="row mb-3">
+                    <div class="col-md-3 mb-2">
+                        <input type="text" class="form-control" name="BOXCricketName" id="searchBOXCricketName"
+                               placeholder="BOXCricket Name" />
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <input type="text" class="form-control" name="BOXCricketCapacity" id="searchBOXCricketCapacity"
+                               placeholder="BOXCricket Capacity" />
+                    </div>
+                     <div class="col-md-3 mb-2">
+                    <select class="form-select" id="selectIsAllowedBooking" aria-label="Default select example">
+                    <option value="True">Allowed To Book</option>
+                    <option value="False">Not Allowed To Book</option>
+                    </select>
+                    </div> 
+                    <div class="col-md-1 mb-2">
+                        <button type="submit" class="btn btn-outline-success w-100">Search</button>
+                    </div>
+                </form> *@
+
+                <!-- Hoverable Table rows -->
+                <div class="card">
+                    <div class="card-header flex-column flex-md-row d-flex justify-content-between align-items-center">
+                        <div class="head-label text-left">
+                            <h5 class="card-title mb-0">BOXCricket List</h5>
+                        </div>
+                        <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                            <a asp-action="Add" class="dt-button create-new btn btn-success" tabindex="0"
+                               aria-controls="DataTables_Table_0">
+                                <span>
+                                    <i class="bx bx-plus me-sm-1"></i>
+                                    <span class="d-none d-sm-inline-block">Add New BOXCricket</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="sticky-left">BOXCricket Name</th>
+                                    <th>Owner Name</th>
+                                    <th>Address</th>
+                                    <th>Country Name</th>
+                                    <th>State Name</th>
+                                    <th>City Name</th>
+                                    <th>Created</th>
+                                    <th>Modified</th>
+                                    <th class="sticky-right">Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @{
+                                    if (Model.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow dr in Model.Rows)
+                                        {
+                                            <tr>
+                                                <td class="sticky-left">@dr["BOXCricketName"]</td>
+                                                <td>@dr["OwnerName"]</td>
+                                                <td>@dr["Address"]</td>
+                                                <td>@dr["CountryName"]</td>
+                                                <td>@dr["StateName"]</td>
+                                                <td>@dr["CityName"]</td>
+                                                <td>@dr["Created"]</td>
+                                                <td>@dr["Modified"]</td>
+                                                <td class="sticky-right">
+                                                    <div class="dropdown dropend">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" asp-action="Add"
+                                                               asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])">
+                                                                <i class="bx bx-edit-alt me-1"></i>
+                                                                Edit
+                                                            </a>
+                                                            <a class="dropdown-item" asp-action="Delete"
+                                                               asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
+                                                               data-confirm="Are you sure you want to delete this BOXCricket?">
+                                                                <i class="bx bx-trash me-1"></i>
+                                                                Delete
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="12" class="text-center">
+                                                <p class="col-form-label">No Record Found</p>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <!--/ Hoverable Table rows -->
+            </div>
+            <!-- / Content -->
+
+
+            <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+
+<!-- / Layout wrapper -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('[data-confirm]');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const confirmationMessage = this.getAttribute('data-confirm');
+                if (!confirm(confirmationMessage)) {
+                    e.preventDefault(); // Cancel the form submission if the user cancels the confirmation
+                }
+            });
+        });
+    });
+</script>

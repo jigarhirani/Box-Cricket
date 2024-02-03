@@ -1,0 +1,153 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BOXCricket.Areas.MST_BOXCricket.Models.MST_BOXCricketModel;
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">BOXCricket /</span> Add-Edit BOXCricket</h4>
+
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">BOXCricket Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Save" method="post">
+                                <input type="hidden" asp-for="BOXCricketID" />                              
+
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="BOXCricketName" for="basic-default-fullname">
+                                        BOX Cricket Name
+                                    </label> 
+                                    <input asp-for="BOXCricketName" type="text" class="form-control"
+                                           id="basic-default-fullname" placeholder="Enter the BOXCricket Name" />
+                                    <span asp-validation-for="BOXCricketName" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Address" class="form-label"
+                                           for="basic-default-message">Address</label>
+                                    <textarea asp-for="Address" id="basic-default-message" class="form-control"
+                                              placeholder="Enter the address where the ground is located"></textarea>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <label for="exampleFormControlSelect1" class="form-label">Country</label>
+                                        <select type="text" class="form-select" aria-label="Default select example"
+                                                asp-for="CountryID"
+                                                asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))"
+                                                onchange="funOnStateChange();">
+                                            <option value="">Select the Country</option>
+                                        </select>
+                                        <span asp-validation-for="CountryID" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-md-4">
+                                        <label for="exampleFormControlSelect1" class="form-label">State</label>
+                                        <select type="text" class="form-select" aria-label="Default select example"
+                                                asp-for="StateID"
+                                                asp-items="@(new SelectList(ViewBag.StateList, "StateID", "StateName"))"
+                                                onchange="funOnCityChange();">
+                                            <option value="">Select the State</option>
+                                        </select>
+                                        <span asp-validation-for="StateID" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-md-4">
+                                        <label for="exampleFormControlSelect1" class="form-label">City</label>
+                                        <select type="text" class="form-select" aria-label="Default select example"
+                                                asp-for="CityID"
+                                                asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
+                                            <option value="">Select the City</option>
+                                        </select>
+                                        <span asp-validation-for="CityID" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a asp-action="BOXCricketList" class="btn btn-secondary ms-2">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+    <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+@section Scripts {
+    @*dropdown fill *@
+    <script>
+
+        function funOnStateChange() {
+            var CountryID = $("#CountryID").val();
+
+            $("#StateID").empty();
+            $("#StateID").append($("<option></option>").val("").html("Select State"));
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+            if (CountryID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StateDropdownByCountry", "MST_BOXCricket")" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                            });
+                        },
+                        error: function (err) {
+                            //alert(err.toString();
+                            alert("Error while fetch data");
+                        }
+                    }
+                )
+            }
+        }
+        function funOnCityChange() {
+            var StateID = $("#StateID").val();
+
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+            if (StateID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("CityDropdownByState", "MST_BOXCricket")" + "?&StateID=" + StateID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error white fetch data");
+                        }
+                    }
+                )
+            }
+        }
+
+
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -17,6 +17,10 @@ namespace BOXCricket.Controllers
         [CheckAccess]
         public IActionResult Index()
         {
+            ViewBag.UserID = HttpContext.Session.GetString("UserID");
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.ProfilePhotoPath = HttpContext.Session.GetString("ProfilePhotoPath");
+
             return View();
         }
 
@@ -29,7 +33,6 @@ namespace BOXCricket.Controllers
         {
             return View();
         }
-
         public IActionResult Dashboard()
         {
             return View();

@@ -16,7 +16,7 @@ namespace BOXCricket.DAL
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_SelectAll");
-
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
                 {
@@ -39,7 +39,7 @@ namespace BOXCricket.DAL
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_DeleteByPK");
                 sqlDB.AddInParameter(dbCMD, "RateID", SqlDbType.Int, RateID);
-
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
             }
@@ -84,7 +84,7 @@ namespace BOXCricket.DAL
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_SelectByPK");
                 sqlDB.AddInParameter(dbCMD, "RateID", SqlDbType.Int, RateID);
-
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
                 {
@@ -124,28 +124,6 @@ namespace BOXCricket.DAL
                 return null;
             }
         }
-        #endregion
-
-        #region Method: dbo_PR_MST_Ground_Dropdown
-        public DataTable dbo_PR_MST_Ground_Dropdown()
-        {
-            try
-            {
-                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_Dropdown");
-                DataTable dt = new DataTable();
-                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
-                {
-                    dt.Load(dr);
-                }
-
-                return dt;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        #endregion    
+        #endregion        
     }
 }

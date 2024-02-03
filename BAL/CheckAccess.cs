@@ -10,7 +10,7 @@ namespace BOXCricket.BAL
         {
             if (filterContext.HttpContext.Session.GetString("UserID") == null)
             {
-                filterContext.Result = new RedirectResult("~/SEC_User/SEC_User/SEC_Login");
+                filterContext.Result = new RedirectResult("~/MST_User/MST_User/Login");
             }
         }
 

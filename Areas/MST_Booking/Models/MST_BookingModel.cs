@@ -1,22 +1,28 @@
-﻿namespace BOXCricket.Areas.MST_Booking.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BOXCricket.Areas.MST_Booking.Models
 {
     public class MST_BookingModel
     {
         public int? BookingID { get; set; }
+
+        [Required(ErrorMessage = "Please choose the Ground.")]
         public int GroundID { get; set; }
-        public string? GroundName { get; set; }
-        public int UserID { get; set; }
-        public string? UserName { get; set; }
-        public DateTime FromTime { get; set; }
-        public DateTime ToTime { get; set; }
+
+        [Required(ErrorMessage = "Please Enter BookedBy.")]
+        public int BookedBy { get; set; }
+
+        [Required(ErrorMessage = "Please choose the Booking Date.")]
         public DateTime BookingDate { get; set; }
-        public string Status { get; set; }
+
+        [Required(ErrorMessage = "Please choose the Start Time.")]
+        public DateTime FromTime { get; set; }
+
+        [Required(ErrorMessage = "Please choose the End Time.")]
+        public DateTime ToTime { get; set; }
+
+        public string? Status { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
-    }
-    public class MST_GroundDropDownModel
-    {
-        public int? GroundID { get; set; }
-        public string GroundName { get; set; }
     }
 }

@@ -5,6 +5,30 @@
       "PackagePath": "staticwebassets\\BOXCricket.bundle.scp.css"
     },
     {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\725ee032b087782f4b617174f1fc2bdd.webp",
+      "PackagePath": "staticwebassets\\UploadPhoto\\725ee032b087782f4b617174f1fc2bdd.webp"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\FzPcFVTX0AAtrOS.jpg",
+      "PackagePath": "staticwebassets\\UploadPhoto\\FzPcFVTX0AAtrOS.jpg"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\Man.png",
+      "PackagePath": "staticwebassets\\UploadPhoto\\Man.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\Woman.png",
+      "PackagePath": "staticwebassets\\UploadPhoto\\Woman.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\cheeku2.jpg",
+      "PackagePath": "staticwebassets\\UploadPhoto\\cheeku2.jpg"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\wow.jpg",
+      "PackagePath": "staticwebassets\\UploadPhoto\\wow.jpg"
+    },
+    {
       "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\css\\demo.css",
       "PackagePath": "staticwebassets\\assets\\css\\demo.css"
     },

@@ -2,6 +2,7 @@
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using static BOXCricket.Models.MST_DropDownModel;
 
 namespace BOXCricket.Areas.MST_Rate.Controllers
 {
@@ -41,7 +42,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         {
 
             #region Dropdown For Ground           
-            DataTable dtGround = dalMST_RateDALBase.dbo_PR_MST_Ground_Dropdown();
+            DataTable dtGround = dalMST_RateDAL.dbo_PR_MST_Ground_Dropdown();
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)

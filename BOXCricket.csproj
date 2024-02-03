@@ -13,9 +13,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\MST_Booking\Data\" />
+    <Folder Include="Areas\MST_BOXCricket\Data\" />
     <Folder Include="Areas\MST_Ground\Data\" />
     <Folder Include="Areas\MST_Rate\Data\" />
-    <Folder Include="Areas\SEC_User\Data\" />
+    <Folder Include="Areas\MST_User\Data\" />
   </ItemGroup>
 
 </Project>

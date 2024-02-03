@@ -9,7 +9,7 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Vertical Layouts</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Bookings /</span> Add-Edit Booking</h4>
 
         <!-- Basic Layout -->
         <div class="row">
@@ -17,44 +17,47 @@
                 <div class="col-lg-8 mx-auto">
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Basic Layout</h5>
+                            <h5 class="mb-0">Booking Details</h5>
                         </div>
                         <div class="card-body">
                             <form asp-action="Save" method="post">
                                 <input type="hidden" asp-for="BookingID" />
                                 <div class="mb-3">
-                                    <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Id</label>
+                                    <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Name</label>
                                     <Select type="text" class="form-select" aria-label="Default select example" asp-for="GroundID" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
-                                        <option value="">Select Ground</option>
+                                        <option value="">Select the Ground</option>
                                     </Select>
+                                    <span asp-validation-for="GroundID" class="text-danger"></span>
                                 </div>
-                                <div class="mb-3">
-                                    <label asp-for="UserID" class="form-label" for="basic-default-company">Book By</label>
-                                    <input asp-for="UserID" type="text" class="form-control" id="basic-default-company" placeholder="Enter User ID" />
-                                </div>
-                                <div class="mb-3">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label asp-for="FromTime" for="html5-time-input" class="form-label">Start Time</label>
-                                            <input asp-for="FromTime" class="form-control" type="time" id="html5-time-input" />
-                                        </div>
+                                @* <div class="mb-3">
+                                    <label asp-for="BookedBy" class="form-label" for="basic-default-company">Book By</label>
+                                    <input asp-for="BookedBy" type="text" class="form-control" id="basic-default-company" placeholder="Enter User ID" />
+                                    <span asp-validation-for="BookedBy" class="text-danger"></span>
+                                </div> *@
+                                
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <label asp-for="BookingDate" for="html5-date-input" class="form-label">Date</label>
+                                        <input asp-for="BookingDate" class="form-control" type="date" name="BookingDate" id="html5-date-input" />
+                                        <span asp-validation-for="BookingDate" class="text-danger"></span>
+                                    </div>
 
-
-                                        <div class="col-md-6">
-                                            <label asp-for="ToTime" for="html5-time-input" class="form-label">End Time</label>
-                                            <input asp-for="ToTime" class="form-control" type="time" id="html5-time-input" />
-                                        </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label asp-for="FromTime" for="html5-time-input" class="form-label">Start Time</label>
+                                        <input asp-for="FromTime" class="form-control" type="time" name="FromTime" id="html5-time-input" />
+                                        <span asp-validation-for="FromTime" class="text-danger"></span>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label asp-for="ToTime" for="html5-time-input" class="form-label">End Time</label>
+                                        <input asp-for="ToTime" class="form-control" type="time" name="ToTime" id="html5-time-input" />
+                                        <span asp-validation-for="ToTime" class="text-danger"></span>
                                     </div>
                                 </div>
+
                                 <div class="mb-3">
-                                    <label asp-for="BookingDate" for="html5-date-input" class="form-label">Date</label>
-                                    <div class="col-md-10">
-                                        <input asp-for="BookingDate" class="form-control" type="date" value="2021-06-18" id="html5-date-input" />
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label asp-for="Status" class="form-label" for="basic-default-company">Status/Remark</label>
-                                    <input asp-for="Status" type="text" class="form-control" id="basic-default-company" placeholder="Enter" />
+                                    <label class="form-label" for="basic-default-company">Status/Remark</label>
+                                    <input asp-for="Status" type="text" class="form-control" id="basic-default-company" placeholder="Enter Status/Remark" />
+                                    @* <span asp-validation-for="Status" class="text-danger"></span> *@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save</button>
                                 <a asp-action="BookingList" class="btn btn-secondary ms-2">Cancel</a>

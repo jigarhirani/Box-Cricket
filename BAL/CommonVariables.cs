@@ -33,5 +33,17 @@
             return UserName;
         }
 
+        public static string? ProfilePhotoPath()
+        {
+            string? ProfilePhotoPath = null;
+            if (_httpContextAccessor.HttpContext.Session.GetString("ProfilePhotoPath") != null)
+            {
+                ProfilePhotoPath = _httpContextAccessor.HttpContext.Session.GetString("ProfilePhotoPath");
+            }
+
+            return ProfilePhotoPath;
+        }
+
+
     }
 }

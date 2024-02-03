@@ -2,6 +2,7 @@
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using static BOXCricket.Models.MST_DropDownModel;
 
 namespace BOXCricket.Areas.MST_Ground.Controllers
 {
@@ -12,6 +13,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
     {
         MST_GroundDALBase dalMST_GroundDALBase = new MST_GroundDALBase();
         MST_GroundDAL dalMST_GroundDAL = new MST_GroundDAL();
+
         public MST_GroundController()
         {
 
@@ -38,33 +40,18 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         #region Add/Edit
         public IActionResult Add(int? GroundID)
         {
+            #region Dropdown For Ground           
+            DataTable dtBOXCricket = dalMST_GroundDAL.dbo_PR_MST_BOXCricket_Dropdown();
 
-            #region Dropdown For Country           
-            DataTable dtCountry = dalMST_GroundDALBase.dbo_PR_MST_Country_SelectByDropdownList();
-
-            List<MST_CountryDropDownModel> MST_CountryDropdown_List = new List<MST_CountryDropDownModel>();
-            foreach (DataRow dr in dtCountry.Rows)
+            List<MST_BOXCricketDropDownModel> MST_BOXCricketDropdown_List = new List<MST_BOXCricketDropDownModel>();
+            foreach (DataRow dr in dtBOXCricket.Rows)
             {
-                MST_CountryDropDownModel vlst = new MST_CountryDropDownModel();
-                vlst.CountryID = Convert.ToInt32(dr["CountryID"]);
-                vlst.CountryName = dr["CountryName"].ToString();
-                MST_CountryDropdown_List.Add(vlst);
+                MST_BOXCricketDropDownModel mst_BOXCricketdropdownmodel = new MST_BOXCricketDropDownModel();
+                mst_BOXCricketdropdownmodel.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
+                mst_BOXCricketdropdownmodel.BOXCricketName = dr["BOXCricketName"].ToString();
+                MST_BOXCricketDropdown_List.Add(mst_BOXCricketdropdownmodel);
             }
-            ViewBag.CountryList = MST_CountryDropdown_List;
-            #endregion
-
-            #region Dropdown For State
-
-            List<MST_StateDropDownModel> MST_StateDropdown_List = new List<MST_StateDropDownModel>();
-            ViewBag.StateList = MST_StateDropdown_List;
-
-            #endregion
-
-            #region Dropdown For City 
-
-            List<MST_CityDropDownModel> MST_CityDropdown_List = new List<MST_CityDropDownModel>();
-            ViewBag.CityList = MST_CityDropdown_List;
-
+            ViewBag.BOXCricketList = MST_BOXCricketDropdown_List;
             #endregion
 
             #region Record Select by PK
@@ -78,14 +65,14 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
                     {
                         model.GroundID = Convert.ToInt32(dr["GroundID"]);
                         model.GroundName = dr["GroundName"].ToString();
+                        model.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
                         model.UserID = Convert.ToInt32(dr["UserID"]);
                         model.GroundCapacity = Convert.ToInt32(dr["GroundCapacity"]);
+                        model.GroundHeight = Convert.ToDecimal(dr["GroundHeight"]);
                         model.GroundWidth = Convert.ToDecimal(dr["GroundWidth"]);
-                        model.GroundHeight = Convert.ToDecimal(dr["GroundWidth"]);
-                        model.CountryID = Convert.ToInt32(dr["CountryID"]);
-                        model.StateID = Convert.ToInt32(dr["CountryID"]);
-                        model.CityID = Convert.ToInt32(dr["CityID"]);
-                        model.Address = dr["Address"].ToString();
+                        model.GroundLength = Convert.ToDecimal(dr["GroundWidth"]);
+                        model.ContactPersonName = dr["ContactPersonName"].ToString();
+                        model.ContactPersonNumber = dr["ContactPersonNumber"].ToString();
                         model.IsAllowedBooking = Convert.ToBoolean(dr["IsAllowedBooking"].ToString());
                     }
                     return View("GroundAddEdit", model);
@@ -119,44 +106,6 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
             }
             TempData["errorMessage"] = "Some error has occurred";
             return RedirectToAction("Add");
-        }
-        #endregion
-
-        #region Dropdown For State
-        public IActionResult StateDropdownByCountry(int CountryID)
-        {
-            DataTable dtState = dalMST_GroundDALBase.dbo_PR_MST_State_DropdownByCountry(CountryID);
-
-            List<MST_StateDropDownModel> MST_StateDropdownByCountry_List = new List<MST_StateDropDownModel>();
-            foreach (DataRow dr in dtState.Rows)
-            {
-                MST_StateDropDownModel vlst = new MST_StateDropDownModel();
-                vlst.StateID = Convert.ToInt32(dr["StateID"]);
-                vlst.StateName = dr["StateName"].ToString();
-                MST_StateDropdownByCountry_List.Add(vlst);
-            }
-            var casecade = MST_StateDropdownByCountry_List;
-            ViewBag.StateList = MST_StateDropdownByCountry_List;
-            return Json(casecade);
-        }
-        #endregion
-
-        #region Dropdown For City 
-        public IActionResult CityDropdownByState(int StateID)
-        {
-            DataTable dtCity = dalMST_GroundDALBase.dbo_PR_MST_City_DropdownByState(StateID);
-
-            List<MST_CityDropDownModel> MST_CityDropdownByState_List = new List<MST_CityDropDownModel>();
-            foreach (DataRow dr in dtCity.Rows)
-            {
-                MST_CityDropDownModel vlst = new MST_CityDropDownModel();
-                vlst.CityID = Convert.ToInt32(dr["CityID"]);
-                vlst.CityName = dr["CityName"].ToString();
-                MST_CityDropdownByState_List.Add(vlst);
-            }
-            ViewBag.CityList = MST_CityDropdownByState_List;
-            var casecade = MST_CityDropdownByState_List;
-            return Json(casecade);
         }
         #endregion
 

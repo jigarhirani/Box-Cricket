@@ -1,0 +1,233 @@
+﻿@using BOXCricket.BAL
+@model BOXCricket.Areas.MST_User.Models.MST_UserModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content -->
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                <li class="nav-item">
+                    <a class="nav-link active" asp-area="MST_User" asp-controller="MST_User" asp-action="Profile"><i class="bx bx-user me-1"></i> Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="MST_User" asp-controller="MST_User" asp-action="ChangePassword"><i class="bx bxs-key bx-tada me-1"></i> Password</a>
+                </li>
+            </ul>
+            <form id="formAccountSettings" enctype="multipart/form-data" asp-area="MST_User" asp-controller="MST_User"
+                asp-action="Save" method="POST">
+                <div class="card mb-4">
+                    <h5 class="card-header">Profile Details</h5>
+                    <!-- Account -->
+                    <input type="hidden" asp-for="UserID" />
+                    <input type="hidden" asp-for="ProfilePhotoPath" />
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                            <img src="@Url.Content(ViewBag.EditImagePath)" alt="user-avatar" class="d-block rounded"
+                                height="100" width="100" id="uploadedAvatar" />
+                            <div class="button-wrapper">
+                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                    <span class="d-none d-sm-block">Upload new photo</span>
+                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                    <input type="file" id="upload" class="account-file-input" hidden asp-for="File"
+                                        accept="image/png, image/jpeg" />
+                                </label>
+                                <button type="button" id="resetButton"
+                                    class="btn btn-outline-secondary account-image-reset mb-4">
+                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Reset</span>
+                                </button>
+                                <span asp-validation-for="File" class="text-danger"></span>
+                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG.@* Max size of 800K *@</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="FirstName" class="form-label">First Name</label>
+                                <input class="form-control" type="text" id="FirstName" name="FirstName" asp-for="FirstName"
+                                    autofocus />
+
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="LastName" class="form-label">Last Name</label>
+                                <input class="form-control" type="text" id="LastName" name="LastName" asp-for="LastName"
+                                       autofocus />
+
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            @* <div class="mb-3 form-password-toggle">
+                                <label class="form-label" for="password">Password</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" class="form-control" asp-for="Password" id="password"
+                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        aria-describedby="password" />
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div> *@
+                            <div class="mb-3 col-md-6">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input class="form-control" type="text" id="email" name="email" asp-for="Email"
+                                    placeholder="john.doe@example.com" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text">IN (+91)</span>
+                                    <input type="text" id="Contact" name="Contact" class="form-control"
+                                        asp-for="Contact" placeholder="xxxxx xxxxx" />
+                                    <span asp-validation-for="Contact" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="exampleFormControlSelect1" class="form-label">Country Id</label>
+                                <Select type="text" class="form-select" aria-label="Default select example"
+                                    asp-for="CountryID"
+                                    asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))"
+                                    onchange="funOnStateChange();">
+                                    <option value="">Select Country</option>
+                                </Select>
+                                <span asp-validation-for="CountryID" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="exampleFormControlSelect1" class="form-label">State Id</label>
+                                <Select type="text" class="form-select" aria-label="Default select example"
+                                    asp-for="StateID"
+                                    asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))"
+                                    onchange="funOnCityChange();">
+                                    <option value="">Select State</option>
+                                </Select>
+                                <span asp-validation-for="StateID" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="exampleFormControlSelect1" class="form-label">City Id</label>
+                                <Select type="text" class="form-select" aria-label="Default select example"
+                                    asp-for="CityID"
+                                    asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
+                                    <option value="">Select City</option>
+                                </Select>
+                                <span asp-validation-for="CityID" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-4">
+                                <div class="form-check form-switch">
+                                    <input asp-for="IsAdmin" class="form-check-input" type="checkbox"
+                                        id="flexSwitchCheckDefault" />
+
+                                    <label asp-for="IsAdmin" class="form-check-label" for="flexSwitchUnheckChecked">Is
+                                        Admin</label>
+                                    <span asp-validation-for="IsAdmin" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <div class="form-check form-switch">
+                                    <input asp-for="IsActive" class="form-check-input" type="checkbox"
+                                        id="flexSwitchCheckDefault" />
+
+                                    <label asp-for="IsActive" class="form-check-label" for="flexSwitchUnheckChecked">Is
+                                        Active</label>
+                                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /Account -->
+        </div>
+    </div>
+</div>
+</div>
+<!-- / Content -->
+@section Scripts {
+    @*dropdown fill *@
+    <script>
+
+        function funOnStateChange() {
+            var CountryID = $("#CountryID").val();
+            $("#StateID").empty();
+            $("#StateID").append($("<option></option>").val("").html("Select State"));
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+            if (CountryID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StateDropdownByCountry", "MST_User")" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                            });
+                        },
+                        error: function (err) {
+                            //alert(err.toString();
+                            alert("Error while fetch data");
+                        }
+                    }
+                )
+            }
+        }
+        function funOnCityChange() {
+            var StateID = $("#StateID").val();
+
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+            if (StateID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("CityDropdownByState", "MST_User")" + "?&StateID=" + StateID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error white fetch data");
+                        }
+                    }
+                )
+            }
+        }
+        //Display Preview of selected image
+        upload.onchange = evt => {
+            const [file] = upload.files
+            if (file) {
+                uploadedAvatar.src = URL.createObjectURL(file);
+            }
+        }
+
+        //Reset Image to Default
+        document.getElementById('resetButton').addEventListener('click', function () {
+            // Set the source of the uploadedAvatar back to the default image path
+            document.getElementById('uploadedAvatar').src = '@Url.Content(ViewBag.EditImagePath)';
+            // Clear the file input to allow selecting the same file again
+            document.getElementById('upload').value = '';
+        });
+
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
