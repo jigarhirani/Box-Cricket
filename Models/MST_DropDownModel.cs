@@ -13,5 +13,11 @@
             public int GroundID { get; set; }
             public string? GroundName { get; set; }
         }
+
+        public class MST_SlotDropDownModel
+        {
+            public int SlotNO { get; set; }
+            public string? SlotDetails { get; set; }
+        }
     }
 }

@@ -45,6 +45,12 @@
                             <option value="Saturday">Saturday</option>
                         </select>
                     </div>
+
+                    <div class="col-md-3 mb-2">
+                        <Select type="text" class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))">
+                            <option value="">Select the Slot</option>
+                        </Select>
+                    </div>
                     
                     <div class="col-md-3 mb-2">
                         <input type="text" class="form-control" name="HourlyRate" id="HourlyRate" placeholder="Hourly Rate" />
@@ -78,8 +84,7 @@
                                     <th class="sticky-left">Ground Name</th>
                                     <th>User Name</th>
                                     <th>Day Of Week</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
+                                    <th>Timings</th>
                                     <th>Hourly Rate</th>
                                     <th>Created</th>
                                     <th>Modified</th>
@@ -97,8 +102,7 @@
                                                 <td class="sticky-left">@dr["GroundName"]</td>
                                                 <td>@dr["UserName"]</td>
                                                 <td>@dr["DayOfWeek"]</td>
-                                                <td>@dr["StartTime"]</td>
-                                                <td>@dr["EndTime"]</td>
+                                                <td>@dr["SlotDetails"]</td>
                                                 <td>@dr["HourlyRate"]</td>
                                                 <td>@dr["Created"]</td>
                                                 <td>@dr["Modified"]</td>

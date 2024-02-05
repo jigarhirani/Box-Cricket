@@ -67,7 +67,14 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
                 MST_GroundDropdown_List.Add(mst_Grounddropdownmodel);
             }
             ViewBag.GroundList = MST_GroundDropdown_List;
-            #endregion            
+            #endregion
+
+            #region Dropdown For Slot    
+
+            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
+            ViewBag.SlotList = MST_SlotDropdown_List;
+
+            #endregion  
 
             #region Record Select by PK
             if (BookingID != null)
@@ -82,10 +89,10 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
                         model.GroundID = Convert.ToInt32(dr["GroundID"]);
                         model.BookedBy = Convert.ToInt32(dr["BookedBy"]);
                         model.BookingDate = Convert.ToDateTime(dr["BookingDate"].ToString());
-                        model.FromTime = Convert.ToDateTime(dr["FromTime"].ToString());
-                        model.ToTime = Convert.ToDateTime(dr["ToTime"].ToString());
+                        model.SlotNO = Convert.ToInt32(dr["SlotNO"]);
                         model.Status = dr["Status"].ToString();
                     }
+                    //GetSlots(model.GroundID, model.BookingDate);
                     return View("BookingAddEdit", model);
                 }
             }
@@ -119,6 +126,25 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             return RedirectToAction("BookingList");
         }
         #endregion       
+
+        #region Dropdown For Slot 
+        public IActionResult GetSlots(int GroundID, DateTime BookingDate)
+        {
+            DataTable dtSlot = dalMST_BookingDAL.dbo_PR_MST_Slot_Dropdown_Validation(GroundID, BookingDate);
+
+            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
+            foreach (DataRow dr in dtSlot.Rows)
+            {
+                MST_SlotDropDownModel mst_Slotdropdownmodel = new MST_SlotDropDownModel();
+                mst_Slotdropdownmodel.SlotNO = Convert.ToInt32(dr["SlotNO"]);
+                mst_Slotdropdownmodel.SlotDetails = dr["SlotDetails"].ToString();
+                MST_SlotDropdown_List.Add(mst_Slotdropdownmodel);
+            }
+            ViewBag.SlotList = MST_SlotDropdown_List;
+            var Slots = MST_SlotDropdown_List;
+            return Json(Slots);
+        }
+        #endregion
 
         #region BookingSearch
         public IActionResult BookingSearch(string UserName, int GroundID)

@@ -60,8 +60,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rates.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rates.DayOfWeek);
-                sqlDB.AddInParameter(dbCMD, "@StartTime", SqlDbType.DateTime, modelMST_Rates.StartTime);
-                sqlDB.AddInParameter(dbCMD, "@EndTime", SqlDbType.DateTime, modelMST_Rates.EndTime);
+                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Rates.SlotNO);
                 sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rates.HourlyRate);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
@@ -111,8 +110,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rates.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rates.DayOfWeek);
-                sqlDB.AddInParameter(dbCMD, "@StartTime", SqlDbType.DateTime, modelMST_Rates.StartTime);
-                sqlDB.AddInParameter(dbCMD, "@EndTime", SqlDbType.DateTime, modelMST_Rates.EndTime);
+                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Rates.SlotNO);
                 sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rates.HourlyRate);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 

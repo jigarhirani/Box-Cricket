@@ -31,6 +31,29 @@ namespace BOXCricket.DAL
         }
         #endregion    
 
+        #region Method: dbo_PR_MST_Slot_Dropdown
+        public DataTable dbo_PR_MST_Slot_Dropdown()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Slot_Dropdown");
+
+                DataTable dtSlot = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtSlot.Load(dr);
+                }
+
+                return dtSlot;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion    
+
         #region Method: dbo_PR_MST_Rate_Search
         public DataTable dbo_PR_MST_Rate_Search(string DayOfWeek, decimal HourlyRate)
         {

@@ -14,11 +14,8 @@ namespace BOXCricket.Areas.MST_Rate.Models
         [Required(ErrorMessage = "Please choose the Day Of Week.")]
         public string DayOfWeek { get; set; }
 
-        [Required(ErrorMessage = "Please choose the Start Time.")]
-        public DateTime StartTime { get; set; }
-
-        [Required(ErrorMessage = "Please choose the End Time.")]
-        public DateTime EndTime { get; set; }
+        [Required(ErrorMessage = "Please choose the Slot.")]
+        public int SlotNO { get; set; }
 
         [Required(ErrorMessage = "Please Enter Hourly Rate in INR.")]
         [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Please enter a valid amount in INR.")]

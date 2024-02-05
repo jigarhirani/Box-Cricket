@@ -33,7 +33,7 @@
                                                              
                                 <div class="mb-3">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <label asp-for="DayOfWeek" for="exampleFormControlSelect1" class="form-label">Day Of Week</label>
                                             <select asp-for="DayOfWeek" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                                                 <option selected>Select Day Of Week</option>
@@ -48,16 +48,12 @@
                                             <span asp-validation-for="DayOfWeek" class="text-danger"></span>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <label asp-for="StartTime" for="html5-time-input" class="form-label">Start Time</label>
-                                            <input asp-for="StartTime" class="form-control" type="time" id="html5-time-input" />
-                                            <span asp-validation-for="StartTime" class="text-danger"></span>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label asp-for="EndTime" for="html5-time-input" class="form-label">End Time</label>
-                                            <input asp-for="EndTime" class="form-control" type="time" id="html5-time-input" />
-                                            <span asp-validation-for="EndTime" class="text-danger"></span>
+                                        <div class="mb-3 col-md-6">
+                                            <label asp-for="SlotNO" for="exampleFormControlSelect1" class="form-label">Slot</label>
+                                            <Select type="text" class="form-select" aria-label="Default select example" asp-for="SlotNO" asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))">
+                                                <option value="">Select the Slot</option>
+                                            </Select>
+                                            <span asp-validation-for="SlotNO" class="text-danger"></span>
                                         </div>
                                     </div>                                    
                                 </div>

@@ -59,8 +59,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@BookedBy", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
-                sqlDB.AddInParameter(dbCMD, "@FromTime", SqlDbType.Time, modelMST_Bookings.FromTime);
-                sqlDB.AddInParameter(dbCMD, "@ToTime", SqlDbType.Time, modelMST_Bookings.ToTime);
+                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Bookings.SlotNO);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_Bookings.Status);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
@@ -110,8 +109,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@BookedBy", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
-                sqlDB.AddInParameter(dbCMD, "@FromTime", SqlDbType.Time, modelMST_Bookings.FromTime);
-                sqlDB.AddInParameter(dbCMD, "@ToTime", SqlDbType.Time, modelMST_Bookings.ToTime);
+                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Bookings.SlotNO);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_Bookings.Status);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 

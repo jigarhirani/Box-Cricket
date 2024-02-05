@@ -22,6 +22,22 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         #region Select All 
         public IActionResult RateList()
         {
+            #region Dropdown For Slot    
+
+            DataTable dtSlot = dalMST_RateDAL.dbo_PR_MST_Slot_Dropdown();
+
+            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
+            foreach (DataRow dr in dtSlot.Rows)
+            {
+                MST_SlotDropDownModel mst_Slotdropdownmodel = new MST_SlotDropDownModel();
+                mst_Slotdropdownmodel.SlotNO = Convert.ToInt32(dr["SlotNO"]);
+                mst_Slotdropdownmodel.SlotDetails = dr["SlotDetails"].ToString();
+                MST_SlotDropdown_List.Add(mst_Slotdropdownmodel);
+            }
+            ViewBag.SlotList = MST_SlotDropdown_List;
+
+            #endregion
+
             DataTable dt = dalMST_RateDALBase.dbo_PR_MST_Rate_SelectAll();
             return View("RateList", dt);
         }
@@ -55,6 +71,22 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
             ViewBag.GroundList = MST_GroundDropdown_List;
             #endregion            
 
+            #region Dropdown For Slot    
+
+            DataTable dtSlot = dalMST_RateDAL.dbo_PR_MST_Slot_Dropdown();
+
+            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
+            foreach (DataRow dr in dtSlot.Rows)
+            {
+                MST_SlotDropDownModel mst_Slotdropdownmodel = new MST_SlotDropDownModel();
+                mst_Slotdropdownmodel.SlotNO = Convert.ToInt32(dr["SlotNO"]);
+                mst_Slotdropdownmodel.SlotDetails = dr["SlotDetails"].ToString();
+                MST_SlotDropdown_List.Add(mst_Slotdropdownmodel);
+            }
+            ViewBag.SlotList = MST_SlotDropdown_List;
+
+            #endregion
+
             #region Record Select by PK
             if (RateID != null)
             {
@@ -68,8 +100,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
                         model.GroundID = Convert.ToInt32(dr["GroundID"]);
                         model.UserID = Convert.ToInt32(dr["UserID"]);
                         model.DayOfWeek = dr["DayOfWeek"].ToString();
-                        model.StartTime = Convert.ToDateTime(dr["StartTime"].ToString());
-                        model.EndTime = Convert.ToDateTime(dr["EndTime"].ToString());
+                        model.SlotNO = Convert.ToInt32(dr["SlotNO"]);
                         model.HourlyRate = Convert.ToDecimal(dr["HourlyRate"]);
                     }
                     return View("RateAddEdit", model);

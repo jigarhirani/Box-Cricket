@@ -15,11 +15,8 @@ namespace BOXCricket.Areas.MST_Booking.Models
         [Required(ErrorMessage = "Please choose the Booking Date.")]
         public DateTime BookingDate { get; set; }
 
-        [Required(ErrorMessage = "Please choose the Start Time.")]
-        public DateTime FromTime { get; set; }
-
-        [Required(ErrorMessage = "Please choose the End Time.")]
-        public DateTime ToTime { get; set; }
+        [Required(ErrorMessage = "Please choose the Slot.")]
+        public int SlotNO { get; set; }
 
         public string? Status { get; set; }
         public DateTime Created { get; set; }

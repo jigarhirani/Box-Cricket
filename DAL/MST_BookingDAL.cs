@@ -30,6 +30,53 @@ namespace BOXCricket.DAL
         }
         #endregion    
 
+        //#region Method: dbo_PR_MST_Slot_Dropdown
+        //public DataTable dbo_PR_MST_Slot_Dropdown()
+        //{
+        //    try
+        //    {
+        //        SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+        //        DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Slot_Dropdown");
+
+        //        DataTable dtSlot = new DataTable();
+        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+        //        {
+        //            dtSlot.Load(dr);
+        //        }
+
+        //        return dtSlot;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
+        //}
+        //#endregion    
+
+        #region Method: dbo_PR_MST_Slot_Dropdown_Validation
+        public DataTable dbo_PR_MST_Slot_Dropdown_Validation(int GroundID, DateTime BookingDate)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Slot_Dropdown_Validation");
+                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, GroundID);
+                sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, BookingDate);
+                DataTable dtSlot = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtSlot.Load(dr);
+                }
+
+                return dtSlot;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion    
+
         #region Method: dbo_PR_MST_Booking_Search
         public DataTable dbo_PR_MST_Booking_Search(string UserName, int GroundID)
         {
