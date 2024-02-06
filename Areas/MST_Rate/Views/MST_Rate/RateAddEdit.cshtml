@@ -23,14 +23,26 @@
                             <form asp-action="Save" method="post">
                                 <input type="hidden" asp-for="RateID"/>
 
-                                <div class="mb-3">
-                                    <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Id</label>
-                                    <Select type="text" class="form-select" aria-label="Default select example" asp-for="GroundID" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
-                                        <option value="">Select the Ground</option>
-                                    </Select>
-                                    <span asp-validation-for="GroundID" class="text-danger"></span>
-                                </div>                                
-                                                             
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlSelect1" class="form-label">BOX Cricket</label>
+                                        <select type="text" class="form-select" aria-label="Default select example"
+                                                asp-for="BOXCricketID"
+                                                asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                                            <option value="">Select the BOX Cricket</option>
+                                        </select>
+                                        <span asp-validation-for="BOXCricketID" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Name</label>
+                                        <Select type="text" class="form-select" aria-label="Default select example" asp-for="GroundID" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                                            <option value="">Select the Ground</option>
+                                        </Select>
+                                        <span asp-validation-for="GroundID" class="text-danger"></span>
+                                    </div>
+                                </div>
+
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -82,3 +94,38 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+
+@section scripts {
+    <script>
+
+        function funOnBOXCricketChange() {
+            var BOXCricketID = $("#BOXCricketID").val();
+
+            $("#GroundID").empty();
+            $("#GroundID").append($("<option></option>").val("").html("Select Ground"));
+            if (BOXCricketID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("GroundDropdownByBOXCricket", "MST_Rate")" + "?&BOXCricketID=" + BOXCricketID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (index, item) {
+                                $("#GroundID").append($("<option></option>").val(item.groundID).html(item.groundName));
+
+                            });
+                        },
+                        error: function (err) {
+                            //alert(err.toString();
+                            alert("Error while fetch data");
+                        }
+                    }
+                )
+            }
+        }
+
+    </script>
+}

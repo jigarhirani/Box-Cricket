@@ -6,6 +6,9 @@ namespace BOXCricket.Areas.MST_Rate.Models
     {
         public int? RateID { get; set; }
 
+        [Required(ErrorMessage = "Please choose the BOX Cricket.")]
+        public int BOXCricketID { get; set; }
+
         [Required(ErrorMessage = "Please choose the Ground.")]
         public int GroundID { get; set; }
 

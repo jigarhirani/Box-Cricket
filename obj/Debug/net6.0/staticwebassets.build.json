@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "foh8ip6m7WRRWqJqI83mYZpqPhxysOXbn74y0IdnTsI=",
+  "Hash": "pAncS8h5D15qlZqMNPw1cGxcYSPzq7JNAUWj/j6ZsAU=",
   "Source": "BOXCricket",
   "BasePath": "_content/BOXCricket",
   "Mode": "Default",
@@ -1573,6 +1573,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\vendor\\libs\\popper\\popper.js"
+    },
+    {
+      "Identity": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\3323-como-pfpsgg.gif",
+      "SourceId": "BOXCricket",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repos\\BOXCricket\\wwwroot\\",
+      "BasePath": "_content/BOXCricket",
+      "RelativePath": "UploadPhoto/3323-como-pfpsgg.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\UploadPhoto\\3323-como-pfpsgg.gif"
     },
     {
       "Identity": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\725ee032b087782f4b617174f1fc2bdd.webp",

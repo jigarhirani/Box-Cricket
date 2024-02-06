@@ -46,9 +46,10 @@
                         </select>
                     </div>
 
+                    
                     <div class="col-md-3 mb-2">
-                        <Select type="text" class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))">
-                            <option value="">Select the Slot</option>
+                        <Select class="form-select" name="SlotNO" id="SlotNO" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))">
+                            <option disabled selected>Select Slot</option>
                         </Select>
                     </div>
                     

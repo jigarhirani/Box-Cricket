@@ -8,6 +8,29 @@ namespace BOXCricket.DAL
 {
     public class MST_RateDAL : DAL_Helper
     {
+        #region Method: dbo_PR_MST_BOXCricket_Dropdown
+        public DataTable dbo_PR_MST_BOXCricket_Dropdown()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_Dropdown");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                DataTable dtBOXCricket = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtBOXCricket.Load(dr);
+                }
+
+                return dtBOXCricket;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region Method: dbo_PR_MST_Ground_Dropdown
         public DataTable dbo_PR_MST_Ground_Dropdown()
         {
@@ -30,6 +53,30 @@ namespace BOXCricket.DAL
             }
         }
         #endregion    
+
+        #region Method: dbo_PR_MST_Ground_DropdownByBOXCricket
+        public DataTable dbo_PR_MST_Ground_DropdownByBOXCricket(int BOXCricketID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_DropdownByBOXCricket");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                sqlDB.AddInParameter(dbCMD, "BOXCricketID", SqlDbType.Int, BOXCricketID);
+                DataTable dtBOXCricket = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtBOXCricket.Load(dr);
+                }
+
+                return dtBOXCricket;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion        
 
         #region Method: dbo_PR_MST_Slot_Dropdown
         public DataTable dbo_PR_MST_Slot_Dropdown()
@@ -55,7 +102,7 @@ namespace BOXCricket.DAL
         #endregion    
 
         #region Method: dbo_PR_MST_Rate_Search
-        public DataTable dbo_PR_MST_Rate_Search(string DayOfWeek, decimal HourlyRate)
+        public DataTable dbo_PR_MST_Rate_Search(string DayOfWeek, decimal HourlyRate, int SlotNO)
         {
             try
             {
@@ -70,6 +117,11 @@ namespace BOXCricket.DAL
                 if (HourlyRate != -1)
                 {
                     sqlDB.AddInParameter(dbCMD, "HourlyRate", SqlDbType.Decimal, HourlyRate);
+                }
+
+                if (SlotNO != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "SlotNO", SqlDbType.Int, SlotNO);
                 }
 
                 DataTable dt = new DataTable();

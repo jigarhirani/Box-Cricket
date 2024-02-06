@@ -12,8 +12,8 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
     public class MST_RateController : Controller
     {
         MST_RateDALBase dalMST_RateDALBase = new MST_RateDALBase();
-
         MST_RateDAL dalMST_RateDAL = new MST_RateDAL();
+
         public MST_RateController()
         {
 
@@ -24,17 +24,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         {
             #region Dropdown For Slot    
 
-            DataTable dtSlot = dalMST_RateDAL.dbo_PR_MST_Slot_Dropdown();
-
-            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
-            foreach (DataRow dr in dtSlot.Rows)
-            {
-                MST_SlotDropDownModel mst_Slotdropdownmodel = new MST_SlotDropDownModel();
-                mst_Slotdropdownmodel.SlotNO = Convert.ToInt32(dr["SlotNO"]);
-                mst_Slotdropdownmodel.SlotDetails = dr["SlotDetails"].ToString();
-                MST_SlotDropdown_List.Add(mst_Slotdropdownmodel);
-            }
-            ViewBag.SlotList = MST_SlotDropdown_List;
+            GetSlots();
 
             #endregion
 
@@ -56,36 +46,24 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         #region Add/Edit
         public IActionResult Add(int? RateID)
         {
+            #region Dropdown For BOXCricket 
 
-            #region Dropdown For Ground           
-            DataTable dtGround = dalMST_RateDAL.dbo_PR_MST_Ground_Dropdown();
+            BOXCricketDropDown();
+
+            #endregion
+
+            #region Dropdown For Ground By BOXCricket
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
-            foreach (DataRow dr in dtGround.Rows)
-            {
-                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
-                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
-                vlst.GroundName = dr["GroundName"].ToString();
-                MST_GroundDropdown_List.Add(vlst);
-            }
             ViewBag.GroundList = MST_GroundDropdown_List;
-            #endregion            
+
+            #endregion
 
             #region Dropdown For Slot    
 
-            DataTable dtSlot = dalMST_RateDAL.dbo_PR_MST_Slot_Dropdown();
+            GetSlots();
 
-            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
-            foreach (DataRow dr in dtSlot.Rows)
-            {
-                MST_SlotDropDownModel mst_Slotdropdownmodel = new MST_SlotDropDownModel();
-                mst_Slotdropdownmodel.SlotNO = Convert.ToInt32(dr["SlotNO"]);
-                mst_Slotdropdownmodel.SlotDetails = dr["SlotDetails"].ToString();
-                MST_SlotDropdown_List.Add(mst_Slotdropdownmodel);
-            }
-            ViewBag.SlotList = MST_SlotDropdown_List;
-
-            #endregion
+            #endregion  
 
             #region Record Select by PK
             if (RateID != null)
@@ -97,12 +75,14 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
                     foreach (DataRow dr in dt.Rows)
                     {
                         model.RateID = Convert.ToInt32(dr["RateID"]);
+                        model.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
                         model.GroundID = Convert.ToInt32(dr["GroundID"]);
                         model.UserID = Convert.ToInt32(dr["UserID"]);
                         model.DayOfWeek = dr["DayOfWeek"].ToString();
                         model.SlotNO = Convert.ToInt32(dr["SlotNO"]);
                         model.HourlyRate = Convert.ToDecimal(dr["HourlyRate"]);
                     }
+                    GroundDropDownByBOXCricket(model.BOXCricketID);
                     return View("RateAddEdit", model);
                 }
             }
@@ -137,10 +117,70 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         }
         #endregion       
 
-        #region RateSearch
-        public IActionResult RateSearch(string DayOfWeek, decimal HourlyRate)
+        #region Dropdown For BOXCricketDropDown 
+        public void BOXCricketDropDown()
         {
-            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_Search(DayOfWeek, HourlyRate);
+            DataTable dtBOXCricket = dalMST_RateDAL.dbo_PR_MST_BOXCricket_Dropdown();
+
+            List<MST_BOXCricketDropDownModel> MST_BOXCricketDropdown_List = new List<MST_BOXCricketDropDownModel>();
+            foreach (DataRow dr in dtBOXCricket.Rows)
+            {
+                MST_BOXCricketDropDownModel mst_BOXCricketdropdownmodel = new MST_BOXCricketDropDownModel();
+                mst_BOXCricketdropdownmodel.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
+                mst_BOXCricketdropdownmodel.BOXCricketName = dr["BOXCricketName"].ToString();
+                MST_BOXCricketDropdown_List.Add(mst_BOXCricketdropdownmodel);
+            }
+            ViewBag.BOXCricketList = MST_BOXCricketDropdown_List;
+        }
+        #endregion
+
+        #region Dropdown For GroundDropDownByBOXCricket    
+        public IActionResult GroundDropDownByBOXCricket(int BOXCricketID)
+        {
+            DataTable dtGround = dalMST_RateDAL.dbo_PR_MST_Ground_DropdownByBOXCricket(BOXCricketID);
+
+            List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
+            foreach (DataRow dr in dtGround.Rows)
+            {
+                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
+                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
+                vlst.GroundName = dr["GroundName"].ToString();
+                MST_GroundDropdown_List.Add(vlst);
+            }
+            ViewBag.GroundList = MST_GroundDropdown_List;
+            var Ground = MST_GroundDropdown_List;
+            return Json(Ground);
+        }
+
+        #endregion
+
+        #region Dropdown For Slot 
+        public void GetSlots()
+        {
+            DataTable dtSlot = dalMST_RateDAL.dbo_PR_MST_Slot_Dropdown();
+
+            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
+            foreach (DataRow dr in dtSlot.Rows)
+            {
+                MST_SlotDropDownModel mst_Slotdropdownmodel = new MST_SlotDropDownModel();
+                mst_Slotdropdownmodel.SlotNO = Convert.ToInt32(dr["SlotNO"]);
+                mst_Slotdropdownmodel.SlotDetails = dr["SlotDetails"].ToString();
+                MST_SlotDropdown_List.Add(mst_Slotdropdownmodel);
+            }
+            ViewBag.SlotList = MST_SlotDropdown_List;
+        }
+        #endregion
+
+        #region RateSearch
+        public IActionResult RateSearch(string DayOfWeek, decimal HourlyRate, int SlotNO)
+        {
+            #region Dropdown For Slot    
+
+            GetSlots();
+
+            #endregion
+
+            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_Search(DayOfWeek, HourlyRate, SlotNO);
             return View("RateList", dt);
 
         }

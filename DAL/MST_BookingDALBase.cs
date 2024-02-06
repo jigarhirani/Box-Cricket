@@ -56,10 +56,12 @@ namespace BOXCricket.DAL
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_Insert");
+                sqlDB.AddInParameter(dbCMD, "@BOXCricketID", SqlDbType.Int, modelMST_Bookings.BOXCricketID);
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@BookedBy", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
                 sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Bookings.SlotNO);
+                sqlDB.AddInParameter(dbCMD, "@BookingAmount", SqlDbType.Decimal, modelMST_Bookings.BookingAmount);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_Bookings.Status);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
@@ -106,10 +108,12 @@ namespace BOXCricket.DAL
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_UpdateByPK");
                 sqlDB.AddInParameter(dbCMD, "BookingID", SqlDbType.Int, modelMST_Bookings.BookingID);
+                sqlDB.AddInParameter(dbCMD, "@BOXCricketID", SqlDbType.Int, modelMST_Bookings.BOXCricketID);
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@BookedBy", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
                 sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Bookings.SlotNO);
+                sqlDB.AddInParameter(dbCMD, "@BookingAmount", SqlDbType.Decimal, modelMST_Bookings.BookingAmount);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_Bookings.Status);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 

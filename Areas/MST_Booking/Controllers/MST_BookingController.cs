@@ -12,8 +12,8 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
     public class MST_BookingController : Controller
     {
         MST_BookingDALBase dalMST_BookingDALBase = new MST_BookingDALBase();
-
         MST_BookingDAL dalMST_BookingDAL = new MST_BookingDAL();
+
         public MST_BookingController()
         {
 
@@ -23,18 +23,10 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         #region Select All 
         public IActionResult BookingList()
         {
-            #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
+            #region Dropdown For Ground 
 
-            List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
-            foreach (DataRow dr in dtGround.Rows)
-            {
-                MST_GroundDropDownModel mst_Grounddropdownmodel = new MST_GroundDropDownModel();
-                mst_Grounddropdownmodel.GroundID = Convert.ToInt32(dr["GroundID"]);
-                mst_Grounddropdownmodel.GroundName = dr["GroundName"].ToString();
-                MST_GroundDropdown_List.Add(mst_Grounddropdownmodel);
-            }
-            ViewBag.GroundList = MST_GroundDropdown_List;
+            GroundDropDown();
+
             #endregion
 
             DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAll();
@@ -55,18 +47,17 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         #region Add/Edit
         public IActionResult Add(int? BookingID)
         {
-            #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
+            #region Dropdown For BOXCricket 
+
+            BOXCricketDropDown();
+
+            #endregion
+
+            #region Dropdown For Ground By BOXCricket
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
-            foreach (DataRow dr in dtGround.Rows)
-            {
-                MST_GroundDropDownModel mst_Grounddropdownmodel = new MST_GroundDropDownModel();
-                mst_Grounddropdownmodel.GroundID = Convert.ToInt32(dr["GroundID"]);
-                mst_Grounddropdownmodel.GroundName = dr["GroundName"].ToString();
-                MST_GroundDropdown_List.Add(mst_Grounddropdownmodel);
-            }
             ViewBag.GroundList = MST_GroundDropdown_List;
+
             #endregion
 
             #region Dropdown For Slot    
@@ -86,13 +77,15 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
                     foreach (DataRow dr in dt.Rows)
                     {
                         model.BookingID = Convert.ToInt32(dr["BookingID"]);
+                        model.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
                         model.GroundID = Convert.ToInt32(dr["GroundID"]);
                         model.BookedBy = Convert.ToInt32(dr["BookedBy"]);
                         model.BookingDate = Convert.ToDateTime(dr["BookingDate"].ToString());
                         model.SlotNO = Convert.ToInt32(dr["SlotNO"]);
+                        model.BookingAmount = Convert.ToDecimal(dr["BookingAmount"]);
                         model.Status = dr["Status"].ToString();
                     }
-                    //GetSlots(model.GroundID, model.BookingDate);
+                    GroundDropDownByBOXCricket(model.BOXCricketID);
                     return View("BookingAddEdit", model);
                 }
             }
@@ -125,7 +118,62 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             TempData["errorMessage"] = "Some error has occurred";
             return RedirectToAction("BookingList");
         }
-        #endregion       
+        #endregion
+
+        #region Dropdown For BOXCricketDropDown 
+        public void BOXCricketDropDown()
+        {
+            DataTable dtBOXCricket = dalMST_BookingDAL.dbo_PR_MST_BOXCricket_Dropdown();
+
+            List<MST_BOXCricketDropDownModel> MST_BOXCricketDropdown_List = new List<MST_BOXCricketDropDownModel>();
+            foreach (DataRow dr in dtBOXCricket.Rows)
+            {
+                MST_BOXCricketDropDownModel mst_BOXCricketdropdownmodel = new MST_BOXCricketDropDownModel();
+                mst_BOXCricketdropdownmodel.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
+                mst_BOXCricketdropdownmodel.BOXCricketName = dr["BOXCricketName"].ToString();
+                MST_BOXCricketDropdown_List.Add(mst_BOXCricketdropdownmodel);
+            }
+            ViewBag.BOXCricketList = MST_BOXCricketDropdown_List;
+        }
+        #endregion
+
+        #region Dropdown For GroundDropDown    
+        public void GroundDropDown()
+        {
+            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
+
+            List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
+            foreach (DataRow dr in dtGround.Rows)
+            {
+                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
+                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
+                vlst.GroundName = dr["GroundName"].ToString();
+                MST_GroundDropdown_List.Add(vlst);
+            }
+            ViewBag.GroundList = MST_GroundDropdown_List;
+        }
+
+        #endregion
+
+        #region Dropdown For GroundDropDownByBOXCricket    
+        public IActionResult GroundDropDownByBOXCricket(int BOXCricketID)
+        {
+            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_DropdownByBOXCricket(BOXCricketID);
+
+            List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
+            foreach (DataRow dr in dtGround.Rows)
+            {
+                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
+                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
+                vlst.GroundName = dr["GroundName"].ToString();
+                MST_GroundDropdown_List.Add(vlst);
+            }
+            ViewBag.GroundList = MST_GroundDropdown_List;
+            var Ground = MST_GroundDropdown_List;
+            return Json(Ground);
+        }
+
+        #endregion
 
         #region Dropdown For Slot 
         public IActionResult GetSlots(int GroundID, DateTime BookingDate)
@@ -146,21 +194,32 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         }
         #endregion
 
+        #region Get Rate 
+        public IActionResult Rate(int BOXCricketID, int GroundID, int SlotNO, DateTime BookingDate)
+        {
+            DataTable dtRate = dalMST_BookingDAL.dbo_PR_MST_Rate_HourlyRate(BOXCricketID, GroundID, SlotNO, BookingDate);
+
+            MST_BookingModel mst_Bookingmodel = new MST_BookingModel();
+            foreach (DataRow dr in dtRate.Rows)
+            {
+                mst_Bookingmodel.BookingAmount = Convert.ToDecimal(dr["HourlyRate"]);
+            }
+            // Pass the data using ViewBag
+            ViewBag.BookingAmount = mst_Bookingmodel.BookingAmount;
+
+            var Rate = mst_Bookingmodel.BookingAmount;
+            return Json(Rate);
+        }
+        #endregion        
+
         #region BookingSearch
         public IActionResult BookingSearch(string UserName, int GroundID)
         {
-            #region Dropdown For Ground           
-            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
 
-            List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
-            foreach (DataRow dr in dtGround.Rows)
-            {
-                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
-                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
-                vlst.GroundName = dr["GroundName"].ToString();
-                MST_GroundDropdown_List.Add(vlst);
-            }
-            ViewBag.GroundList = MST_GroundDropdown_List;
+            #region Dropdown For Ground 
+
+            GroundDropDown();
+
             #endregion
 
             DataTable dt = dalMST_BookingDAL.dbo_PR_MST_Booking_Search(UserName, GroundID);

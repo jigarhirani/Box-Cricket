@@ -40,7 +40,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         #region Add/Edit
         public IActionResult Add(int? GroundID)
         {
-            #region Dropdown For Ground           
+            #region Dropdown For BOXCricket           
             DataTable dtBOXCricket = dalMST_GroundDAL.dbo_PR_MST_BOXCricket_Dropdown();
 
             List<MST_BOXCricketDropDownModel> MST_BOXCricketDropdown_List = new List<MST_BOXCricketDropDownModel>();
@@ -65,6 +65,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
                     {
                         model.GroundID = Convert.ToInt32(dr["GroundID"]);
                         model.GroundName = dr["GroundName"].ToString();
+                        model.GroundNickName = dr["GroundNickName"].ToString();
                         model.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
                         model.UserID = Convert.ToInt32(dr["UserID"]);
                         model.GroundCapacity = Convert.ToInt32(dr["GroundCapacity"]);

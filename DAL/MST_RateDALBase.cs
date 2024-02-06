@@ -51,17 +51,18 @@ namespace BOXCricket.DAL
         #endregion
 
         #region Method: dbo_PR_MST_Rate_Insert
-        public bool? dbo_PR_MST_Rate_Insert(MST_RateModel modelMST_Rates)
+        public bool? dbo_PR_MST_Rate_Insert(MST_RateModel modelMST_Rate)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_Insert");
-                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rates.GroundID);
+                sqlDB.AddInParameter(dbCMD, "@BOXCricketID", SqlDbType.Int, modelMST_Rate.BOXCricketID);
+                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rate.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
-                sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rates.DayOfWeek);
-                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Rates.SlotNO);
-                sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rates.HourlyRate);
+                sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rate.DayOfWeek);
+                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Rate.SlotNO);
+                sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rate.HourlyRate);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 
@@ -100,18 +101,19 @@ namespace BOXCricket.DAL
         #endregion
 
         #region Method: dbo_PR_MST_Rate_UpdateByPK
-        public bool? dbo_PR_MST_Rate_UpdateByPK(MST_RateModel modelMST_Rates)
+        public bool? dbo_PR_MST_Rate_UpdateByPK(MST_RateModel modelMST_Rate)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_UpdateByPK");
-                sqlDB.AddInParameter(dbCMD, "RateID", SqlDbType.Int, modelMST_Rates.RateID);
-                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rates.GroundID);
+                sqlDB.AddInParameter(dbCMD, "RateID", SqlDbType.Int, modelMST_Rate.RateID);
+                sqlDB.AddInParameter(dbCMD, "@BOXCricketID", SqlDbType.Int, modelMST_Rate.BOXCricketID);
+                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Rate.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, CommonVariables.UserID());
-                sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rates.DayOfWeek);
-                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Rates.SlotNO);
-                sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rates.HourlyRate);
+                sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, modelMST_Rate.DayOfWeek);
+                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Rate.SlotNO);
+                sqlDB.AddInParameter(dbCMD, "@HourlyRate", SqlDbType.Decimal, modelMST_Rate.HourlyRate);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);

@@ -9,6 +9,9 @@ namespace BOXCricket.Areas.MST_Ground.Models
         [Required(ErrorMessage = "Please enter the Ground Name.")]
         public string GroundName { get; set; }
 
+        [Required(ErrorMessage = "Please enter the Ground Nick Name.")]
+        public string? GroundNickName { get; set; }
+
         [Required(ErrorMessage = "Please choose the BOX Cricket.")]
         public int BOXCricketID { get; set; }
         public int UserID { get; set; }

@@ -67,7 +67,6 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, UserID);
                 sqlDB.AddInParameter(dbCMD, "FirstName", SqlDbType.VarChar, FirstName);
                 sqlDB.AddInParameter(dbCMD, "LastName", SqlDbType.VarChar, LastName);
-                sqlDB.AddInParameter(dbCMD, "@Password", SqlDbType.VarChar, Password);
                 sqlDB.AddInParameter(dbCMD, "@Email", SqlDbType.VarChar, Email);
                 sqlDB.AddInParameter(dbCMD, "@Contact", SqlDbType.VarChar, Contact);
                 sqlDB.AddInParameter(dbCMD, "@CountryID", SqlDbType.Int, CountryID);
