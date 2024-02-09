@@ -22,6 +22,18 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         #region Select All 
         public IActionResult RateList()
         {
+            #region Dropdown For BOXCricket 
+
+            BOXCricketDropDown();
+
+            #endregion
+
+            #region Dropdown For Ground 
+
+            GroundDropDown();
+
+            #endregion
+
             #region Dropdown For Slot    
 
             GetSlots();
@@ -134,6 +146,26 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         }
         #endregion
 
+        #region Dropdown For GroundDropDown    
+        public IActionResult GroundDropDown()
+        {
+            DataTable dtGround = dalMST_RateDAL.dbo_PR_MST_Ground_Dropdown();
+
+            List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
+            foreach (DataRow dr in dtGround.Rows)
+            {
+                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
+                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
+                vlst.GroundName = dr["GroundName"].ToString();
+                MST_GroundDropdown_List.Add(vlst);
+            }
+            ViewBag.GroundList = MST_GroundDropdown_List;
+            var Ground = MST_GroundDropdown_List;
+            return Json(Ground);
+        }
+
+        #endregion
+
         #region Dropdown For GroundDropDownByBOXCricket    
         public IActionResult GroundDropDownByBOXCricket(int BOXCricketID)
         {
@@ -172,15 +204,27 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         #endregion
 
         #region RateSearch
-        public IActionResult RateSearch(string DayOfWeek, decimal HourlyRate, int SlotNO)
+        public IActionResult RateSearch(string DayOfWeek, decimal HourlyRate, int SlotNO, int BOXCricketID, int GroundID)
         {
+            #region Dropdown For BOXCricket 
+
+            BOXCricketDropDown();
+
+            #endregion
+
+            #region Dropdown For Ground 
+
+            GroundDropDown();
+
+            #endregion
+
             #region Dropdown For Slot    
 
             GetSlots();
 
             #endregion
 
-            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_Search(DayOfWeek, HourlyRate, SlotNO);
+            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_Search(DayOfWeek, HourlyRate, SlotNO, BOXCricketID, GroundID);
             return View("RateList", dt);
 
         }

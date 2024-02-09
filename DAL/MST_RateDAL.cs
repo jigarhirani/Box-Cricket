@@ -102,7 +102,7 @@ namespace BOXCricket.DAL
         #endregion    
 
         #region Method: dbo_PR_MST_Rate_Search
-        public DataTable dbo_PR_MST_Rate_Search(string DayOfWeek, decimal HourlyRate, int SlotNO)
+        public DataTable dbo_PR_MST_Rate_Search(string DayOfWeek, decimal HourlyRate, int SlotNO, int BOXCricketID, int GroundID)
         {
             try
             {
@@ -122,6 +122,16 @@ namespace BOXCricket.DAL
                 if (SlotNO != 0)
                 {
                     sqlDB.AddInParameter(dbCMD, "SlotNO", SqlDbType.Int, SlotNO);
+                }
+
+                if (BOXCricketID != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "BOXCricketID", SqlDbType.Int, BOXCricketID);
+                }
+
+                if (GroundID != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "GroundID", SqlDbType.Int, GroundID);
                 }
 
                 DataTable dt = new DataTable();

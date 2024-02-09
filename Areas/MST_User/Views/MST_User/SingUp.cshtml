@@ -66,34 +66,40 @@
                     <p class="mb-4">Make your app management easy and fun!</p>
 
                     <form id="formAuthentication" enctype="multipart/form-data" class="mb-3" asp-area="MST_User" asp-controller="MST_User" asp-action="Save" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="FirstName" class="form-label">FirstName</label>
-                            <input type="text" asp-for="FirstName" class="form-control" id="FirstName" name="FirstName"
-                                   placeholder="Enter your First Name" autofocus />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label for="LastName" class="form-label">LastName</label>
-                            <input type="text" asp-for="LastName" class="form-control" id="LastName" name="LastName"
-                                   placeholder="Enter your Last Name" autofocus />
-                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="FirstName" class="form-label">First Name</label>
+                                <input type="text" asp-for="FirstName" class="form-control" id="FirstName" name="FirstName"
+                                       placeholder="Your First Name" autofocus />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="LastName" class="form-label">Last Name</label>
+                                <input type="text" asp-for="LastName" class="form-control" id="LastName" name="LastName"
+                                       placeholder="Your Last Name" autofocus />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
                         </div>
                         
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" asp-for="Email" class="form-control" id="email" name="email"
-                                placeholder="Enter your email" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="phoneNumber">Phone Number</label>
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text">IN (+91)</span>
-                                <input type="text" id="Contact" name="Contact" class="form-control"
-                                       asp-for="Contact" placeholder="xxxxx xxxxx" />
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" asp-for="Email" class="form-control" id="email" name="email"
+                                       placeholder="Your email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text">IN (+91)</span>
+                                    <input type="text" id="Contact" name="Contact" class="form-control"
+                                           asp-for="Contact" placeholder="xxxxx xxxxx" />
+                                </div>
                                 <span asp-validation-for="Contact" class="text-danger"></span>
                             </div>
                         </div>
+                        
                         <div class="mb-3 form-password-toggle">
                             <label class="form-label" for="password">Password</label>
                             <div class="input-group input-group-merge">
@@ -104,8 +110,41 @@
                             </div>
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
+
+                        <div class="row">
+                            <div class="mb-3 col-md-4">
+                                <label for="exampleFormControlSelect1" class="form-label">Country Id</label>
+                                <Select type="text" class="form-select" aria-label="Default select example"
+                                        asp-for="CountryID"
+                                        asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))"
+                                        onchange="funOnStateChange();">
+                                    <option value="">Country</option>
+                                </Select>
+                                <span asp-validation-for="CountryID" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="exampleFormControlSelect1" class="form-label">State Id</label>
+                                <Select type="text" class="form-select" aria-label="Default select example"
+                                        asp-for="StateID"
+                                        asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))"
+                                        onchange="funOnCityChange();">
+                                    <option value="">State</option>
+                                </Select>
+                                <span asp-validation-for="StateID" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="exampleFormControlSelect1" class="form-label">City Id</label>
+                                <Select type="text" class="form-select" aria-label="Default select example"
+                                        asp-for="CityID"
+                                        asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
+                                    <option value="">City</option>
+                                </Select>
+                                <span asp-validation-for="CityID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Default file input example</label>
+                            <label for="formFile" class="form-label">Choose Your Profile Picture</label>
                             <input class="form-control" asp-for="File" type="file" id="formFile" />
                         </div>
                         <div class="mb-3">
@@ -132,3 +171,65 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @*dropdown fill *@
+    <script>
+
+        function funOnStateChange() {
+            var CountryID = $("#CountryID").val();
+            $("#StateID").empty();
+            $("#StateID").append($("<option></option>").val("").html("State"));
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("City"));
+            if (CountryID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StateDropdownByCountry", "MST_User")" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                            });
+                        },
+                        error: function (err) {
+                            //alert(err.toString();
+                            alert("Error while fetch data");
+                        }
+                    }
+                )
+            }
+        }
+        function funOnCityChange() {
+            var StateID = $("#StateID").val();
+
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("City"));
+            if (StateID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("CityDropdownByState", "MST_User")" + "?&StateID=" + StateID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error white fetch data");
+                        }
+                    }
+                )
+            }
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

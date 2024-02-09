@@ -40,7 +40,7 @@ namespace BOXCricket.Areas.MST_User.Models
 
         [Required(ErrorMessage = "Please upload your profile photo")]
         [DisplayName("Profile Photo")]
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
 
         public string? ProfilePhotoPath { get; set; }
         public DateTime Created { get; set; }

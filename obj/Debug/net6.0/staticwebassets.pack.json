@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\UploadPhoto\\725ee032b087782f4b617174f1fc2bdd.webp"
     },
     {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\FzPa7TJXwBUZ6lr.jpg",
+      "PackagePath": "staticwebassets\\UploadPhoto\\FzPa7TJXwBUZ6lr.jpg"
+    },
+    {
       "Id": "D:\\Repos\\BOXCricket\\wwwroot\\UploadPhoto\\FzPcFVTX0AAtrOS.jpg",
       "PackagePath": "staticwebassets\\UploadPhoto\\FzPcFVTX0AAtrOS.jpg"
     },
@@ -185,16 +189,140 @@
       "PackagePath": "staticwebassets\\assets\\img\\icons\\unicons\\wallet.png"
     },
     {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\boy-app-academy.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\boy-app-academy.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\boy-verify-email-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\boy-verify-email-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\boy-verify-email-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\boy-verify-email-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\boy-with-laptop-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\boy-with-laptop-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\boy-with-laptop-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\boy-with-laptop-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\boy-with-rocket-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\boy-with-rocket-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\boy-with-rocket-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\boy-with-rocket-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\bulb-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\bulb-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\bulb-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\bulb-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\create-account-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\create-account-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\create-account-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\create-account-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-app-academy.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-app-academy.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-doing-yoga-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-doing-yoga-dark.png"
+    },
+    {
       "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-doing-yoga-light.png",
       "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-doing-yoga-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-unlock-password-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-unlock-password-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-unlock-password-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-unlock-password-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-verify-password-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-verify-password-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-verify-password-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-verify-password-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-with-laptop-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-with-laptop-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\girl-with-laptop-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\girl-with-laptop-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\lady-with-laptop-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\lady-with-laptop-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\man-with-laptop-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\man-with-laptop-dark.png"
     },
     {
       "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\man-with-laptop-light.png",
       "PackagePath": "staticwebassets\\assets\\img\\illustrations\\man-with-laptop-light.png"
     },
     {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\page-misc-error-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\page-misc-error-dark.png"
+    },
+    {
       "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\page-misc-error-light.png",
       "PackagePath": "staticwebassets\\assets\\img\\illustrations\\page-misc-error-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\pencil-rocket.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\pencil-rocket.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\prize-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\prize-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\rocket.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\rocket.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\shopping-girl-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\shopping-girl-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\shopping-girl-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\shopping-girl-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\sitting-girl-with-laptop-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\sitting-girl-with-laptop-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\sitting-girl-with-laptop-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\sitting-girl-with-laptop-light.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\superman-flying-dark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\superman-flying-dark.png"
+    },
+    {
+      "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\illustrations\\superman-flying-light.png",
+      "PackagePath": "staticwebassets\\assets\\img\\illustrations\\superman-flying-light.png"
     },
     {
       "Id": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\img\\layouts\\layout-container-light.png",

@@ -26,7 +26,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
 
         #endregion
 
-        #region Login
+        #region Go To Login Page
         public IActionResult Login()
         {
             HttpContext.Session.Clear();
@@ -87,6 +87,34 @@ namespace BOXCricket.Areas.MST_User.Controllers
         #region Go to Sign Up Page
         public IActionResult SingUP()
         {
+            #region Dropdown For Country           
+            DataTable dtCountry = dalMST_UserDAL.dbo_PR_LOC_Country_SelectByDropdownList();
+
+            List<LOC_CountryDropDownModel> LOC_CountryDropdown_List = new List<LOC_CountryDropDownModel>();
+            foreach (DataRow dr in dtCountry.Rows)
+            {
+                LOC_CountryDropDownModel loc_countrydropdownmodel = new LOC_CountryDropDownModel();
+                loc_countrydropdownmodel.CountryID = Convert.ToInt32(dr["CountryID"]);
+                loc_countrydropdownmodel.CountryName = dr["CountryName"].ToString();
+                LOC_CountryDropdown_List.Add(loc_countrydropdownmodel);
+            }
+            ViewBag.CountryList = LOC_CountryDropdown_List;
+            #endregion
+
+            #region Dropdown For State
+
+            List<LOC_StateDropDownModel> LOC_StateDropdown_List = new List<LOC_StateDropDownModel>();
+            ViewBag.StateList = LOC_StateDropdown_List;
+
+            #endregion
+
+            #region Dropdown For City 
+
+            List<LOC_CityDropDownModel> LOC_CityDropdown_List = new List<LOC_CityDropDownModel>();
+            ViewBag.CityList = LOC_CityDropdown_List;
+
+            #endregion
+
             return View();
         }
         #endregion
@@ -140,8 +168,8 @@ namespace BOXCricket.Areas.MST_User.Controllers
                     model.CountryID = Convert.ToInt32(dr["CountryID"].ToString());
                     model.StateID = Convert.ToInt32(dr["StateID"].ToString());
                     model.CityID = Convert.ToInt32(dr["CityID"].ToString());
-                    model.IsAdmin = Convert.ToBoolean(dr["IsAdmin"].ToString());
-                    model.IsActive = Convert.ToBoolean(dr["IsActive"].ToString());
+                    //model.IsAdmin = Convert.ToBoolean(dr["IsAdmin"].ToString());
+                    //model.IsActive = Convert.ToBoolean(dr["IsActive"].ToString());
                     model.ProfilePhotoPath = dr["ProfilePhotoPath"].ToString();
                     ViewBag.EditImagePath = Convert.ToString(dr["ProfilePhotoPath"]);
                 }
@@ -159,7 +187,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
         [HttpPost]
         public IActionResult Save(MST_UserModel modelMST_User)
         {
-
+            #region File section
             if (modelMST_User.File != null)
             {
                 string FilePath = "wwwroot\\UploadPhoto";
@@ -180,6 +208,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
                 }
 
             }
+            #endregion
 
             string str = Configuration.GetConnectionString("MyConnection");
 
@@ -187,11 +216,11 @@ namespace BOXCricket.Areas.MST_User.Controllers
 
             if (modelMST_User.UserID == null)
             {
-                result = dalMST_UserDALBase.dbo_PR_MST_User_Insert(str, modelMST_User.FirstName, modelMST_User.LastName, modelMST_User.Password, modelMST_User.Email, modelMST_User.Contact, modelMST_User.ProfilePhotoPath, null, null);
+                result = dalMST_UserDALBase.dbo_PR_MST_User_Insert(str, modelMST_User.FirstName, modelMST_User.LastName, modelMST_User.Password, modelMST_User.Email, modelMST_User.Contact, modelMST_User.ProfilePhotoPath, modelMST_User.CountryID, modelMST_User.StateID, modelMST_User.CityID, null, null);
             }
             else
             {
-                result = dalMST_UserDALBase.dbo_PR_MST_User_UpdateByPK(str, modelMST_User.FirstName, modelMST_User.LastName, modelMST_User.Password, modelMST_User.Email, modelMST_User.Contact, modelMST_User.CountryID, modelMST_User.StateID, modelMST_User.CityID, modelMST_User.IsAdmin, modelMST_User.IsActive, modelMST_User.ProfilePhotoPath, null, Convert.ToInt32(HttpContext.Session.GetString("UserID")));
+                result = dalMST_UserDALBase.dbo_PR_MST_User_UpdateByPK(str, modelMST_User.FirstName, modelMST_User.LastName, modelMST_User.Password, modelMST_User.Email, modelMST_User.Contact, modelMST_User.CountryID, modelMST_User.StateID, modelMST_User.CityID, modelMST_User.ProfilePhotoPath, null, Convert.ToInt32(HttpContext.Session.GetString("UserID")));
             }
 
             if (result)
@@ -220,7 +249,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
         }
         #endregion        
 
-        #region Change Password
+        #region Change Password Page
         public IActionResult ChangePassword()
         {
             return View();

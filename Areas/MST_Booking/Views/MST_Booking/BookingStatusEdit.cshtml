@@ -1,0 +1,95 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BOXCricket.Areas.MST_Booking.Models.MST_BookingStatusUpdateModel;
+
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Bookings /</span> Booking Status Edit</h4>
+
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Booking Details</h5>
+                        </div>
+                                               
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="basic-default-company">Booked By</label>
+                                    <input asp-for="BookedBy" type="text" class="form-control" id="basic-default-company" disabled />
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="basic-default-company">Booking Amount</label>
+                                    <input asp-for="BookingAmount" type="text" class="form-control" id="basic-default-company" disabled />
+                                </div>                                
+                            </div>                            
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="basic-default-company">BOX Cricket Name</label>
+                                    <input asp-for="BOXCricketName" type="text" class="form-control" id="basic-default-company" disabled />
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="basic-default-company">Ground Name</label>
+                                    <input asp-for="GroundName" type="text" class="form-control" id="basic-default-company" disabled />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label asp-for="BookingDate" for="html5-date-input" class="form-label">Booking Date</label>
+                                    <input asp-for="BookingDate" class="form-control" type="date" name="BookingDate" id="BookingDate" disabled/>
+                                </div>
+                                
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="basic-default-company">Slot Details</label>
+                                    <input asp-for="SlotDetail" type="text" class="form-control" id="basic-default-company" disabled />
+                                </div>
+                            </div>   
+
+                            <form asp-area="MST_Booking" asp-controller="MST_Booking" asp-action="BookingStatusSave" method="post">
+                                <input type="hidden" asp-for="BookingID" />                              
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label asp-for="Status" for="exampleFormControlSelect1" class="form-label">Select Status of Booking</label>
+                                        <Select type="text" asp-for="Status" class="form-select" aria-label="Default select example">
+                                            <option value="Pending" selected>Pending</option>
+                                            <option value="Confirm">Confirm</option>
+                                            <option value="Rejected">Reject</option>
+                                        </Select>
+                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="basic-default-company">Remark</label>
+                                        <input asp-for="Remarks" type="text" class="form-control" id="basic-default-company" placeholder="Enter Remarks" />
+                                        @* <span asp-validation-for="Remarks" class="text-danger"></span> *@
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a asp-action="BookingList" class="btn btn-secondary ms-2">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+    <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->

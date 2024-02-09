@@ -22,10 +22,33 @@ namespace BOXCricket.Areas.MST_Booking.Models
         public decimal BookingAmount { get; set; }
 
         [Required(ErrorMessage = "Please choose the Slot.")]
-        public int SlotNO { get; set; }
+        public int? SlotNO { get; set; }
 
-        public string? Status { get; set; }
+        public string? Slots { get; set; }
+
+        public string Status { get; set; }
+        public string? Remarks { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
+    }
+
+    public class MST_BookingStatusUpdateModel
+    {
+        public int? BookingID { get; set; }
+
+        public string? BOXCricketName { get; set; }
+        public string? GroundName { get; set; }
+
+        public DateTime BookingDate { get; set; }
+        public decimal BookingAmount { get; set; }
+        public string? SlotDetail { get; set; }
+
+        public string Status { get; set; }
+        public string? Remarks { get; set; }
+
+        public int? TotalSlotsBooked { get; set; }
+        public DateTime Modified { get; set; }
+
+        public string? BookedBy { get; set; }
     }
 }

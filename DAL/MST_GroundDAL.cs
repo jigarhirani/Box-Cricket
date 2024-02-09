@@ -31,7 +31,7 @@ namespace BOXCricket.DAL
         #endregion    
 
         #region Method: dbo_PR_MST_Ground_Search
-        public DataTable dbo_PR_MST_Ground_Search(string GroundName, int GroundCapacity)
+        public DataTable dbo_PR_MST_Ground_Search(string GroundName, int GroundCapacity, string IsAllowedBooking)
         {
             try
             {
@@ -46,6 +46,11 @@ namespace BOXCricket.DAL
                 if (GroundCapacity != null)
                 {
                     sqlDB.AddInParameter(dbCMD, "GroundCapacity", SqlDbType.Int, GroundCapacity);
+                }
+
+                if (IsAllowedBooking != null)
+                {
+                    sqlDB.AddInParameter(dbCMD, "IsAllowedBooking", SqlDbType.VarChar, IsAllowedBooking);
                 }
 
                 DataTable dt = new DataTable();

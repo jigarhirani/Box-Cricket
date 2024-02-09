@@ -17,34 +17,51 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         public MST_BookingController()
         {
 
-
         }
 
-        #region Select All 
+        #region Select All By Owner
         public IActionResult BookingList()
         {
+            ViewBag.IsMyBookingPage = false;
+
+            #region Dropdown For BOXCricket 
+
+            BOXCricketDropDown();
+
+            #endregion
+
             #region Dropdown For Ground 
 
             GroundDropDown();
 
             #endregion
-
-            DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAll();
+            DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAllByOwner();
             return View("BookingList", dt);
         }
         #endregion
 
-        #region Delete
-        public IActionResult Delete(int BookingID)
+        #region Select All By Owner
+        public IActionResult SelectAllBooking()
         {
-            if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_DeleteByPK(BookingID)))
-                return RedirectToAction("BookingList");
-            return View("BookingList");
+            ViewBag.IsMyBookingPage = true;
+
+            #region Dropdown For BOXCricket 
+
+            BOXCricketDropDown();
+
+            #endregion
+
+            #region Dropdown For Ground 
+
+            GroundDropDown();
+
+            #endregion
+            DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAll();
+            return View("BookingList", dt);
         }
+        #endregion 
 
-        #endregion
-
-        #region Add/Edit
+        #region Add Booking
         public IActionResult Add(int? BookingID)
         {
             #region Dropdown For BOXCricket 
@@ -65,59 +82,80 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
             ViewBag.SlotList = MST_SlotDropdown_List;
 
-            #endregion  
+            #endregion
 
-            #region Record Select by PK
-            if (BookingID != null)
-            {
-                DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectByPK(BookingID);
-                if (dt.Rows.Count > 0)
-                {
-                    MST_BookingModel model = new MST_BookingModel();
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        model.BookingID = Convert.ToInt32(dr["BookingID"]);
-                        model.BOXCricketID = Convert.ToInt32(dr["BOXCricketID"]);
-                        model.GroundID = Convert.ToInt32(dr["GroundID"]);
-                        model.BookedBy = Convert.ToInt32(dr["BookedBy"]);
-                        model.BookingDate = Convert.ToDateTime(dr["BookingDate"].ToString());
-                        model.SlotNO = Convert.ToInt32(dr["SlotNO"]);
-                        model.BookingAmount = Convert.ToDecimal(dr["BookingAmount"]);
-                        model.Status = dr["Status"].ToString();
-                    }
-                    GroundDropDownByBOXCricket(model.BOXCricketID);
-                    return View("BookingAddEdit", model);
-                }
-            }
-            #endregion           
-
-            return View("BookingAddEdit");
+            return View("BookingAdd");
         }
         #endregion
 
         #region Save 
         [HttpPost]
-        public IActionResult Save(MST_BookingModel modelMST_Booking)
+        public IActionResult Save(MST_BookingModel modelMST_Booking, string[] selectedSlots)
         {
-
             if (ModelState.IsValid)
             {
+                // Set the selected slots in the model
+                modelMST_Booking.Slots = selectedSlots != null ? string.Join(",", selectedSlots) : null;
+
                 if (modelMST_Booking.BookingID == null)
                 {
                     if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_Insert(modelMST_Booking)))
                         TempData["successMessage"] = "Record Inserted Successfully";
                     return RedirectToAction("BookingList");
                 }
-                else
-                {
-                    if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_UpdateByPK(modelMST_Booking)))
-                        TempData["successMessage"] = "Record Updated Successfully";
-                    return RedirectToAction("BookingList");
-                }
             }
             TempData["errorMessage"] = "Some error has occurred";
             return RedirectToAction("BookingList");
         }
+
+        #endregion
+
+        #region BookingStatusEdit
+        public IActionResult BookingStatusEdit(int? BookingID)
+        {
+            #region Record Select by PK for Status Edit
+            if (BookingID != null)
+            {
+                DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectByPK(BookingID);
+                if (dt.Rows.Count > 0)
+                {
+                    MST_BookingStatusUpdateModel model = new MST_BookingStatusUpdateModel();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        model.BookingID = Convert.ToInt32(dr["BookingID"]);
+                        model.BOXCricketName = Convert.ToString(dr["BOXCricketName"]);
+                        model.GroundName = Convert.ToString(dr["GroundName"]);
+                        model.BookingDate = Convert.ToDateTime(dr["BookingDate"].ToString());
+                        model.BookedBy = Convert.ToString(dr["BookedBy"]);
+                        model.SlotDetail = dr["SlotDetails"].ToString();
+                        model.BookingAmount = Convert.ToDecimal(dr["BookingAmount"]);
+                        model.TotalSlotsBooked = Convert.ToInt32(dr["TotalSlotsBooked"].ToString());
+                        model.Status = dr["Status"].ToString();
+                        model.Remarks = dr["Remarks"].ToString();
+                    }
+                    return View("BookingStatusEdit", model);
+                }
+            }
+            #endregion
+
+            return View("BookingList");
+        }
+        #endregion
+
+        #region BookingStatusSave 
+        [HttpPost]
+        public IActionResult BookingStatusSave(MST_BookingStatusUpdateModel modelMST_BookingStatusUpdate)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_StatusUpdateByPK(modelMST_BookingStatusUpdate)))
+                    TempData["successMessage"] = "Booking Status Updated Successfully";
+                return RedirectToAction("BookingList");
+            }
+            TempData["errorMessage"] = "Some error has occurred";
+            return RedirectToAction("BookingList");
+        }
+
         #endregion
 
         #region Dropdown For BOXCricketDropDown 
@@ -138,7 +176,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         #endregion
 
         #region Dropdown For GroundDropDown    
-        public void GroundDropDown()
+        public IActionResult GroundDropDown()
         {
             DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_Dropdown();
 
@@ -151,6 +189,8 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
                 MST_GroundDropdown_List.Add(vlst);
             }
             ViewBag.GroundList = MST_GroundDropdown_List;
+            var Ground = MST_GroundDropdown_List;
+            return Json(Ground);
         }
 
         #endregion
@@ -159,6 +199,26 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         public IActionResult GroundDropDownByBOXCricket(int BOXCricketID)
         {
             DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_DropdownByBOXCricket(BOXCricketID);
+
+            List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
+            foreach (DataRow dr in dtGround.Rows)
+            {
+                MST_GroundDropDownModel vlst = new MST_GroundDropDownModel();
+                vlst.GroundID = Convert.ToInt32(dr["GroundID"]);
+                vlst.GroundName = dr["GroundName"].ToString();
+                MST_GroundDropdown_List.Add(vlst);
+            }
+            ViewBag.GroundList = MST_GroundDropdown_List;
+            var Ground = MST_GroundDropdown_List;
+            return Json(Ground);
+        }
+
+        #endregion
+
+        #region Dropdown For GroundAllowedtoBookDropdownByBOXCricket    
+        public IActionResult GroundAllowedtoBookDropdownByBOXCricket(int BOXCricketID)
+        {
+            DataTable dtGround = dalMST_BookingDAL.dbo_PR_MST_Ground_AllowedtoBookDropdownByBOXCricket(BOXCricketID);
 
             List<MST_GroundDropDownModel> MST_GroundDropdown_List = new List<MST_GroundDropDownModel>();
             foreach (DataRow dr in dtGround.Rows)
@@ -195,26 +255,31 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         #endregion
 
         #region Get Rate 
-        public IActionResult Rate(int BOXCricketID, int GroundID, int SlotNO, DateTime BookingDate)
+        public IActionResult Rate(int BOXCricketID, int GroundID, int[] SlotNO, DateTime BookingDate)
         {
-            DataTable dtRate = dalMST_BookingDAL.dbo_PR_MST_Rate_HourlyRate(BOXCricketID, GroundID, SlotNO, BookingDate);
-
-            MST_BookingModel mst_Bookingmodel = new MST_BookingModel();
-            foreach (DataRow dr in dtRate.Rows)
+            decimal TotalRate = 0;
+            foreach (int slot in SlotNO)
             {
-                mst_Bookingmodel.BookingAmount = Convert.ToDecimal(dr["HourlyRate"]);
+                DataTable dtRate = dalMST_BookingDAL.dbo_PR_MST_Rate_HourlyRate(BOXCricketID, GroundID, slot, BookingDate);
+                if (dtRate.Rows.Count > 0)
+                {
+                    TotalRate += Convert.ToDecimal(dtRate.Rows[0]["HourlyRate"]);
+                }
             }
-            // Pass the data using ViewBag
-            ViewBag.BookingAmount = mst_Bookingmodel.BookingAmount;
 
-            var Rate = mst_Bookingmodel.BookingAmount;
-            return Json(Rate);
+            return Json(TotalRate);
         }
-        #endregion        
+
+        #endregion       
 
         #region BookingSearch
-        public IActionResult BookingSearch(string UserName, int GroundID)
+        public IActionResult BookingSearch(string UserName, int GroundID, int BOXCricketID, string Status)
         {
+            #region Dropdown For BOXCricket 
+
+            BOXCricketDropDown();
+
+            #endregion
 
             #region Dropdown For Ground 
 
@@ -222,10 +287,11 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
 
             #endregion
 
-            DataTable dt = dalMST_BookingDAL.dbo_PR_MST_Booking_Search(UserName, GroundID);
+            DataTable dt = dalMST_BookingDAL.dbo_PR_MST_Booking_Search(UserName, GroundID, BOXCricketID, Status);
             return View("BookingList", dt);
 
         }
         #endregion
+
     }
 }

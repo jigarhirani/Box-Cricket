@@ -77,6 +77,30 @@ namespace BOXCricket.DAL
         }
         #endregion        
 
+        #region Method: dbo_PR_MST_Ground_AllowedtoBookDropdownByBOXCricket
+        public DataTable dbo_PR_MST_Ground_AllowedtoBookDropdownByBOXCricket(int BOXCricketID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_AllowedtoBookDropdownByBOXCricket");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                sqlDB.AddInParameter(dbCMD, "BOXCricketID", SqlDbType.Int, BOXCricketID);
+                DataTable dtBOXCricket = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtBOXCricket.Load(dr);
+                }
+
+                return dtBOXCricket;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion        
+
         #region Method: dbo_PR_MST_Slot_Dropdown_Validation
         public DataTable dbo_PR_MST_Slot_Dropdown_Validation(int GroundID, DateTime BookingDate)
         {
@@ -125,10 +149,10 @@ namespace BOXCricket.DAL
                 return null;
             }
         }
-        #endregion    
+        #endregion
 
         #region Method: dbo_PR_MST_Booking_Search
-        public DataTable dbo_PR_MST_Booking_Search(string UserName, int GroundID)
+        public DataTable dbo_PR_MST_Booking_Search(string UserName, int GroundID, int BOXCricketID, string Status)
         {
             try
             {
@@ -140,9 +164,19 @@ namespace BOXCricket.DAL
                     sqlDB.AddInParameter(dbCMD, "UserName", SqlDbType.VarChar, UserName);
                 }
 
+                if (Status != null)
+                {
+                    sqlDB.AddInParameter(dbCMD, "Status", SqlDbType.VarChar, Status);
+                }
+
                 if (GroundID != 0)
                 {
                     sqlDB.AddInParameter(dbCMD, "GroundID", SqlDbType.Int, GroundID);
+                }
+
+                if (BOXCricketID != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "BOXCricketID", SqlDbType.Int, BOXCricketID);
                 }
 
                 DataTable dt = new DataTable();

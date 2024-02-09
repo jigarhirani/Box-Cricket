@@ -34,12 +34,14 @@
     <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="~/assets/vendor/libs/apex-charts/apex-charts.css" />
 
+
     <!-- Page CSS -->
     <!-- Helpers -->
     <script src="~/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="~/assets/js/config.js"></script>
+
 </head>
 
 <body>
@@ -132,16 +134,7 @@
                             <div>Ground</div>
                             <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
                         </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a asp-area="MST_Booking" asp-controller="MST_Booking" asp-action="BookingList"
-                            class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-collection"></i>
-                            <div>Bookings</div>
-                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
-                        </a>
-                    </li>
+                    </li>                    
 
                     <li class="menu-item">
                         <a asp-area="MST_Rate" asp-controller="MST_Rate" asp-action="RateList" class="menu-link">
@@ -151,37 +144,13 @@
                         </a>
                     </li>
 
-
-
-
-
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Pages</span>
-                    </li>
-
-
-                    <!-- Elements -->
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Elements</div>
+                        <a asp-area="MST_Booking" asp-controller="MST_Booking" asp-action="BookingList"
+                           class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div>Bookings</div>
+                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
                         </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a asp-action="Table" class="menu-link">
-                                    <div data-i18n="Without menu">Tables</div>
-                                </a>
-                            </li>
-                        </ul>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a asp-controller="Home" asp-action="Form" class="menu-link">
-                                    <div data-i18n="Without menu">Form</div>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                 </ul>
@@ -211,12 +180,7 @@
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
-                            <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                            </li>
+                            <li class="nav-item lh-1 me-3" id="clock"></li>
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -257,9 +221,18 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" asp-area="MST_User" asp-controller="MST_User" asp-action="ChangePassword">
-                                    <i class="bx bx-key me-2"></i>
-                                    <span class="align-middle">Change Password</span>
-                                    </a>
+                                            <i class="bx bx-key me-2"></i>
+                                            <span class="align-middle">Change Password</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="MST_Booking" asp-controller="MST_Booking" asp-action="SelectAllBooking">
+                                            <i class='bx bx-book me-2'></i>
+                                            <span class="align-middle">My Bookings</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider"></div>
@@ -341,6 +314,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // Handle midnight (0 hours)
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('clock').textContent = timeString;
+            requestAnimationFrame(updateTime);
+        }
+
+        // Initial call to display time immediately
+        updateTime();
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

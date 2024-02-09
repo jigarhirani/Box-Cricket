@@ -32,25 +32,16 @@
                     </div>
                 }
 
-                @* <form asp-action="BOXCricketSearch" asp-controller="MST_BOXCricket" asp-area="MST_BOXCricket" class="row mb-3">
+                <form asp-action="BOXCricketSearch" asp-controller="MST_BOXCricket" asp-area="MST_BOXCricket" class="row mb-3">
                     <div class="col-md-3 mb-2">
                         <input type="text" class="form-control" name="BOXCricketName" id="searchBOXCricketName"
-                               placeholder="BOXCricket Name" />
+                            placeholder="BOXCricket Name" />
                     </div>
-                    <div class="col-md-3 mb-2">
-                        <input type="text" class="form-control" name="BOXCricketCapacity" id="searchBOXCricketCapacity"
-                               placeholder="BOXCricket Capacity" />
-                    </div>
-                     <div class="col-md-3 mb-2">
-                    <select class="form-select" id="selectIsAllowedBooking" aria-label="Default select example">
-                    <option value="True">Allowed To Book</option>
-                    <option value="False">Not Allowed To Book</option>
-                    </select>
-                    </div> 
+                    
                     <div class="col-md-1 mb-2">
                         <button type="submit" class="btn btn-outline-success w-100">Search</button>
                     </div>
-                </form> *@
+                </form>
 
                 <!-- Hoverable Table rows -->
                 <div class="card">
@@ -100,25 +91,15 @@
                                                 <td>@dr["Created"]</td>
                                                 <td>@dr["Modified"]</td>
                                                 <td class="sticky-right">
-                                                    <div class="dropdown dropend">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" asp-action="Add"
-                                                               asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])">
-                                                                <i class="bx bx-edit-alt me-1"></i>
-                                                                Edit
-                                                            </a>
-                                                            <a class="dropdown-item" asp-action="Delete"
-                                                               asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
-                                                               data-confirm="Are you sure you want to delete this BOXCricket?">
-                                                                <i class="bx bx-trash me-1"></i>
-                                                                Delete
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                    <a class="btn btn-icon btn-warning" asp-action="Add"
+                                                       asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])">
+                                                        <i class="bx bx-pencil"></i>
+                                                    </a>
+                                                    <a class="btn btn-icon btn-danger" asp-action="Delete"
+                                                       asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
+                                                       data-confirm="Are you sure you want to delete this BOXCricket?">
+                                                        <i class="bx bx-trash"></i>
+                                                    </a>                                                    
                                                 </td>
                                             </tr>
                                         }
@@ -126,7 +107,7 @@
                                     else
                                     {
                                         <tr>
-                                            <td colspan="12" class="text-center">
+                                            <td colspan="7" class="text-center">
                                                 <p class="col-form-label">No Record Found</p>
                                             </td>
                                         </tr>
@@ -160,9 +141,21 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', function (e) {
                 const confirmationMessage = this.getAttribute('data-confirm');
-                if (!confirm(confirmationMessage)) {
-                    e.preventDefault(); // Cancel the form submission if the user cancels the confirmation
-                }
+                e.preventDefault(); // Prevent the default action
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: confirmationMessage,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If the user confirms, proceed with the action
+                        window.location.href = this.getAttribute('href');
+                    }
+                });
             });
         });
     });

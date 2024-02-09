@@ -8,7 +8,7 @@ namespace BOXCricket.DAL
     {
 
         #region Method: dbo_PR_MST_User_Insert
-        public Boolean dbo_PR_MST_User_Insert(string ConnStr, string FirstName, string LastName, string Password, string Email, string Contact, string? ProfilePhotoPath, DateTime? Created, DateTime? Modified)
+        public Boolean dbo_PR_MST_User_Insert(string ConnStr, string FirstName, string LastName, string Password, string Email, string Contact, string? ProfilePhotoPath, int CountryID, int StateID, int CityID, DateTime? Created, DateTime? Modified)
         {
             try
             {
@@ -19,6 +19,9 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "Password", SqlDbType.VarChar, Password);
                 sqlDB.AddInParameter(dbCMD, "Email", SqlDbType.VarChar, Email);
                 sqlDB.AddInParameter(dbCMD, "Contact", SqlDbType.VarChar, Contact);
+                sqlDB.AddInParameter(dbCMD, "@CountryID", SqlDbType.Int, CountryID);
+                sqlDB.AddInParameter(dbCMD, "@StateID", SqlDbType.Int, StateID);
+                sqlDB.AddInParameter(dbCMD, "@CityID", SqlDbType.Int, CityID);
                 sqlDB.AddInParameter(dbCMD, "ProfilePhotoPath", SqlDbType.NVarChar, ProfilePhotoPath);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
@@ -58,7 +61,7 @@ namespace BOXCricket.DAL
         #endregion
 
         #region Method: dbo_PR_MST_User_UpdateByPK
-        public Boolean dbo_PR_MST_User_UpdateByPK(string ConnStr, string FirstName, string LastName, string Password, string? Email, string? Contact, int? CountryID, int? StateID, int? CityID, bool IsAdmin, bool IsActive, string? ProfilePhotoPath, DateTime? Modified, int UserID)
+        public Boolean dbo_PR_MST_User_UpdateByPK(string ConnStr, string FirstName, string LastName, string Password, string? Email, string? Contact, int? CountryID, int? StateID, int? CityID, string? ProfilePhotoPath, DateTime? Modified, int UserID)
         {
             try
             {
@@ -72,8 +75,8 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@CountryID", SqlDbType.Int, CountryID);
                 sqlDB.AddInParameter(dbCMD, "@StateID", SqlDbType.Int, StateID);
                 sqlDB.AddInParameter(dbCMD, "@CityID", SqlDbType.Int, CityID);
-                sqlDB.AddInParameter(dbCMD, "@IsAdmin", SqlDbType.Bit, IsAdmin);
-                sqlDB.AddInParameter(dbCMD, "@IsActive", SqlDbType.Bit, IsActive);
+                //sqlDB.AddInParameter(dbCMD, "@IsAdmin", SqlDbType.Bit, IsAdmin);
+                //sqlDB.AddInParameter(dbCMD, "@IsActive", SqlDbType.Bit, IsActive);
                 sqlDB.AddInParameter(dbCMD, "ProfilePhotoPath", SqlDbType.NVarChar, ProfilePhotoPath);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 

@@ -8,6 +8,28 @@ namespace BOXCricket.DAL
 {
     public class MST_BookingDALBase : DAL_Helper
     {
+        #region Method: dbo_PR_MST_Booking_SelectAllByOwner
+        public DataTable dbo_PR_MST_Booking_SelectAllByOwner()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_SelectAllByOwner");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region Method: dbo_PR_MST_Booking_SelectAll
         public DataTable dbo_PR_MST_Booking_SelectAll()
         {
@@ -30,25 +52,6 @@ namespace BOXCricket.DAL
         }
         #endregion
 
-        #region Method: dbo_PR_MST_Booking_DeleteByPK
-        public bool? dbo_PR_MST_Booking_DeleteByPK(int? BookingID)
-        {
-            try
-            {
-                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_DeleteByPK");
-                sqlDB.AddInParameter(dbCMD, "BookingID", SqlDbType.Int, BookingID);
-                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
-                int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
-                return (vReturnValue == -1 ? false : true);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        #endregion
-
         #region Method: dbo_PR_MST_Booking_Insert
         public bool? dbo_PR_MST_Booking_Insert(MST_BookingModel modelMST_Bookings)
         {
@@ -60,9 +63,10 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@BookedBy", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
-                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Bookings.SlotNO);
+                sqlDB.AddInParameter(dbCMD, "@Slots", SqlDbType.NVarChar, modelMST_Bookings.Slots);
                 sqlDB.AddInParameter(dbCMD, "@BookingAmount", SqlDbType.Decimal, modelMST_Bookings.BookingAmount);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_Bookings.Status);
+                sqlDB.AddInParameter(dbCMD, "@Remarks", SqlDbType.VarChar, modelMST_Bookings.Remarks);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 
@@ -100,21 +104,16 @@ namespace BOXCricket.DAL
         }
         #endregion
 
-        #region Method: dbo_PR_MST_Booking_UpdateByPK
-        public bool? dbo_PR_MST_Booking_UpdateByPK(MST_BookingModel modelMST_Bookings)
+        #region Method: dbo_PR_MST_Booking_StatusUpdateByPK
+        public bool? dbo_PR_MST_Booking_StatusUpdateByPK(MST_BookingStatusUpdateModel modelMST_BookingStatusUpdate)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_UpdateByPK");
-                sqlDB.AddInParameter(dbCMD, "BookingID", SqlDbType.Int, modelMST_Bookings.BookingID);
-                sqlDB.AddInParameter(dbCMD, "@BOXCricketID", SqlDbType.Int, modelMST_Bookings.BOXCricketID);
-                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, modelMST_Bookings.GroundID);
-                sqlDB.AddInParameter(dbCMD, "@BookedBy", SqlDbType.Int, CommonVariables.UserID());
-                sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, modelMST_Bookings.BookingDate);
-                sqlDB.AddInParameter(dbCMD, "@SlotNO", SqlDbType.Int, modelMST_Bookings.SlotNO);
-                sqlDB.AddInParameter(dbCMD, "@BookingAmount", SqlDbType.Decimal, modelMST_Bookings.BookingAmount);
-                sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_Bookings.Status);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_StatusUpdateByPK");
+                sqlDB.AddInParameter(dbCMD, "BookingID", SqlDbType.Int, modelMST_BookingStatusUpdate.BookingID);
+                sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_BookingStatusUpdate.Status);
+                sqlDB.AddInParameter(dbCMD, "@Remarks", SqlDbType.VarChar, modelMST_BookingStatusUpdate.Remarks);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);

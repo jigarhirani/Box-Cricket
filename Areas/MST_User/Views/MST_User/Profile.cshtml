@@ -118,29 +118,7 @@
                                 <span asp-validation-for="CityID" class="text-danger"></span>
                             </div>
 
-                        </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-4">
-                                <div class="form-check form-switch">
-                                    <input asp-for="IsAdmin" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" />
-
-                                    <label asp-for="IsAdmin" class="form-check-label" for="flexSwitchUnheckChecked">Is
-                                        Admin</label>
-                                    <span asp-validation-for="IsAdmin" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="mb-3 col-md-4">
-                                <div class="form-check form-switch">
-                                    <input asp-for="IsActive" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" />
-
-                                    <label asp-for="IsActive" class="form-check-label" for="flexSwitchUnheckChecked">Is
-                                        Active</label>
-                                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>                        
+                        </div>                                           
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary me-2">Save changes</button>
                             <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Cancel</a>

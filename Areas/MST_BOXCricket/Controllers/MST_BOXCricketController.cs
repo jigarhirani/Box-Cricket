@@ -18,6 +18,7 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         {
 
         }
+
         #region Select All 
         public IActionResult BOXCricketList()
         {
@@ -155,6 +156,15 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
             ViewBag.CityList = LOC_CityDropdownByState_List;
             var casecade = LOC_CityDropdownByState_List;
             return Json(casecade);
+        }
+        #endregion
+
+        #region BOXCricketSearch
+        public IActionResult BOXCricketSearch(string BOXCricketName)
+        {
+            DataTable dt = dalMST_BOXCricketDAL.dbo_PR_MST_BOXCricket_Search(BOXCricketName);
+            return View("BOXCricketList", dt);
+
         }
         #endregion
     }

@@ -111,9 +111,9 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         #endregion
 
         #region GroundSearch
-        public IActionResult GroundSearch(string GroundName, int GroundCapacity)
+        public IActionResult GroundSearch(string GroundName, int GroundCapacity, string IsAllowedBooking)
         {
-            DataTable dt = dalMST_GroundDAL.dbo_PR_MST_Ground_Search(GroundName, GroundCapacity);
+            DataTable dt = dalMST_GroundDAL.dbo_PR_MST_Ground_Search(GroundName, GroundCapacity, IsAllowedBooking);
             return View("GroundList", dt);
 
         }
