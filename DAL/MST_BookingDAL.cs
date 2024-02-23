@@ -7,13 +7,13 @@ namespace BOXCricket.DAL
 {
     public class MST_BookingDAL : DAL_Helper
     {
-        #region Method: dbo_PR_MST_BOXCricket_Dropdown
-        public DataTable dbo_PR_MST_BOXCricket_Dropdown()
+        #region Method: dbo_PR_MST_BOXCricket_Dropdown_ByUserID
+        public DataTable dbo_PR_MST_BOXCricket_Dropdown_ByUserID()
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_Dropdown");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_Dropdown_ByUserID");
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dtBOXCricket = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
@@ -77,13 +77,13 @@ namespace BOXCricket.DAL
         }
         #endregion        
 
-        #region Method: dbo_PR_MST_Ground_AllowedtoBookDropdownByBOXCricket
-        public DataTable dbo_PR_MST_Ground_AllowedtoBookDropdownByBOXCricket(int BOXCricketID)
+        #region Method: dbo_PR_MST_Ground_AllowedtoBookDropdown_ByBOXCricket
+        public DataTable dbo_PR_MST_Ground_AllowedtoBookDropdown_ByBOXCricket(int BOXCricketID)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_AllowedtoBookDropdownByBOXCricket");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_AllowedtoBookDropdown_ByBOXCricket");
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "BOXCricketID", SqlDbType.Int, BOXCricketID);
                 DataTable dtBOXCricket = new DataTable();
@@ -101,13 +101,13 @@ namespace BOXCricket.DAL
         }
         #endregion        
 
-        #region Method: dbo_PR_MST_Slot_Dropdown_Validation
-        public DataTable dbo_PR_MST_Slot_Dropdown_Validation(int GroundID, DateTime BookingDate)
+        #region Method: dbo_PR_MST_Slot_Dropdown_Validation_ByDate
+        public DataTable dbo_PR_MST_Slot_Dropdown_Validation_ByDate(int GroundID, DateTime BookingDate)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Slot_Dropdown_Validation");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Slot_Dropdown_Validation_ByDate");
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, GroundID);
                 sqlDB.AddInParameter(dbCMD, "@BookingDate", SqlDbType.DateTime, BookingDate);
                 DataTable dtSlot = new DataTable();
@@ -125,13 +125,13 @@ namespace BOXCricket.DAL
         }
         #endregion    
 
-        #region Method: dbo_PR_MST_Rate_HourlyRate
-        public DataTable dbo_PR_MST_Rate_HourlyRate(int BOXCricketID, int GroundID, int SlotNO, DateTime BookingDate)
+        #region Method: dbo_PR_MST_Rate_HourlyRate_BySlotAndDate
+        public DataTable dbo_PR_MST_Rate_HourlyRate_BySlotAndDate(int BOXCricketID, int GroundID, int SlotNO, DateTime BookingDate)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_HourlyRate");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_HourlyRate_BySlotAndDate");
                 sqlDB.AddInParameter(dbCMD, "@BOXCricketID", SqlDbType.Int, BOXCricketID);
                 sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, GroundID);
                 sqlDB.AddInParameter(dbCMD, "@SlotNo", SqlDbType.Int, SlotNO);
@@ -151,13 +151,13 @@ namespace BOXCricket.DAL
         }
         #endregion
 
-        #region Method: dbo_PR_MST_Booking_Search
-        public DataTable dbo_PR_MST_Booking_Search(string UserName, int GroundID, int BOXCricketID, string Status)
+        #region Method: dbo_PR_MST_Booking_Search_ByFilters
+        public DataTable dbo_PR_MST_Booking_Search_ByFilters(string UserName, int GroundID, int BOXCricketID, string Status)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_Search");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_Search_ByFilters");
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 if (UserName != null)
                 {

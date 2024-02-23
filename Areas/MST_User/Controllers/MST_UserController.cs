@@ -1,5 +1,5 @@
 ﻿using BOXCricket.Areas.MST_User.Models;
-
+using BOXCricket.BAL;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -57,7 +57,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
             }
             else
             {
-                DataTable dt = dalMST_UserDAL.dbo_PR_MST_User_SelectByEmailPassword(connstr, modelMST_User.Email, modelMST_User.Password);
+                DataTable dt = dalMST_UserDAL.dbo_PR_MST_User_Select_ByEmailPassword(connstr, modelMST_User.Email, modelMST_User.Password);
                 if (dt.Rows.Count > 0)
                 {
                     foreach (DataRow dr in dt.Rows)
@@ -66,6 +66,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
                         HttpContext.Session.SetString("Email", dr["Email"].ToString());
                         HttpContext.Session.SetString("UserID", dr["UserID"].ToString());
                         HttpContext.Session.SetString("Password", dr["Password"].ToString());
+                        HttpContext.Session.SetString("IsAdmin", dr["IsAdmin"].ToString());
                         HttpContext.Session.SetString("ProfilePhotoPath", dr["ProfilePhotoPath"].ToString());
                         break;
                     }
@@ -77,7 +78,14 @@ namespace BOXCricket.Areas.MST_User.Controllers
                 }
                 if (HttpContext.Session.GetString("Email") != null && HttpContext.Session.GetString("Password") != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    if (CommonVariables.IsAdmin() == false)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("AdminIndex", "Home");
+                    }
                 }
             }
             return RedirectToAction("Login", "MST_User");
@@ -177,7 +185,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
                 CityDropdownByState(model.StateID);
                 return View("Profile", model);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AdminIndex", "Home");
         }
         #endregion
 
@@ -245,7 +253,14 @@ namespace BOXCricket.Areas.MST_User.Controllers
                 TempData["alertTitle"] = "Error";
                 TempData["alertMessage"] = "Some Error Occured";
             }
-            return RedirectToAction("Index", "Home");
+            if (CommonVariables.IsAdmin() == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("AdminIndex", "Home");
+            }
         }
         #endregion        
 
@@ -264,7 +279,15 @@ namespace BOXCricket.Areas.MST_User.Controllers
             {
                 if (Convert.ToBoolean(dalMST_UserDAL.dbo_PR_MST_User_Password_UpdateByPK(modelMST_User_PasswordChange)))
                     TempData["successMessage"] = "Password Updated Successfully";
-                return RedirectToAction("Index", "Home");
+
+                if (CommonVariables.IsAdmin() == false)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("AdminIndex", "Home");
+                }
             }
             TempData["errorMessage"] = "Some error has occurred";
             return RedirectToAction("ChangePassword");
@@ -321,7 +344,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login", "MST_User");
+            return RedirectToAction("Index", "Home");
         }
         #endregion                       
     }

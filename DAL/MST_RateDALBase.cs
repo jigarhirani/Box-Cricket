@@ -9,13 +9,13 @@ namespace BOXCricket.DAL
 {
     public class MST_RateDALBase : DAL_Helper
     {
-        #region Method: dbo_PR_MST_Rate_SelectAll
-        public DataTable dbo_PR_MST_Rate_SelectAll()
+        #region Method: dbo_PR_MST_Rate_SelectAll_ByUserID
+        public DataTable dbo_PR_MST_Rate_SelectAll_ByUserID()
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_SelectAll");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_SelectAll_ByUserID");
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))

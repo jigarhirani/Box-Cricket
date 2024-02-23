@@ -22,7 +22,7 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         #region Select All 
         public IActionResult BOXCricketList()
         {
-            DataTable dt = dalMST_BOXCricketDALBase.dbo_PR_MST_BOXCricket_SelectAll();
+            DataTable dt = dalMST_BOXCricketDALBase.dbo_PR_MST_BOXCricket_SelectAll_ByOwnerID();
             return View("BOXCricketList", dt);
         }
         #endregion
@@ -162,7 +162,7 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         #region BOXCricketSearch
         public IActionResult BOXCricketSearch(string BOXCricketName)
         {
-            DataTable dt = dalMST_BOXCricketDAL.dbo_PR_MST_BOXCricket_Search(BOXCricketName);
+            DataTable dt = dalMST_BOXCricketDAL.dbo_PR_MST_BOXCricket_Search_ByFilters(BOXCricketName);
             return View("BOXCricketList", dt);
 
         }

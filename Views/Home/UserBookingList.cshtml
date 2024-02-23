@@ -1,0 +1,148 @@
+﻿@using System.Data
+@using BOXCricket.BAL
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Bookings /</span> Bookings List</h4>
+                <!-- Hoverable Table rows -->
+                <div class="card">
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="sticky-left">Ground Name</th>
+                                    <th>BOX Cricket Name</th>
+                                    <th>Booking Date</th>
+                                    <th>Timings</th>
+                                    <th>Total Slots Booked</th>
+                                    <th>BookingAmount</th>
+                                    <th>Status</th>
+                                    <th>Booked On</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @{
+                                    if (Model.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow dr in Model.Rows)
+                                        {
+                                            <tr>
+                                                <td class="sticky-left">@dr["GroundName"]</td>
+                                                <td>@dr["BOXCricketName"]</td>
+                                                <td>@Convert.ToDateTime(dr["BookingDate"]).ToString("dd-MM-yy")</td>
+                                                <td>@dr["SlotDetails"]</td>
+                                                <td>@dr["TotalSlotsBooked"]</td>
+                                                <td>@dr["BookingAmount"]</td>
+                                                <td>@dr["Status"]</td>
+                                                <td>@dr["Created"]</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="9" class="text-center">
+                                                <p class="col-form-label">No Record Found</p>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <!--/ Hoverable Table rows -->
+            </div>
+            <!-- / Content -->
+
+
+            <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+
+<!-- / Layout wrapper -->
+<script>
+    function funOnBOXCricketChange() {
+        var BOXCricketID = $("#BOXCricketID").val();
+
+        $("#GroundID").empty();
+        $("#GroundID").append($("<option></option>").val("").html("Select Ground"));
+        if (BOXCricketID !== "") {
+            $.ajax(
+                {
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("GroundDropDownByBOXCricket", "MST_Booking")" + "?&BOXCricketID=" + BOXCricketID,
+                    data: {},
+                    dataType: "json",
+                    success: function (Result) {
+                        $.each(Result, function (index, item) {
+                            $("#GroundID").append($("<option></option>").val(item.groundID).html(item.groundName));
+
+                        });
+                    },
+                    error: function (err) {
+                        //alert(err.toString();
+                        alert("Error while fetch data");
+                    }
+                }
+            )
+        }
+        else {
+            // If BOXCricketID is empty, load all grounds
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "@Url.Action("GroundDropDown", "MST_Booking")",
+                data: {},
+                dataType: "json",
+                success: function (Result) {
+                    $.each(Result, function (index, item) {
+                        $("#GroundID").append($("<option></option>").val(item.groundID).html(item.groundName));
+                    });
+                },
+                error: function (err) {
+                    //alert(err.toString();
+                    alert("Error while fetching data");
+                }
+            });
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('[data-confirm]');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const confirmationMessage = this.getAttribute('data-confirm');
+                if (!confirm(confirmationMessage)) {
+                    e.preventDefault(); // Cancel the form submission if the user cancels the confirmation
+                }
+            });
+        });
+    });
+</script>

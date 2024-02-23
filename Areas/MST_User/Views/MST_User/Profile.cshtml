@@ -62,17 +62,6 @@
 
                                 <span asp-validation-for="LastName" class="text-danger"></span>
                             </div>
-                            @* <div class="mb-3 form-password-toggle">
-                                <label class="form-label" for="password">Password</label>
-                                <div class="input-group input-group-merge">
-                                    <input type="password" class="form-control" asp-for="Password" id="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" />
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-
-                                </div>
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div> *@
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">E-mail</label>
                                 <input class="form-control" type="text" id="email" name="email" asp-for="Email"
@@ -121,7 +110,14 @@
                         </div>                                           
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Cancel</a>
+                            @if (CommonVariables.IsAdmin() == false)
+                            {
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Cancel</a>
+                            }
+                            else
+                            {
+                                <a asp-action="AdminIndex" asp-controller="Home" class="btn btn-outline-secondary">Cancel</a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -129,7 +125,6 @@
             <!-- /Account -->
         </div>
     </div>
-</div>
 </div>
 <!-- / Content -->
 @section Scripts {

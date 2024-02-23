@@ -8,13 +8,13 @@ namespace BOXCricket.DAL
 {
     public class MST_BookingDALBase : DAL_Helper
     {
-        #region Method: dbo_PR_MST_Booking_SelectAllByOwner
-        public DataTable dbo_PR_MST_Booking_SelectAllByOwner()
+        #region Method: dbo_PR_MST_Booking_SelectAll_ByOwner
+        public DataTable dbo_PR_MST_Booking_SelectAll_ByOwner()
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_SelectAllByOwner");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_SelectAll_ByOwner");
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
@@ -30,13 +30,13 @@ namespace BOXCricket.DAL
         }
         #endregion
 
-        #region Method: dbo_PR_MST_Booking_SelectAll
-        public DataTable dbo_PR_MST_Booking_SelectAll()
+        #region Method: dbo_PR_MST_Booking_SelectAll_ByUserID
+        public DataTable dbo_PR_MST_Booking_SelectAll_ByUserID()
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_SelectAll");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_SelectAll_ByUserID");
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
@@ -88,7 +88,6 @@ namespace BOXCricket.DAL
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Booking_SelectByPK");
                 sqlDB.AddInParameter(dbCMD, "BookingID", SqlDbType.Int, BookingID);
-                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
                 {

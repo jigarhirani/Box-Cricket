@@ -8,13 +8,13 @@ namespace BOXCricket.DAL
 {
     public class MST_GroundDALBase : DAL_Helper
     {
-        #region Method: dbo_PR_MST_Ground_SelectAll
-        public DataTable dbo_PR_MST_Ground_SelectAll()
+        #region Method: dbo_PR_MST_Ground_SelectAll_ByUserID
+        public DataTable dbo_PR_MST_Ground_SelectAll_ByUserID()
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_SelectAll");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_SelectAll_ByUserID");
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))

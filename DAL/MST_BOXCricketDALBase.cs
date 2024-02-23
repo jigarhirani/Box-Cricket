@@ -8,13 +8,13 @@ namespace BOXCricket.DAL
 {
     public class MST_BOXCricketDALBase : DAL_Helper
     {
-        #region Method: dbo_PR_MST_BOXCricket_SelectAll
-        public DataTable dbo_PR_MST_BOXCricket_SelectAll()
+        #region Method: dbo_PR_MST_BOXCricket_SelectAll_ByOwnerID
+        public DataTable dbo_PR_MST_BOXCricket_SelectAll_ByOwnerID()
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_SelectAll");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_SelectAll_ByOwnerID");
                 sqlDB.AddInParameter(dbCMD, "OwnerID", SqlDbType.Int, CommonVariables.UserID());
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))

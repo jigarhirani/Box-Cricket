@@ -33,6 +33,30 @@
             return UserName;
         }
 
+        public static bool? IsAdmin()
+        {
+            // Retrieve session value
+            string isAdminString = _httpContextAccessor.HttpContext.Session.GetString("IsAdmin");
+
+            // Check if session value is not null or empty
+            if (!string.IsNullOrEmpty(isAdminString))
+            {
+                // Parse session value into boolean
+                if (bool.TryParse(isAdminString, out bool IsAdmin))
+                {
+                    return IsAdmin;
+                }
+                else
+                {
+                    // Log or handle invalid session value
+                    throw new InvalidOperationException("Invalid value stored in session for 'IsAdmin'.");
+                }
+            }
+
+            // Default value if session value is not set
+            return false;
+        }
+
         public static string? ProfilePhotoPath()
         {
             string? ProfilePhotoPath = null;

@@ -1,0 +1,247 @@
+﻿@using System.Data
+@using BOXCricket.BAL
+@{
+    if (CommonVariables.IsAdmin() == true)
+    {
+        Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout_User.cshtml";
+    }
+}
+@model BOXCricket.Areas.MST_Booking.Models.MST_BookingModel;
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Bookings /</span> Add Booking</h4>
+
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Booking Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Save" method="post">
+                                <input type="hidden" asp-for="BookingID" />
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlSelect1" class="form-label">BOX Cricket</label>
+                                        <select type="text" class="form-select" aria-label="Default select example"
+                                                asp-for="BOXCricketID"
+                                                asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                                            <option value="">Select the BOX Cricket</option>
+                                        </select>
+                                        <span asp-validation-for="BOXCricketID" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Name</label>
+                                        <Select type="text" class="form-select" aria-label="Default select example" asp-for="GroundID" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                                            <option value="">Select the Ground</option>
+                                        </Select>
+                                        <span asp-validation-for="GroundID" class="text-danger"></span>
+                                    </div>                                    
+                                </div>                                
+                                
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <label asp-for="BookingDate" for="html5-date-input" class="form-label">Date</label>
+                                        <input asp-for="BookingDate" class="form-control" type="date" name="BookingDate" id="BookingDate" />
+                                        <span asp-validation-for="BookingDate" class="text-danger"></span>
+                                    </div>  
+
+                                    <div class="mb-3 col-md-4">
+                                        <label asp-for="SlotNO" for="exampleFormControlSelect1" class="form-label">Slot</label>
+                                        <Select type="text" class="form-select" aria-label="Default select example" asp-for="SlotNO" asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))" multiple>
+                                            <option value="">Select the Slot</option>
+                                        </Select>
+                                        <span asp-validation-for="SlotNO" class="text-danger"></span>
+                                    </div>
+
+                                    <input type="hidden" asp-for="Slots" id="SelectedSlots" name="SelectedSlots" />
+
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label" for="basic-default-company">Booking Amount</label>
+                                        <input asp-for="BookingAmount" type="text" class="form-control" id="basic-default-company" placeholder="Enter Booking Amount" readonly/>
+                                        @* <span asp-validation-for="BookingAmount" class="text-danger"></span> *@
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label asp-for="Status" for="exampleFormControlSelect1" class="form-label">Select Status of Booking</label>
+                                        <Select type="text" asp-for="Status" class="form-select" aria-label="Default select example">
+                                            <option value="Pending" selected>Pending</option>
+                                            <option value="Confirm">Confirm</option>
+                                            <option value="Rejected">Reject</option>
+                                        </Select>
+                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="basic-default-company">Remark</label>
+                                        <input asp-for="Remarks" type="text" class="form-control" id="basic-default-company" placeholder="Enter Remarks" />
+                                        @* <span asp-validation-for="Remarks" class="text-danger"></span> *@
+                                    </div>
+                                </div>  
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a asp-action="BookingList" class="btn btn-secondary ms-2">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+    <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+@section scripts {
+    <script>
+
+        function funOnBOXCricketChange() {
+            var BOXCricketID = $("#BOXCricketID").val();
+
+            $("#GroundID").empty();
+            $("#GroundID").append($("<option></option>").val("").html("Select Ground"));
+            if (BOXCricketID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("GroundAllowedtoBookDropdownByBOXCricket", "MST_Booking")" + "?&BOXCricketID=" + BOXCricketID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result, function (index, item) {
+                                $("#GroundID").append($("<option></option>").val(item.groundID).html(item.groundName));
+
+                            });
+                        },
+                        error: function (err) {
+                            //alert(err.toString();
+                            alert("Error while fetch data");
+                        }
+                    }
+                )
+            }
+        }
+
+        $(document).ready(function () {
+            // Function to update slots based on selected ground and date
+            function updateSlots() {
+                var groundId = $("#GroundID").val();
+                var bookingDate = $("#BookingDate").val();
+
+                $("#SlotNO").empty();
+                $("#SlotNO").append($("<option></option>").val("").html("Select Slot"));
+
+                // Check if both GroundID and BookingDate are filled
+                if (groundId !== "" && bookingDate !== "" && bookingDate !== "01-01-0001 00:00:00") {
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("GetSlots", "MST_Booking")", // Replace with your actual controller and action method
+                        data: { groundID: groundId, bookingDate: bookingDate },
+                        dataType: "json",
+                        success: function (result) {
+                            // Update the Slot dropdown list
+                            $.each(result, function (index, item) {
+                                $("#SlotNO").append($("<option></option>").val(item.slotNO).html(item.slotDetails));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error while fetching data");
+                        }
+                    });
+                }
+            }
+
+            // Event handlers for GroundID and BookingDate change
+            $("#GroundID, #BookingDate").change(function () {
+                updateSlots();
+            });
+
+            // Event handler for SlotNO change
+            $("#SlotNO").change(function () {
+                var selectedSlot = parseInt($(this).val());
+                var lastSelectedSlot = parseInt($(this).data('lastSelectedSlot'));
+                var selectedSlots = $(this).val();
+
+                // Check if the number of selected slots exceeds four
+                if (selectedSlots.length > 4) {
+                    alert("You can only select a maximum of four consecutive slots.");
+                    $(this).val($(this).data('lastSelectedSlots')); // Revert to the previous selection
+                    return;
+                }
+
+                // Check if the selected slot is consecutive to the last selected slot
+                if (selectedSlot === lastSelectedSlot + 1) {
+                    // Update last selected slot
+                    $(this).data('lastSelectedSlot', selectedSlot);
+                    $(this).data('lastSelectedSlots', selectedSlots);
+                } else {
+                    // Reset consecutive slot counter and last selected slots
+                    $(this).data('lastSelectedSlot', selectedSlot);
+                    $(this).data('lastSelectedSlots', [selectedSlot]);
+                }
+            });
+
+            
+            // Function to automatically trigger when GroundID, BookingDate, and SlotNO are filled
+            function autoTrigger() {
+                var boxcricketId = $("#BOXCricketID").val();
+                var groundId = $("#GroundID").val();
+                var bookingDate = $("#BookingDate").val();
+                var slotNo = $("#SlotNO").val();
+
+                // Check if all fields are filled
+                if (boxcricketId !== "" && groundId !== "" && bookingDate !== "" && bookingDate !== "01-01-0001 00:00:00" && slotNo !== "") {
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("Rate", "MST_Booking")", // Replace "YourControllerName" with your actual controller name
+                        data: { boxcricketId: boxcricketId, groundId: groundId, bookingDate: bookingDate, slotNo: slotNo },
+                        dataType: "json",
+                        success: function (response) {
+                            // Handle success response
+                            $('#basic-default-company').val(response);
+                        },
+                        error: function (err) {
+                            // Handle error response
+                            console.error(err);
+                        }
+                    });
+                }
+            }
+
+            // Event handler for SlotNO change
+            $("#SlotNO").change(function () {
+                autoTrigger();
+            });
+
+            // Initial population on page load
+            updateSlots();
+        });
+
+        $("form").submit(function () {
+            // Get the selected slots
+            var selectedSlots = $("#SlotNO").val();
+
+            // Set the value of the hidden input field to the selected slots
+            $("#SelectedSlots").val(selectedSlots);
+        });
+    </script>
+}

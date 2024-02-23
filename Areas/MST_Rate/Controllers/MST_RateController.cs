@@ -40,7 +40,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
 
             #endregion
 
-            DataTable dt = dalMST_RateDALBase.dbo_PR_MST_Rate_SelectAll();
+            DataTable dt = dalMST_RateDALBase.dbo_PR_MST_Rate_SelectAll_ByUserID();
             return View("RateList", dt);
         }
         #endregion
@@ -132,7 +132,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         #region Dropdown For BOXCricketDropDown 
         public void BOXCricketDropDown()
         {
-            DataTable dtBOXCricket = dalMST_RateDAL.dbo_PR_MST_BOXCricket_Dropdown();
+            DataTable dtBOXCricket = dalMST_RateDAL.dbo_PR_MST_BOXCricket_Dropdown_ByUserID();
 
             List<MST_BOXCricketDropDownModel> MST_BOXCricketDropdown_List = new List<MST_BOXCricketDropDownModel>();
             foreach (DataRow dr in dtBOXCricket.Rows)
@@ -224,7 +224,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
 
             #endregion
 
-            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_Search(DayOfWeek, HourlyRate, SlotNO, BOXCricketID, GroundID);
+            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_Search_ByFilters(DayOfWeek, HourlyRate, SlotNO, BOXCricketID, GroundID);
             return View("RateList", dt);
 
         }

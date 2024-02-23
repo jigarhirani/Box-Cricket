@@ -1,0 +1,73 @@
+﻿@using System.Data
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<!-- Content -->
+<div class="container-xxl flex-grow-1 container-p-y">
+    @if (!string.IsNullOrWhiteSpace(successMessage))
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            @successMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    else if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            @errorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <!-- Grid Card -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+        @{
+            if (Model.Rows.Count > 0)
+            {
+                foreach (DataRow dr in Model.Rows)
+                {
+                    <div class="col">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="https://content.jdmagicbox.com/comp/hyderabad/s3/040pxx40.xx40.210203205029.m9s3/catalogue/sixer-zone-box-cricket-uppal-hyderabad-cricket-turf-grounds-2xief16ulc.jpg"
+                                alt="Card image cap" />
+                            <div class="card-body">
+                                <h5 class="card-title align-items-center">@dr["GroundName"]</h5>
+                                <span class="fw-medium card-text"><i class="bx bx-expand me-1"></i><span>L : @dr["GroundLength"], W
+                                        : @dr["GroundWidth"], H : @dr["GroundHeight"]</span></span><br>
+                                <span class="fw-medium card-text"><i class="bx bx-group me-1"></i><span>Ground Capacity :
+                                        @dr["GroundCapacity"]</span></span><br>
+                                <span class="fw-medium card-text"><i class="bx bx-user me-1"></i>Contact Person :
+                                    @dr["ContactPersonName"]</span><br>
+                                <span class="fw-medium card-text"><i class="bx bx-phone me-1"></i>Contact Person Number :
+                                    @dr["ContactPersonNumber"]</span>
+                            </div>
+                            <div class="card-footer pt-0">
+                                <!-- Price and Button -->
+                                <div class="d-sm-flex justify-content-sm-between align-items-center ">
+                                    <!-- Price -->
+                                    <div class="hstack gap-2">
+                                        <h5 class="fw-normal text-success mb-0">&#8377;1500</h5>
+                                        <small>/per Hour</small>
+                                        <span class="text-decoration-line-through">&#8377;1800</span>
+                                    </div>
+                                    <!-- Button -->
+                                    <div class="mt-2 mt-sm-0">
+                                        <a asp-action="BookingAdd" asp-route-GroundID="@Convert.ToInt32(@dr["GroundID"])"
+                                            asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
+                                            class="btn btn-outline-primary  mb-0">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<!-- / Content -->

@@ -57,7 +57,7 @@
 
                     <div class="col-md-2 mb-2">
                         <input type="text" class="form-control" name="UserName" id="UserName" placeholder="User Name" />
-                    </div>                    
+                    </div>
                     <div class="col-md-1 mb-2">
                         <button type="submit" class="btn btn-outline-success w-100">Search</button>
                     </div>
@@ -76,7 +76,7 @@
                             }
                             else
                             {
-                                <a asp-action="SelectAllBooking" asp-controller="MST_Booking" class="btn btn-info me-sm-2">My Bookings</a>
+                                <a asp-action="SelectAllMyBooking" asp-controller="MST_Booking" class="btn btn-info me-sm-2">My Bookings</a>
                             }
                             <a asp-action="Add" class="dt-button create-new btn btn-success" tabindex="0"
                                aria-controls="DataTables_Table_0">
@@ -84,7 +84,7 @@
                                     <i class="bx bx-plus me-sm-1"></i>
                                     <span class="d-none d-sm-inline-block">Add New Booking</span>
                                 </span>
-                            </a>                            
+                            </a>
                         </div>
                     </div>
                     <div class="table-responsive text-nowrap">
@@ -122,7 +122,7 @@
                                                 <td>@dr["Status"]</td>
                                                 <td>@dr["Created"]</td>
                                                 <td>@dr["Modified"]</td>
-                                                <td class="sticky-right">                                                    
+                                                <td class="sticky-right">
                                                     <a class="btn btn-icon btn-warning" asp-action="BookingStatusEdit" asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])">
                                                         <i class="bx bx-pencil"></i>
                                                     </a>

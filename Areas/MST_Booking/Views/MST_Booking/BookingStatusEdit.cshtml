@@ -1,4 +1,5 @@
 ﻿@using System.Data
+@using BOXCricket.BAL
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -67,8 +68,8 @@
                                         <label asp-for="Status" for="exampleFormControlSelect1" class="form-label">Select Status of Booking</label>
                                         <Select type="text" asp-for="Status" class="form-select" aria-label="Default select example">
                                             <option value="Pending" selected>Pending</option>
-                                            <option value="Confirm">Confirm</option>
-                                            <option value="Rejected">Reject</option>
+                                            <option value="Confirmed">Confirmed</option>
+                                            <option value="Rejected">Rejected</option>
                                         </Select>
                                         <span asp-validation-for="Status" class="text-danger"></span>
                                     </div>

@@ -19,7 +19,6 @@ namespace BOXCricket.DAL
                 {
                     dt.Load(dr);
                 }
-
                 return dt;
             }
             catch (Exception)
@@ -42,7 +41,6 @@ namespace BOXCricket.DAL
                 {
                     dt.Load(dr);
                 }
-
                 return dt;
             }
             catch (Exception)
@@ -75,13 +73,13 @@ namespace BOXCricket.DAL
         }
         #endregion
 
-        #region Method: dbo_PR_MST_BOXCricket_Search
-        public DataTable dbo_PR_MST_BOXCricket_Search(string BOXCricketName)
+        #region Method: dbo_PR_MST_BOXCricket_Search_ByFilters
+        public DataTable dbo_PR_MST_BOXCricket_Search_ByFilters(string BOXCricketName)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_Search");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_Search_ByFilters");
                 sqlDB.AddInParameter(dbCMD, "OwnerID", SqlDbType.Int, CommonVariables.UserID());
                 if (BOXCricketName != null)
                 {

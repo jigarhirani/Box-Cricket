@@ -1,4 +1,5 @@
 ﻿@using System.Data
+@using BOXCricket.BAL
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -33,15 +34,21 @@
                 }
 
                 <form asp-action="GroundSearch" asp-controller="MST_Ground" asp-area="MST_Ground" class="row mb-3">
-                    <div class="col-md-3 mb-2">
+
+                    <div class="col-md-2 mb-2">
+                        <Select class="form-select" name="BOXCricketID" id="BOXCricketID" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                            <option value="" selected>Select BOXCricket</option>
+                        </Select>
+                    </div>
+                    <div class="col-md-2 mb-2">
                         <input type="text" class="form-control" name="GroundName" id="searchGroundName"
                             placeholder="Ground Name" />
                     </div>
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-2 mb-2">
                         <input type="text" class="form-control" name="GroundCapacity" id="searchGroundCapacity"
                             placeholder="Ground Capacity" />
                     </div>
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-2 mb-2">
                         <select class="form-select" name="IsAllowedBooking" id="IsAllowedBooking" aria-label="Default select example">
                             <option selected disabled>Select Ground Status</option>
                             <option value="1">Allowed To Book</option>

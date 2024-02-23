@@ -8,13 +8,13 @@ namespace BOXCricket.DAL
 {
     public class MST_UserDAL : DAL_Helper
     {
-        #region Method: dbo_PR_MST_User_SelectByEmailPassword
-        public DataTable dbo_PR_MST_User_SelectByEmailPassword(string ConnStr, string Email, string Password)
+        #region Method: dbo_PR_MST_User_Select_ByEmailPassword
+        public DataTable dbo_PR_MST_User_Select_ByEmailPassword(string ConnStr, string Email, string Password)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_SelectByEmailPassword");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_Select_ByEmailPassword");
                 sqlDB.AddInParameter(dbCMD, "Email", SqlDbType.VarChar, Email);
                 sqlDB.AddInParameter(dbCMD, "Password", SqlDbType.VarChar, Password);
 
