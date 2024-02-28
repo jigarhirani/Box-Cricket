@@ -22,14 +22,14 @@
                         </div>
                         <div class="card-body">
                             <form asp-action="Save" method="post">
-                                <input type="hidden" asp-for="RateID"/>
+                                <input type="hidden" id="RateID" asp-for="RateID" />
 
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlSelect1" class="form-label">BOX Cricket</label>
                                         <select type="text" class="form-select" aria-label="Default select example"
                                                 asp-for="BOXCricketID"
-                                                asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                                                asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();" autofocus>
                                             <option value="">Select the BOX Cricket</option>
                                         </select>
                                         <span asp-validation-for="BOXCricketID" class="text-danger"></span>
@@ -73,9 +73,10 @@
 
                                 <div class="mb-3">
                                     <label asp-for="HourlyRate" class="form-label" for="basic-default-company">Hourly Rate</label>
-                                    <input asp-for="HourlyRate" type="text" class="form-control" id="basic-default-company" placeholder="Enter Hourly Rate in INR" />
+                                    <input asp-for="HourlyRate" type="text" class="form-control" id="HourlyRate" placeholder="Enter Hourly Rate in INR" />
                                     <span asp-validation-for="HourlyRate" class="text-danger"></span>
                                 </div>
+
                                 <div class="demo-inline-spacing">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <a asp-action="RateList" class="btn btn-secondary ms-2">Cancel</a>
@@ -128,5 +129,37 @@
             }
         }
 
+        $(document).ready(function () {
+            // Event handler when form fields change
+            $("select").change(function () {
+                // Check if all required fields are filled
+                var BOXCricketID = $("#BOXCricketID").val();
+                var GroundID = $("#GroundID").val();
+                var DayOfWeek = $("#exampleFormControlSelect1").val(); // Ensure DayOfWeek is treated as a string
+                var SlotNO = $("#SlotNO").val();
+
+                if (BOXCricketID !== "" && GroundID !== "" && DayOfWeek !== "" && SlotNO !== "") {
+                    // Make AJAX request
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("GetRateDetails", "MST_Rate")",
+                        data: {
+                            BOXCricketID: BOXCricketID,
+                            GroundID: GroundID,
+                            DayOfWeek: DayOfWeek,
+                            SlotNO: SlotNO
+                        },
+                        success: function (result) {
+                            // Update form fields with received data
+                            $("#RateID").val(result.rateID); // Assuming you have a hidden field with id "RateID"
+                            $("#HourlyRate").val(result.hourlyRate); // Assuming you have an input field with id "HourlyRate"
+                        },
+                        error: function (err) {
+                            console.error("Error while fetching data:", err);
+                        }
+                    });
+                }
+            });
+        });
     </script>
 }

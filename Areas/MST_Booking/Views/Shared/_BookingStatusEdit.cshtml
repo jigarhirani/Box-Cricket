@@ -1,0 +1,82 @@
+﻿@using System.Data
+@using BOXCricket.BAL
+@model BOXCricket.Areas.MST_Booking.Models.MST_BookingStatusUpdateModel;
+
+<!-- Modal Backdrop (header, body)-->
+<div class="modal-header">
+    <h5 class="modal-title" id="backDropModalTitle">Booking Status Edit</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-default-company">Booked By</label>
+            <input asp-for="BookedBy" type="text" class="form-control" id="basic-default-company" disabled />
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-default-company">Booking Amount</label>
+            <input asp-for="BookingAmount" type="text" class="form-control" id="basic-default-company" disabled />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-default-company">BOX Cricket Name</label>
+            <input asp-for="BOXCricketName" type="text" class="form-control" id="basic-default-company" disabled />
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-default-company">Ground Name</label>
+            <input asp-for="GroundName" type="text" class="form-control" id="basic-default-company" disabled />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label asp-for="BookingDate" for="html5-date-input" class="form-label">Booking Date</label>
+            <input asp-for="BookingDate" class="form-control" type="date" name="BookingDate" id="BookingDate" disabled />
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-default-company">Slot Details</label>
+            <input asp-for="SlotDetail" type="text" class="form-control" id="basic-default-company" disabled />
+        </div>
+    </div>
+    <form asp-area="MST_Booking" asp-controller="MST_Booking" asp-action="BookingStatusSave" method="post">
+        <input type="hidden" asp-for="BookingID" />
+
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label asp-for="Status" for="exampleFormControlSelect1" class="form-label">Select Status of Booking</label>
+                <Select type="text" asp-for="Status" class="form-select" aria-label="Default select example" autofocus>
+                    <option value="Pending" selected>Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Rejected">Rejected</option>
+                </Select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 col-md-6">
+                <label class="form-label" for="basic-default-company">Remark</label>
+                <input asp-for="Remarks" type="text" class="form-control" id="basic-default-company" placeholder="Enter Remarks" />
+                @* <span asp-validation-for="Remarks" class="text-danger"></span> *@
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a type="button" asp-action="BookingList" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        // Trigger the modal when the partial view is loaded
+        $(function () {
+            $('#backDropModal').modal('show');
+        });
+    </script>
+}

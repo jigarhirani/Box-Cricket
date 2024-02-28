@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "D:\\Repos\\BOXCricket\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\repos\\boxcricket\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\repos\\boxcricket\\views\\home\\grounds.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:views\\home\\grounds.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\repos\\boxcricket\\wwwroot\\assets\\vendor\\css\\theme-default.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:wwwroot\\assets\\vendor\\css\\theme-default.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +22,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Grounds.cshtml",
-              "DocumentMoniker": "D:\\Repos\\BOXCricket\\Views\\Home\\Grounds.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Grounds.cshtml",
-              "ToolTip": "D:\\Repos\\BOXCricket\\Views\\Home\\Grounds.cshtml",
-              "RelativeToolTip": "Views\\Home\\Grounds.cshtml",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAACMAAADLAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-02-23T14:45:57.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Repos\\BOXCricket\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\Repos\\BOXCricket\\Views\\Home\\Index.cshtml*",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml*",
-              "ViewState": "AQIAABoAAAAAAAAAAAAowCwAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-02-23T07:32:46.684Z",
+              "Title": "theme-default.css",
+              "DocumentMoniker": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\vendor\\css\\theme-default.css",
+              "RelativeDocumentMoniker": "wwwroot\\assets\\vendor\\css\\theme-default.css",
+              "ToolTip": "D:\\Repos\\BOXCricket\\wwwroot\\assets\\vendor\\css\\theme-default.css",
+              "RelativeToolTip": "wwwroot\\assets\\vendor\\css\\theme-default.css",
+              "ViewState": "AQIAAM8DAAAAAAAAAAAcwNgDAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-02-28T18:12:59.987Z",
               "EditorCaption": ""
             }
           ]

@@ -148,5 +148,32 @@ namespace BOXCricket.DAL
             }
         }
         #endregion
+
+        #region Method: dbo_PR_MST_Rate_GetByDetails
+        public DataTable dbo_PR_MST_Rate_GetByDetails(int BOXCricketID, int GroundID, string DayOfWeek, int SlotNO)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Rate_GetByDetails");
+                sqlDB.AddInParameter(dbCMD, "@BOXCricketID", SqlDbType.Int, BOXCricketID);
+                sqlDB.AddInParameter(dbCMD, "@GroundID", SqlDbType.Int, GroundID);
+                sqlDB.AddInParameter(dbCMD, "@DayOfWeek", SqlDbType.VarChar, DayOfWeek);
+                sqlDB.AddInParameter(dbCMD, "@SlotNo", SqlDbType.Int, SlotNO);
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

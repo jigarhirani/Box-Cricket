@@ -229,5 +229,25 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
 
         }
         #endregion
+
+        #region Get Rate Details
+        public IActionResult GetRateDetails(int BOXCricketID, int GroundID, string DayOfWeek, int SlotNO)
+        {
+            DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_GetByDetails(BOXCricketID, GroundID, DayOfWeek, SlotNO);
+            if (dt.Rows.Count > 0)
+            {
+                MST_RateModel model = new MST_RateModel();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var RateID = Convert.ToInt32(dr["RateID"]);
+                    var HourlyRate = Convert.ToDecimal(dr["HourlyRate"]);
+
+                    return Json(new { rateID = RateID, hourlyRate = HourlyRate });
+                }
+
+            }
+            return Json(null);
+        }
+        #endregion
     }
 }

@@ -2,6 +2,7 @@
 
 namespace BOXCricket.Areas.MST_Ground.Models
 {
+
     public class MST_GroundModel
     {
         public int? GroundID { get; set; }
@@ -39,10 +40,26 @@ namespace BOXCricket.Areas.MST_Ground.Models
         [Required(ErrorMessage = "Please enter the Number of Contact Person.")]
         public string ContactPersonNumber { get; set; }
 
+        [Required(ErrorMessage = "Please Enter Hourly Rate in INR.")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Please enter a valid amount in INR.")]
+        public decimal ActualHourlyRate { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Hourly Rate in INR.")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Please enter a valid amount in INR.")]
+        public decimal DiscountedHourlyRate { get; set; }
+
         [Required(ErrorMessage = "Please indicate whether booking on this ground is allowed or not.")]
         public bool IsAllowedBooking { get; set; } = false;
 
-        public DateTime Created { get; set; }
-        public DateTime Modified { get; set; }
+        public string? GroundImagePath1 { get; set; }
+        public string? GroundImagePath2 { get; set; }
+        public string? GroundImagePath3 { get; set; }
+        public string? GroundImagePath4 { get; set; }
+
+        public IFormFile? GroundImage1 { get; set; }
+        public IFormFile? GroundImage2 { get; set; }
+        public IFormFile? GroundImage3 { get; set; }
+        public IFormFile? GroundImage4 { get; set; }
+
     }
 }

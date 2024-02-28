@@ -84,6 +84,10 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
                         model.CountryID = Convert.ToInt32(dr["CountryID"]);
                         model.StateID = Convert.ToInt32(dr["StateID"]);
                         model.CityID = Convert.ToInt32(dr["CityID"]);
+                        model.BOXCricketImagePath1 = dr["BOXCricketImagePath1"].ToString();
+                        model.BOXCricketImagePath2 = dr["BOXCricketImagePath2"].ToString();
+                        ViewBag.EditBOXCricketImagePath1 = Convert.ToString(dr["BOXCricketImagePath1"]);
+                        ViewBag.EditBOXCricketImagePath2 = Convert.ToString(dr["BOXCricketImagePath2"]);
                     }
                     StateDropdownByCountry(model.CountryID);
                     CityDropdownByState(model.StateID);
@@ -100,9 +104,50 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         [HttpPost]
         public IActionResult Save(MST_BOXCricketModel modelMST_BOXCricket)
         {
-
             if (ModelState.IsValid)
             {
+                #region BOXCricketImagePath section
+                // Iterate over all BOXCricket images in the model
+                for (int i = 1; i <= 2; i++)
+                {
+                    var BOXCricketImageProperty = $"BOXCricketImage{i}";
+                    var BOXCricketImagePathProperty = $"BOXCricketImagePath{i}";
+
+                    var BOXCricketImage = (IFormFile)modelMST_BOXCricket.GetType().GetProperty(BOXCricketImageProperty).GetValue(modelMST_BOXCricket);
+                    var BOXCricketImagePath = (string)modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).GetValue(modelMST_BOXCricket);
+
+                    if (BOXCricketImagePath != null)
+                    {
+                        modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, BOXCricketImagePath);
+                    }
+                    else
+                    {
+                        if (BOXCricketImage != null)
+                        {
+                            // Determine uploaded BOXCricketImage type and create folder according to file type
+                            string filePath = System.IO.Path.GetExtension(BOXCricketImage.FileName);
+                            string directoryPath = @"D:\Repos\Admin_Panel\wwwroot\" + filePath;
+
+                            // Check if directory exists, if not then create it
+                            if (!Directory.Exists(directoryPath))
+                            {
+                                Directory.CreateDirectory(directoryPath);
+                            }
+
+                            // Upload BOXCricketImage to the root directory of the project
+                            string folderPath = Path.Combine("wwwroot/" + filePath + "/", BOXCricketImage.FileName);
+                            using (FileStream fs = System.IO.File.Create(folderPath))
+                            {
+                                BOXCricketImage.CopyTo(fs);
+                            }
+
+                            // Store BOXCricketImage path in the model
+                            modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, "/" + filePath + "/" + BOXCricketImage.FileName);
+                        }
+                    }
+                }
+                #endregion
+
                 if (modelMST_BOXCricket.BOXCricketID == null)
                 {
                     if (Convert.ToBoolean(dalMST_BOXCricketDALBase.dbo_PR_MST_BOXCricket_Insert(modelMST_BOXCricket)))

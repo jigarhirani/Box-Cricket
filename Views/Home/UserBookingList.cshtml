@@ -49,7 +49,25 @@
                                                 <td>@dr["SlotDetails"]</td>
                                                 <td>@dr["TotalSlotsBooked"]</td>
                                                 <td>@dr["BookingAmount"]</td>
-                                                <td>@dr["Status"]</td>
+                                                @{
+                                                    var status = dr["Status"].ToString();
+                                                    string statusClass = "";
+                                                    switch (status)
+                                                    {
+                                                        case "Confirmed":
+                                                            statusClass = "badge bg-label-success me-1";
+                                                            break;
+                                                        case "Pending":
+                                                            statusClass = "badge bg-label-warning me-1";
+                                                            break;
+                                                        case "Rejected":
+                                                            statusClass = "badge bg-label-danger me-1";
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+                                                <td><span class="@statusClass">@status</span></td>
                                                 <td>@dr["Created"]</td>
                                             </tr>
                                         }

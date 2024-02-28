@@ -135,7 +135,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
                         model.Status = dr["Status"].ToString();
                         model.Remarks = dr["Remarks"].ToString();
                     }
-                    return View("BookingStatusEdit", model);
+                    return PartialView("BookingStatusEdit", model);
                 }
             }
             #endregion
@@ -272,7 +272,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             return Json(TotalRate);
         }
 
-        #endregion       
+        #endregion               
 
         #region BookingSearch by filters
         public IActionResult BookingSearch(string UserName, int GroundID, int BOXCricketID, string Status)
@@ -289,20 +289,42 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
 
             #endregion
 
-            if (ViewBag.IsMyBookingPage = false)
-            {
-                ViewBag.IsMyBookingPage = false;
-            }
-            else
-            {
-                ViewBag.IsMyBookingPage = true;
-            }
-
             DataTable dt = dalMST_BookingDAL.dbo_PR_MST_Booking_Search_ByFilters(UserName, GroundID, BOXCricketID, Status);
             return View("BookingList", dt);
 
         }
         #endregion
 
+        #region _BookingStatusEdit
+        public IActionResult _BookingStatusEdit(int? BookingID)
+        {
+            #region Record Select by PK for Status Edit
+            if (BookingID != null)
+            {
+                DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectByPK(BookingID);
+                if (dt.Rows.Count > 0)
+                {
+                    MST_BookingStatusUpdateModel model = new MST_BookingStatusUpdateModel();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        model.BookingID = Convert.ToInt32(dr["BookingID"]);
+                        model.BOXCricketName = Convert.ToString(dr["BOXCricketName"]);
+                        model.GroundName = Convert.ToString(dr["GroundName"]);
+                        model.BookingDate = Convert.ToDateTime(dr["BookingDate"].ToString());
+                        model.BookedBy = Convert.ToString(dr["BookedBy"]);
+                        model.SlotDetail = dr["SlotDetails"].ToString();
+                        model.BookingAmount = Convert.ToDecimal(dr["BookingAmount"]);
+                        model.TotalSlotsBooked = Convert.ToInt32(dr["TotalSlotsBooked"].ToString());
+                        model.Status = dr["Status"].ToString();
+                        model.Remarks = dr["Remarks"].ToString();
+                    }
+                    return PartialView("_BookingStatusEdit", model);
+                }
+            }
+            #endregion
+
+            return View("BookingList");
+        }
+        #endregion
     }
 }

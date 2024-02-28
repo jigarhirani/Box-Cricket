@@ -26,8 +26,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcTVNUX0Jvb2tpbmdcQm9va2luZ0xpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repos/BOXCricket/Areas/MST_Booking/Views/MST_Booking/BookingStatusEdit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcTVNUX0Jvb2tpbmdcQm9va2luZ1N0YXR1c0VkaXQuY3NodG1s
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/Shared/_BookingStatusEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcU2hhcmVkXF9Cb29raW5nU3RhdHVzRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/Shared/_Model.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcU2hhcmVkXF9Nb2RlbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Repos/BOXCricket/Areas/MST_Booking/Views/_ViewImports.cshtml]
@@ -116,10 +120,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Repos/BOXCricket/Views/Home/AdminIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbkluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Repos/BOXCricket/Views/Home/BookingAdd.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCb29raW5nQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Repos/BOXCricket/Views/Home/Grounds.cshtml]

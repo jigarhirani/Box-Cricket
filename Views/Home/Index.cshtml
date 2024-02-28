@@ -9,6 +9,7 @@
 }
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
+
     @if (!string.IsNullOrWhiteSpace(successMessage))
     {
         <div class="alert alert-success alert-dismissible" role="alert">
@@ -23,6 +24,74 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
+
+    <div class="btn-group mb-3">
+        <button type="button"
+                class="btn btn-outline-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+            Filters
+        </button>
+        <div class="dropdown-menu dropdown-menu-end w-px-300">
+            <form class="p-4">   
+                <div class="row">
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default">
+                            City
+                        </label>
+                        <Select class="form-select" name="BOXCricketID" id="BOXCricketID" aria-label="Default select example">
+                            <option value="" selected>Select City</option>
+                        </Select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default">
+                            BOXCricket Name
+                        </label>
+                        <input type="text" class="form-control" name="BOXCricketName" id="searchBOXCricketName"
+                               placeholder="Enter BOXCricket Name" />
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="basic-default">
+                        Ground Name
+                    </label>
+                    <input type="text" class="form-control" name="GroundName" id="searchGroundName"
+                           placeholder="Enter Ground Name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="basic-default">
+                        Ground Capacity
+                    </label>
+                    <input type="number" value="18" class="form-control" name="GroundCapacity" id="searchGroundCapacity"
+                           placeholder="Enter Ground Capacity" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="basic-default">
+                        Per Hour Price
+                    </label>
+                    <input type="text" class="form-control" name="PerHourPrice" id="PerHourPrice"
+                           placeholder="Enter Per Hour Price" />
+                </div>
+                <div class="mb-3">
+                    <label for="html5-date-input" class="form-label">Date</label>
+                    <input class="form-control" type="date" name="BookingDate" id="BookingDate" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="basic-default">
+                        Slot
+                    </label>
+                    <Select class="form-select" name="Slot" id="Slot" aria-label="Default select example">
+                        <option value="" selected>Select Slot</option>
+                    </Select>
+                </div>
+                <button type="submit" class="btn btn-primary">Apply</button>
+                <button type="button" class="btn btn-secondary">Clear</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Grid Card -->
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
         @{
@@ -30,67 +99,77 @@
             {
                 foreach (DataRow dr in Model.Rows)
                 {
+                    var imagePaths = new List<string>();
+                    for (int i = 1; i <= 2; i++) // Assuming you have up to 4 image paths per ground
+                    {
+                        var imagePath = dr["BOXCricketImagePath" + i].ToString();
+                        if (!string.IsNullOrWhiteSpace(imagePath))
+                        {
+                            imagePaths.Add(imagePath);
+                        }
+                    }
+
+                    var carouselId = "imageSlider" + Guid.NewGuid().ToString("N"); // Generate a unique ID for each carousel
                     <div class="col">
-                        <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100" src="https://suratboxcricket.com/banner.png" alt="First slide">
+                        <div class="card">
+                            <div id="@carouselId" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach (var path in imagePaths)
+                                    {
+                                        <div class="carousel-item @(path == imagePaths.First() ? "active" : "")">
+                                            <img class="d-block w-100" src="@path" height="260" width="480" alt="Image">
+                                        </div>
+                                    }
                                 </div>
-                                <!-- Add additional carousel items here -->
-                                <!-- Example: -->
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="https://content.jdmagicbox.com/comp/hyderabad/s3/040pxx40.xx40.210203205029.m9s3/catalogue/sixer-zone-box-cricket-uppal-hyderabad-cricket-turf-grounds-2xief16ulc.jpg" alt="Second slide">
+                                <button class="carousel-control-prev" type="button" data-bs-target="#@carouselId" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#@carouselId" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@dr["BOXCricketName"]</h5>
+                                <span class="fw-medium card-text"><i class="bx bx-location-plus me-1"></i>@dr["Address"]</span><br>
+                                <span class="fw-medium card-text"><i class="bx bx-user me-1"></i>Contact Person :
+                                    @dr["OwnerName"]</span><br>
+                                <span class="fw-medium card-text"><i class="bx bx-phone me-1"></i>Contact Person Number :
+                                    @dr["Contact"]</span>
+                            </div>
+                            <div class="card-footer pt-0">
+                                <!-- Price and Button -->
+                                <div class="d-sm-flex justify-content-sm-between align-items-center ">
+                                    <!-- Price -->
+                                    <div class="hstack gap-2">
+                                        <h5 class="fw-normal text-success mb-0">&#8377;1500</h5>
+                                        <small>/per Hour</small>
+                                        <span class="text-decoration-line-through">&#8377;1800</span>
+                                    </div>
+                                    <!-- Button -->
+                                    <div class="mt-2 mt-sm-0">
+                                        <a asp-action="Grounds" asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
+                                            class="btn btn-outline-primary  mb-0">Ground Details</a>
+                                    </div>
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#imageSlider" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                        <div class="card h-100">
-                            <!-- Your card content here -->
                         </div>
                     </div>
-
-
-                    // <div class="col">
-                    //     <div class="card h-100">
-                    //         <img class="card-img-top"
-                    //              src="https://suratboxcricket.com/banner.png"
-                    //             alt="Card image cap" />
-                    //         <div class="card-body">
-                    //             <h5 class="card-title">@dr["BOXCricketName"]</h5>
-                    //             <span class="fw-medium card-text"><i class="bx bx-location-plus me-1"></i>@dr["Address"]</span><br>
-                    //             <span class="fw-medium card-text"><i class="bx bx-user me-1"></i>Contact Person :
-                    //                 @dr["OwnerName"]</span><br>
-                    //             <span class="fw-medium card-text"><i class="bx bx-phone me-1"></i>Contact Person Number :
-                    //                 @dr["Contact"]</span>
-                    //         </div>
-                    //         <div class="card-footer pt-0">
-                    //             <!-- Price and Button -->
-                    //             <div class="d-sm-flex justify-content-sm-between align-items-center ">
-                    //                 <!-- Price -->
-                    //                 <div class="hstack gap-2">
-                    //                     <h5 class="fw-normal text-success mb-0">&#8377;1500</h5>
-                    //                     <small>/per Hour</small>
-                    //                     <span class="text-decoration-line-through">&#8377;1800</span>
-                    //                 </div>
-                    //                 <!-- Button -->
-                    //                 <div class="mt-2 mt-sm-0">
-                    //                     <a asp-action="Grounds" asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
-                    //                         class="btn btn-outline-primary  mb-0">Ground Details</a>
-                    //                 </div>
-                    //             </div>
-                    //         </div>
-                    //     </div>
-                    // </div>
                 }
             }
         }
     </div>
 </div>
 <!-- / Content -->
+
+<script>
+    // Initialize the carousel
+    var myCarousel = document.getElementById('imageSlider');
+    var carousel = new bootstrap.Carousel(myCarousel);
+
+    // Optional: You can also handle slide events if needed
+    myCarousel.addEventListener('slid.bs.carousel', function () {
+        // Handle slide event if needed
+    });
+</script>

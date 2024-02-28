@@ -75,7 +75,17 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
                         model.GroundLength = Convert.ToDecimal(dr["GroundWidth"]);
                         model.ContactPersonName = dr["ContactPersonName"].ToString();
                         model.ContactPersonNumber = dr["ContactPersonNumber"].ToString();
+                        model.ActualHourlyRate = Convert.ToDecimal(dr["ActualHourlyRate"]);
+                        model.DiscountedHourlyRate = Convert.ToDecimal(dr["DiscountedHourlyRate"]);
+                        model.GroundImagePath1 = dr["GroundImagePath1"].ToString();
+                        model.GroundImagePath2 = dr["GroundImagePath2"].ToString();
+                        model.GroundImagePath3 = dr["GroundImagePath3"].ToString();
+                        model.GroundImagePath4 = dr["GroundImagePath4"].ToString();
                         model.IsAllowedBooking = Convert.ToBoolean(dr["IsAllowedBooking"].ToString());
+                        ViewBag.EditGroundImagePath1 = Convert.ToString(dr["GroundImagePath1"]);
+                        ViewBag.EditGroundImagePath2 = Convert.ToString(dr["GroundImagePath2"]);
+                        ViewBag.EditGroundImagePath3 = Convert.ToString(dr["GroundImagePath3"]);
+                        ViewBag.EditGroundImagePath4 = Convert.ToString(dr["GroundImagePath4"]);
                     }
                     return View("GroundAddEdit", model);
                 }
@@ -90,8 +100,51 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         [HttpPost]
         public IActionResult Save(MST_GroundModel modelMST_Ground)
         {
+
             if (ModelState.IsValid)
             {
+                #region GroundImagePath section
+                // Iterate over all ground images in the model
+                for (int i = 1; i <= 4; i++)
+                {
+                    var groundImageProperty = $"GroundImage{i}";
+                    var groundImagePathProperty = $"GroundImagePath{i}";
+
+                    var groundImage = (IFormFile)modelMST_Ground.GetType().GetProperty(groundImageProperty).GetValue(modelMST_Ground);
+                    var groundImagePath = (string)modelMST_Ground.GetType().GetProperty(groundImagePathProperty).GetValue(modelMST_Ground);
+
+                    if (groundImagePath != null)
+                    {
+                        modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, groundImagePath);
+                    }
+                    else
+                    {
+                        if (groundImage != null)
+                        {
+                            // Determine uploaded GroundImage type and create folder according to file type
+                            string filePath = System.IO.Path.GetExtension(groundImage.FileName);
+                            string directoryPath = @"D:\Repos\Admin_Panel\wwwroot\" + filePath;
+
+                            // Check if directory exists, if not then create it
+                            if (!Directory.Exists(directoryPath))
+                            {
+                                Directory.CreateDirectory(directoryPath);
+                            }
+
+                            // Upload GroundImage to the root directory of the project
+                            string folderPath = Path.Combine("wwwroot/" + filePath + "/", groundImage.FileName);
+                            using (FileStream fs = System.IO.File.Create(folderPath))
+                            {
+                                groundImage.CopyTo(fs);
+                            }
+
+                            // Store GroundImage path in the model
+                            modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, "/" + filePath + "/" + groundImage.FileName);
+                        }
+                    }
+                }
+                #endregion
+
                 if (modelMST_Ground.GroundID == null)
                 {
                     if (Convert.ToBoolean(dalMST_GroundDALBase.dbo_PR_MST_Ground_Insert(modelMST_Ground)))
@@ -105,7 +158,6 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
                     return RedirectToAction("GroundList");
                 }
             }
-
             TempData["errorMessage"] = "Some error has occurred";
             return RedirectToAction("Add");
         }
@@ -141,8 +193,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
             return View("GroundList", dt);
 
         }
-        #endregion
+        #endregion       
 
     }
-
 }

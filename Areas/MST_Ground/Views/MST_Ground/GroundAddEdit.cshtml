@@ -28,7 +28,7 @@
                                     <label for="exampleFormControlSelect1" class="form-label">BOX Cricket</label>
                                     <select type="text" class="form-select" aria-label="Default select example"
                                             asp-for="BOXCricketID"
-                                            asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))">
+                                            asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" autofocus>
                                         <option value="">Select the BOX Cricket</option>
                                     </select>
                                     <span asp-validation-for="BOXCricketID" class="text-danger"></span>
@@ -54,7 +54,7 @@
                                                id="basic-default-fullname" placeholder="Enter the Ground Nick Name" />
                                         <span asp-validation-for="GroundNickName" class="text-danger"></span>
                                     </div>
-                                </div>                                  
+                                </div>                                 
                                 
                                 <div class="row">
                                     <div class="mb-3 col-md-3">
@@ -107,7 +107,94 @@
                                                id="basic-default-fullname" placeholder="Enter the Contact Person Number" />
                                         <span asp-validation-for="ContactPersonNumber" class="text-danger"></span>
                                     </div>
+                                </div>    
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" asp-for="ActualHourlyRate" for="basic-default-fullname">
+                                            Actual Hourly Rate
+                                        </label>
+                                        <input asp-for="ActualHourlyRate" type="text" class="form-control"
+                                               id="basic-default-fullname" placeholder="Enter the Actual Hourly Rate" />
+                                        <span asp-validation-for="ActualHourlyRate" class="text-danger"></span>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" asp-for="DiscountedHourlyRate" for="basic-default-fullname">
+                                            Discounted Hourly Rate
+                                        </label>
+                                        <input asp-for="DiscountedHourlyRate" type="text" class="form-control"
+                                               id="basic-default-fullname" placeholder="Enter the Discounted Hourly Rate" />
+                                        <span asp-validation-for="DiscountedHourlyRate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <input type="hidden" asp-for="GroundImagePath1" />
+                                <input type="hidden" asp-for="GroundImagePath2" />
+                                <input type="hidden" asp-for="GroundImagePath3" />
+                                <input type="hidden" asp-for="GroundImagePath4" />
+                                <div class="row">
+                                    <label for="formFileMultiple" class="form-label">Ground Images (Allowed JPG or PNG)</label>
+                                    <div class="d-flex flex-column align-items-center mb-2 col-md-6">
+                                        <img src="@Url.Content(ViewBag.EditGroundImagePath1)" alt="ground-image" class="d-block rounded mb-2" height="160" width="280" id="uploadedAvatar1" />
+                                        <div class="button-wrapper">
+                                            <label for="upload1" class="btn btn-primary btn-block mb-2" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file" id="upload1" class="account-file-input" hidden asp-for="GroundImage1" accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" id="resetButton1" class="btn btn-outline-secondary btn-block mb-2">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+                                        </div>
+                                        <span asp-validation-for="GroundImage1" class="text-danger"></span>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center mb-3 col-md-6">
+                                        <img src="@Url.Content(ViewBag.EditGroundImagePath2)" alt="ground-image" class="d-block rounded mb-2" height="160" width="280" id="uploadedAvatar2" />
+                                        <div class="button-wrapper">
+                                            <label for="upload2" class="btn btn-primary btn-block mb-2" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file" id="upload2" class="account-file-input" hidden asp-for="GroundImage2" accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" id="resetButton2" class="btn btn-outline-secondary btn-block mb-2">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+                                        </div>
+                                        <span asp-validation-for="GroundImage2" class="text-danger"></span>
+                                    </div>                                                                    
                                 </div>      
+                                <div class="row">                                    
+                                    <div class="d-flex flex-column align-items-center mb-3 col-md-6">
+                                        <img src="@Url.Content(ViewBag.EditGroundImagePath3)" alt="ground-image" class="d-block rounded mb-2" height="160" width="280" id="uploadedAvatar3" />
+                                        <div class="button-wrapper">
+                                            <label for="upload3" class="btn btn-primary btn-block mb-2" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file" id="upload3" class="account-file-input" hidden asp-for="GroundImage3" accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" id="resetButton3" class="btn btn-outline-secondary btn-block mb-2">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+                                        </div>
+                                        <span asp-validation-for="GroundImage3" class="text-danger"></span>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center mb-3 col-md-6">
+                                        <img src="@Url.Content(ViewBag.EditGroundImagePath4)" alt="ground-image" class="d-block rounded mb-2" height="160" width="280" id="uploadedAvatar4" />
+                                        <div class="button-wrapper">
+                                            <label for="upload4" class="btn btn-primary btn-block mb-2" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file" id="upload4" class="account-file-input" hidden asp-for="GroundImage4" accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" id="resetButton4" class="btn btn-outline-secondary btn-block mb-2">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+                                        </div>
+                                        <span asp-validation-for="GroundImage4" class="text-danger"></span>
+                                    </div>
+                                </div>
                                 <div class="form-check form-switch mb-3">
                                     <input asp-for="IsAllowedBooking" class="form-check-input" type="checkbox"
                                         id="flexSwitchCheckDefault" />
@@ -129,8 +216,72 @@
     <div class="content-backdrop fade"></div>
 </div>
 <!-- Content wrapper -->
-
 @section Scripts {
+    <script>
+        //Display Preview of selected image 1
+        upload1.onchange = evt => {
+            const [file] = upload1.files
+            if (file) {
+                uploadedAvatar1.src = URL.createObjectURL(file);
+            }
+        }
+
+        //Reset Image to Default 1
+        document.getElementById('resetButton1').addEventListener('click', function () {
+            // Set the source of the uploadedAvatar back to the default image path
+            document.getElementById('uploadedAvatar1').src = '@Url.Content(ViewBag.EditBOXCricketImagePath1)';
+            // Clear the file input to allow selecting the same file again
+            document.getElementById('upload1').value = '';
+        });
+
+        //Display Preview of selected image 2
+        upload2.onchange = evt => {
+            const [file] = upload2.files
+            if (file) {
+                uploadedAvatar2.src = URL.createObjectURL(file);
+            }
+        }
+
+        //Reset Image to Default 2
+        document.getElementById('resetButton2').addEventListener('click', function () {
+            // Set the source of the uploadedAvatar back to the default image path
+            document.getElementById('uploadedAvatar2').src = '@Url.Content(ViewBag.EditBOXCricketImagePath2)';
+            // Clear the file input to allow selecting the same file again
+            document.getElementById('upload2').value = '';
+        });
+
+        //Display Preview of selected image 3
+        upload3.onchange = evt => {
+            const [file] = upload3.files
+            if (file) {
+                uploadedAvatar3.src = URL.createObjectURL(file);
+            }
+        }
+
+        //Reset Image to Default 3
+        document.getElementById('resetButton3').addEventListener('click', function () {
+            // Set the source of the uploadedAvatar back to the default image path
+            document.getElementById('uploadedAvatar3').src = '@Url.Content(ViewBag.EditBOXCricketImagePath3)';
+            // Clear the file input to allow selecting the same file again
+            document.getElementById('upload').value = '';
+        });
+
+        //Display Preview of selected image 4
+        upload4.onchange = evt => {
+            const [file] = upload4.files
+            if (file) {
+                uploadedAvatar4.src = URL.createObjectURL(file);
+            }
+        }
+
+        //Reset Image to Default 4
+        document.getElementById('resetButton4').addEventListener('click', function () {
+            // Set the source of the uploadedAvatar back to the default image path
+            document.getElementById('uploadedAvatar4').src = '@Url.Content(ViewBag.EditBOXCricketImagePath4)';
+            // Clear the file input to allow selecting the same file again
+            document.getElementById('upload4').value = '';
+        });
+    </script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

@@ -67,6 +67,12 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundLength", SqlDbType.Decimal, modelMST_Ground.GroundLength);
                 sqlDB.AddInParameter(dbCMD, "@ContactPersonName", SqlDbType.VarChar, modelMST_Ground.GroundName);
                 sqlDB.AddInParameter(dbCMD, "@ContactPersonNumber", SqlDbType.VarChar, modelMST_Ground.ContactPersonNumber);
+                sqlDB.AddInParameter(dbCMD, "@ActualHourlyRate", SqlDbType.Decimal, modelMST_Ground.ActualHourlyRate);
+                sqlDB.AddInParameter(dbCMD, "@DiscountedHourlyRate", SqlDbType.Decimal, modelMST_Ground.DiscountedHourlyRate);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath1", SqlDbType.VarChar, modelMST_Ground.GroundImagePath1);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath2", SqlDbType.VarChar, modelMST_Ground.GroundImagePath2);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath3", SqlDbType.VarChar, modelMST_Ground.GroundImagePath3);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath4", SqlDbType.VarChar, modelMST_Ground.GroundImagePath4);
                 sqlDB.AddInParameter(dbCMD, "@IsAllowedBooking", SqlDbType.Bit, modelMST_Ground.IsAllowedBooking);
                 sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
@@ -111,7 +117,7 @@ namespace BOXCricket.DAL
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_UpdateByPK");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_UpdateByPKK");
                 sqlDB.AddInParameter(dbCMD, "GroundID", SqlDbType.Int, modelMST_Ground.GroundID);
                 sqlDB.AddInParameter(dbCMD, "@GroundName", SqlDbType.VarChar, modelMST_Ground.GroundName);
                 sqlDB.AddInParameter(dbCMD, "@GroundNickName", SqlDbType.VarChar, modelMST_Ground.GroundNickName);
@@ -123,6 +129,12 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundLength", SqlDbType.Decimal, modelMST_Ground.GroundLength);
                 sqlDB.AddInParameter(dbCMD, "@ContactPersonName", SqlDbType.VarChar, modelMST_Ground.GroundName);
                 sqlDB.AddInParameter(dbCMD, "@ContactPersonNumber", SqlDbType.VarChar, modelMST_Ground.ContactPersonNumber);
+                sqlDB.AddInParameter(dbCMD, "@ActualHourlyRate", SqlDbType.Decimal, modelMST_Ground.ActualHourlyRate);
+                sqlDB.AddInParameter(dbCMD, "@DiscountedHourlyRate", SqlDbType.Decimal, modelMST_Ground.DiscountedHourlyRate);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath1", SqlDbType.VarChar, modelMST_Ground.GroundImagePath1);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath2", SqlDbType.VarChar, modelMST_Ground.GroundImagePath2);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath3", SqlDbType.VarChar, modelMST_Ground.GroundImagePath3);
+                sqlDB.AddInParameter(dbCMD, "@GroundImagePath4", SqlDbType.VarChar, modelMST_Ground.GroundImagePath4);
                 sqlDB.AddInParameter(dbCMD, "@IsAllowedBooking", SqlDbType.Bit, modelMST_Ground.IsAllowedBooking);
                 sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 

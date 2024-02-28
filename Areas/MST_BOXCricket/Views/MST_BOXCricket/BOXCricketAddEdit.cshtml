@@ -21,7 +21,7 @@
                             <h5 class="mb-0">BOXCricket Details</h5>
                         </div>
                         <div class="card-body">
-                            <form asp-action="Save" method="post">
+                            <form asp-action="Save" method="post" enctype="multipart/form-data">
                                 <input type="hidden" asp-for="BOXCricketID" />                              
 
                                 <div class="mb-3">
@@ -29,7 +29,7 @@
                                         BOX Cricket Name
                                     </label> 
                                     <input asp-for="BOXCricketName" type="text" class="form-control"
-                                           id="basic-default-fullname" placeholder="Enter the BOXCricket Name" />
+                                           id="basic-default-fullname" placeholder="Enter the BOXCricket Name" autofocus/>
                                     <span asp-validation-for="BOXCricketName" class="text-danger"></span>
                                 </div>
 
@@ -37,7 +37,7 @@
                                     <label asp-for="Address" class="form-label"
                                            for="basic-default-message">Address</label>
                                     <textarea asp-for="Address" id="basic-default-message" class="form-control"
-                                              placeholder="Enter the address where the ground is located"></textarea>
+                                              placeholder="Enter the address where the round is located"></textarea>
                                     <span asp-validation-for="Address" class="text-danger"></span>
                                 </div>
 
@@ -72,6 +72,42 @@
                                             <option value="">Select the City</option>
                                         </select>
                                         <span asp-validation-for="CityID" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" asp-for="BOXCricketImagePath1" />
+                                <input type="hidden" asp-for="BOXCricketImagePath2" />
+                                <div class="row">
+                                    <label for="formFileMultiple" class="form-label">BOXCricket Images (Allowed JPG or PNG)</label>
+                                    <div class="d-flex flex-column align-items-center mb-2 col-md-6">
+                                        <img src="@Url.Content(ViewBag.EditBOXCricketImagePath1)" alt="boxcricket-image" class="d-block rounded mb-2" height="160" width="280" id="uploadedAvatar1" />
+                                        <div class="button-wrapper">
+                                            <label for="upload1" class="btn btn-primary btn-block mb-2" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file" id="upload1" class="account-file-input" hidden asp-for="BOXCricketImage1" accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" id="resetButton1" class="btn btn-outline-secondary btn-block mb-2">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+                                        </div>
+                                        <span asp-validation-for="BOXCricketImage1" class="text-danger"></span>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center mb-3 col-md-6">
+                                        <img src="@Url.Content(ViewBag.EditBOXCricketImagePath2)" alt="boxcricket-image" class="d-block rounded mb-2" height="160" width="280" id="uploadedAvatar2" />
+                                        <div class="button-wrapper">
+                                            <label for="upload2" class="btn btn-primary btn-block mb-2" tabindex="0">
+                                                <span class="d-none d-sm-block">Upload new photo</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file" id="upload2" class="account-file-input" hidden asp-for="BOXCricketImage2" accept="image/png, image/jpeg" />
+                                            </label>
+                                            <button type="button" id="resetButton2" class="btn btn-outline-secondary btn-block mb-2">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                            </button>
+                                        </div>
+                                        <span asp-validation-for="BOXCricketImage2" class="text-danger"></span>
                                     </div>
                                 </div>
 
@@ -146,6 +182,45 @@
             }
         }
 
+        //Display Preview of selected image 1
+        upload1.onchange = evt => {
+            const [file] = upload1.files
+            if (file) {
+                uploadedAvatar1.src = URL.createObjectURL(file);
+            }
+        }
+
+        //Reset Image to Default 1
+        document.getElementById('resetButton1').addEventListener('click', function () {
+            // Set the source of the uploadedAvatar back to the default image path
+            document.getElementById('uploadedAvatar1').src = '@Url.Content(ViewBag.EditBOXCricketImagePath1)';
+            // Clear the file input to allow selecting the same file again
+            document.getElementById('upload1').value = '';
+        });
+
+        //Display Preview of selected image 2
+        upload2.onchange = evt => {
+            const [file] = upload2.files
+            if (file) {
+                uploadedAvatar2.src = URL.createObjectURL(file);
+            }
+        }
+
+        //Reset Image to Default 2
+        document.getElementById('resetButton2').addEventListener('click', function () {
+            // Set the source of the uploadedAvatar back to the default image path
+            document.getElementById('uploadedAvatar2').src = '@Url.Content(ViewBag.EditBOXCricketImagePath2)';
+            // Clear the file input to allow selecting the same file again
+            document.getElementById('upload2').value = '';
+        });
+
+        //Display Preview of selected image 3
+        upload3.onchange = evt => {
+            const [file] = upload3.files
+            if (file) {
+                uploadedAvatar3.src = URL.createObjectURL(file);
+            }
+        }
 
     </script>
     @{

@@ -23,6 +23,12 @@ namespace BOXCricket.Areas.MST_BOXCricket.Models
         [Required(ErrorMessage = "Please choose the City.")]
         public int CityID { get; set; }
 
+        public string? BOXCricketImagePath1 { get; set; }
+        public string? BOXCricketImagePath2 { get; set; }
+
+        public IFormFile? BOXCricketImage1 { get; set; }
+        public IFormFile? BOXCricketImage2 { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }

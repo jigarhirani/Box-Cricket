@@ -20,7 +20,7 @@ namespace BOXCricket.Controllers
         HomeDALBase dalHomeDALBase = new HomeDALBase();
         HomeDAL dalHomeDAL = new HomeDAL();
 
-        #region Select All BOX Crickets
+        #region Select All BOX Crickets With Allowed to book Grounds
         public IActionResult Index()
         {
             DataTable dt = dalHomeDALBase.dbo_PR_MST_BOXCricket_SelectAll();
@@ -28,7 +28,7 @@ namespace BOXCricket.Controllers
         }
         #endregion
 
-        #region Select All Grounds
+        #region Select All Allowed to book Grounds
         public IActionResult Grounds(int? BOXCricketID)
         {
             if (BOXCricketID.HasValue)
@@ -127,6 +127,7 @@ namespace BOXCricket.Controllers
 
         #endregion
 
+        #region AdminIndex Page load
         public IActionResult AdminIndex()
         {
             ViewBag.UserID = HttpContext.Session.GetString("UserID");
@@ -139,6 +140,7 @@ namespace BOXCricket.Controllers
 
             return View("AdminIndex", dtcounts);
         }
+        #endregion
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

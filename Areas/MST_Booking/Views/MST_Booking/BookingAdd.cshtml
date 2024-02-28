@@ -27,32 +27,42 @@
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlSelect1" class="form-label">BOX Cricket</label>
                                         <select type="text" class="form-select" aria-label="Default select example"
-                                                asp-for="BOXCricketID"
-                                                asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                                            asp-for="BOXCricketID"
+                                            asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))"
+                                                onchange="funOnBOXCricketChange();" autofocus>
                                             <option value="">Select the BOX Cricket</option>
                                         </select>
                                         <span asp-validation-for="BOXCricketID" class="text-danger"></span>
                                     </div>
 
                                     <div class="mb-3 col-md-6">
-                                        <label asp-for="GroundID" for="exampleFormControlSelect1" class="form-label">Ground Name</label>
-                                        <Select type="text" class="form-select" aria-label="Default select example" asp-for="GroundID" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                                        <label asp-for="GroundID" for="exampleFormControlSelect1"
+                                            class="form-label">Ground Name</label>
+                                        <Select type="text" class="form-select" aria-label="Default select example"
+                                            asp-for="GroundID"
+                                            asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
                                             <option value="">Select the Ground</option>
                                         </Select>
                                         <span asp-validation-for="GroundID" class="text-danger"></span>
-                                    </div>                                    
-                                </div>                                
-                                
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
-                                        <label asp-for="BookingDate" for="html5-date-input" class="form-label">Date</label>
-                                        <input asp-for="BookingDate" class="form-control" type="date" name="BookingDate" id="BookingDate" />
+                                        <label asp-for="BookingDate" for="html5-date-input"
+                                            class="form-label">Date</label>
+                                        <input asp-for="BookingDate" class="form-control" type="date" name="BookingDate"
+                                            id="BookingDate" />
                                         <span asp-validation-for="BookingDate" class="text-danger"></span>
-                                    </div>  
+                                    </div>
 
                                     <div class="mb-3 col-md-4">
-                                        <label asp-for="SlotNO" for="exampleFormControlSelect1" class="form-label">Slot</label>
-                                        <Select type="text" class="form-select" aria-label="Default select example" asp-for="SlotNO" asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))" multiple>
+                                        <label asp-for="SlotNO" for="exampleFormControlSelect1"
+                                            class="form-label">Slot</label>
+                                        <Select type="text" class="form-select" aria-label="Default select example"
+                                            asp-for="SlotNO"
+                                            asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))"
+                                            multiple>
                                             <option value="">Select the Slot</option>
                                         </Select>
                                         <span asp-validation-for="SlotNO" class="text-danger"></span>
@@ -62,15 +72,18 @@
 
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label" for="basic-default-company">Booking Amount</label>
-                                        <input asp-for="BookingAmount" type="text" class="form-control" id="basic-default-company" placeholder="Enter Booking Amount" readonly/>
+                                        <input asp-for="BookingAmount" type="text" class="form-control"
+                                            id="basic-default-company" placeholder="Enter Booking Amount" readonly />
                                         @* <span asp-validation-for="BookingAmount" class="text-danger"></span> *@
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
-                                        <label asp-for="Status" for="exampleFormControlSelect1" class="form-label">Select Status of Booking</label>
-                                        <Select type="text" asp-for="Status" class="form-select" aria-label="Default select example">
+                                        <label asp-for="Status" for="exampleFormControlSelect1"
+                                            class="form-label">Select Status of Booking</label>
+                                        <Select type="text" asp-for="Status" class="form-select"
+                                            aria-label="Default select example">
                                             <option value="Pending" selected>Pending</option>
                                             <option value="Confirm">Confirm</option>
                                             <option value="Rejected">Reject</option>
@@ -80,10 +93,11 @@
 
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label" for="basic-default-company">Remark</label>
-                                        <input asp-for="Remarks" type="text" class="form-control" id="basic-default-company" placeholder="Enter Remarks" />
+                                        <input asp-for="Remarks" type="text" class="form-control"
+                                            id="basic-default-company" placeholder="Enter Remarks" />
                                         @* <span asp-validation-for="Remarks" class="text-danger"></span> *@
                                     </div>
-                                </div>  
+                                </div>
 
                                 <button type="submit" class="btn btn-primary">Save</button>
                                 <a asp-action="BookingList" class="btn btn-secondary ms-2">Cancel</a>
@@ -99,9 +113,9 @@
 </div>
 <!-- Content wrapper -->
 
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 
 @section scripts {
     <script>
@@ -193,7 +207,7 @@
                 }
             });
 
-            
+
             // Function to automatically trigger when GroundID, BookingDate, and SlotNO are filled
             function autoTrigger() {
                 var boxcricketId = $("#BOXCricketID").val();

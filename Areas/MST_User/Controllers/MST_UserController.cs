@@ -171,13 +171,10 @@ namespace BOXCricket.Areas.MST_User.Controllers
                     model.FirstName = dr["FirstName"].ToString();
                     model.LastName = dr["LastName"].ToString();
                     model.Email = dr["Email"].ToString();
-                    //model.Password = dr["Password"].ToString();
                     model.Contact = dr["Contact"].ToString();
                     model.CountryID = Convert.ToInt32(dr["CountryID"].ToString());
                     model.StateID = Convert.ToInt32(dr["StateID"].ToString());
                     model.CityID = Convert.ToInt32(dr["CityID"].ToString());
-                    //model.IsAdmin = Convert.ToBoolean(dr["IsAdmin"].ToString());
-                    //model.IsActive = Convert.ToBoolean(dr["IsActive"].ToString());
                     model.ProfilePhotoPath = dr["ProfilePhotoPath"].ToString();
                     ViewBag.EditImagePath = Convert.ToString(dr["ProfilePhotoPath"]);
                 }
@@ -214,7 +211,6 @@ namespace BOXCricket.Areas.MST_User.Controllers
                 {
                     modelMST_User.File.CopyTo(stream);
                 }
-
             }
             #endregion
 

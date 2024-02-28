@@ -1,4 +1,5 @@
 ﻿@using System.Data
+@using BOXCricket.Areas.MST_Booking.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -30,8 +31,8 @@
                         @errorMessage
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                }
-
+                }               
+                
                 <form asp-action="BookingSearch" asp-controller="MST_Booking" asp-area="MST_Booking" class="row mb-3">
 
                     <div class="col-md-2 mb-2">
@@ -119,13 +120,42 @@
                                                 <td>@dr["SlotDetails"]</td>
                                                 <td>@dr["TotalSlotsBooked"]</td>
                                                 <td>@dr["BookingAmount"]</td>
-                                                <td>@dr["Status"]</td>
+                                                @{
+                                                    var status = dr["Status"].ToString();
+                                                    string statusClass = "";
+                                                    switch (status)
+                                                    {
+                                                        case "Confirmed":
+                                                            statusClass = "badge bg-label-success me-1";
+                                                            break;
+                                                        case "Pending":
+                                                            statusClass = "badge bg-label-warning me-1";
+                                                            break;
+                                                        case "Rejected":
+                                                            statusClass = "badge bg-label-danger me-1";
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+                                                <td><span class="@statusClass">@status</span></td>
                                                 <td>@dr["Created"]</td>
                                                 <td>@dr["Modified"]</td>
                                                 <td class="sticky-right">
-                                                    <a class="btn btn-icon btn-warning" asp-action="BookingStatusEdit" asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])">
+                                                    <a class="btn btn-icon btn-warning" asp-action="BookingStatusEdit"
+                                                       asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])">
                                                         <i class="bx bx-pencil"></i>
                                                     </a>
+
+                                                    @*<a class="btn btn-icon btn-outline-danger" asp-action="_BookingStatusEdit"
+                                                       asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])">
+                                                        <i class='bx bx-square-rounded'></i>
+                                                    </a>*@
+
+                                                    <a class="btn btn-icon btn-outline-danger" onclick="loadPopup(@Convert.ToInt32(@dr["BookingID"]))">
+                                                        <i class='bx bx-square-rounded'></i>
+                                                    </a>
+
                                                 </td>
                                             </tr>
                                         }
@@ -147,19 +177,28 @@
                 <!--/ Hoverable Table rows -->
             </div>
             <!-- / Content -->
-
-
             <div class="content-backdrop fade"></div>
         </div>
         <!-- Content wrapper -->
     </div>
     <!-- / Layout page -->
 </div>
-
 <!-- Overlay -->
 <div class="layout-overlay layout-menu-toggle"></div>
-
 <!-- / Layout wrapper -->
+<!-- Modal Backdrop -->
+<div class="col-lg-4 col-md-3">
+    <div class="mt-3">
+        <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function funOnBOXCricketChange() {
         var BOXCricketID = $("#BOXCricketID").val();
@@ -206,8 +245,22 @@
                 }
             });
         }
-    }
+    }  
 
+    function loadPopup(bookingID) {
+        $.ajax({
+            url: '@Url.Action("_BookingStatusEdit", "MST_Booking")',
+            type: 'GET',
+            data: { bookingID: bookingID },
+            success: function (data) {
+                $('#backDropModal .modal-content').html(data); // Replace 'response' with 'data'
+                $('#backDropModal').modal('show');
+            },
+            error: function () {
+                alert('Error loading popup');
+            }
+        });
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButtons = document.querySelectorAll('[data-confirm]');
@@ -221,4 +274,5 @@
             });
         });
     });
-</script>
+
+</script>+

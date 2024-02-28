@@ -43,7 +43,7 @@ namespace BOXCricket.DAL
                     sqlDB.AddInParameter(dbCMD, "GroundName", SqlDbType.VarChar, GroundName);
                 }
 
-                if (GroundCapacity != null)
+                if (GroundCapacity != 0)
                 {
                     sqlDB.AddInParameter(dbCMD, "GroundCapacity", SqlDbType.Int, GroundCapacity);
                 }
