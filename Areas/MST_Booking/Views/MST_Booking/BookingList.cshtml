@@ -134,6 +134,9 @@
                                                         case "Rejected":
                                                             statusClass = "badge bg-label-danger me-1";
                                                             break;
+                                                        case "Completed":
+                                                            statusClass = "badge bg-label-primary me-1";
+                                                            break;
                                                         default:
                                                             break;
                                                     }
@@ -142,20 +145,9 @@
                                                 <td>@dr["Created"]</td>
                                                 <td>@dr["Modified"]</td>
                                                 <td class="sticky-right">
-                                                    <a class="btn btn-icon btn-warning" asp-action="BookingStatusEdit"
-                                                       asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])">
-                                                        <i class="bx bx-pencil"></i>
+                                                    <a class="btn btn-icon btn-warning" onclick="loadPopup(@Convert.ToInt32(@dr["BookingID"]))">
+                                                        <i class='bx bx-pencil'></i>
                                                     </a>
-
-                                                    @*<a class="btn btn-icon btn-outline-danger" asp-action="_BookingStatusEdit"
-                                                       asp-route-BookingID="@Convert.ToInt32(@dr["BookingID"])">
-                                                        <i class='bx bx-square-rounded'></i>
-                                                    </a>*@
-
-                                                    <a class="btn btn-icon btn-outline-danger" onclick="loadPopup(@Convert.ToInt32(@dr["BookingID"]))">
-                                                        <i class='bx bx-square-rounded'></i>
-                                                    </a>
-
                                                 </td>
                                             </tr>
                                         }

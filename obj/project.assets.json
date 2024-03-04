@@ -10176,11 +10176,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repos\\BOXCricket\\BOXCricket.csproj",
+      "projectUniqueName": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
       "projectName": "BOXCricket",
-      "projectPath": "D:\\Repos\\BOXCricket\\BOXCricket.csproj",
+      "projectPath": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
       "packagesPath": "C:\\Users\\hiran\\.nuget\\packages\\",
-      "outputPath": "D:\\Repos\\BOXCricket\\obj\\",
+      "outputPath": "D:\\GitHub\\Box-Cricket\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hiran\\AppData\\Roaming\\NuGet\\NuGet.Config",
