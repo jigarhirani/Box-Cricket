@@ -4,6 +4,7 @@ using BOXCricket.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
+using static BOXCricket.Models.LOC_DropDownModel;
 using static BOXCricket.Models.MST_DropDownModel;
 namespace BOXCricket.Controllers
 {
@@ -23,6 +24,10 @@ namespace BOXCricket.Controllers
         #region Select All BOX Crickets With Allowed to book Grounds
         public IActionResult Index()
         {
+            #region Load Dropdown For City 
+            CityDropdown();
+            #endregion
+
             DataTable dt = dalHomeDALBase.dbo_PR_MST_BOXCricket_SelectAll();
             return View("Index", dt);
         }
@@ -31,6 +36,9 @@ namespace BOXCricket.Controllers
         #region Select All Allowed to book Grounds
         public IActionResult Grounds(int? BOXCricketID)
         {
+            #region Load Dropdown For Slots 
+            GetAllSlots();
+            #endregion
             if (BOXCricketID.HasValue)
             {
                 DataTable dt = dalHomeDAL.dbo_PR_MST_Ground_SelectAll_ByBoxCricketID(BOXCricketID);
@@ -90,7 +98,26 @@ namespace BOXCricket.Controllers
         }
         #endregion 
 
-        #region Dropdown For Slot 
+        #region Dropdown For Slot
+        public IActionResult GetAllSlots()
+        {
+            DataTable dtSlot = dalHomeDAL.dbo_PR_MST_Slot_Dropdown();
+
+            List<MST_SlotDropDownModel> MST_SlotDropdown_List = new List<MST_SlotDropDownModel>();
+            foreach (DataRow dr in dtSlot.Rows)
+            {
+                MST_SlotDropDownModel mst_Slotdropdownmodel = new MST_SlotDropDownModel();
+                mst_Slotdropdownmodel.SlotNO = Convert.ToInt32(dr["SlotNO"]);
+                mst_Slotdropdownmodel.SlotDetails = dr["SlotDetails"].ToString();
+                MST_SlotDropdown_List.Add(mst_Slotdropdownmodel);
+            }
+            ViewBag.SlotList = MST_SlotDropdown_List;
+            var Slots = MST_SlotDropdown_List;
+            return Json(Slots);
+        }
+        #endregion
+
+        #region Dropdown For Slot Validation By Date
         public IActionResult GetSlots(int GroundID, DateTime BookingDate)
         {
             DataTable dtSlot = dalHomeDAL.dbo_PR_MST_Slot_Dropdown_Validation_ByDate(GroundID, BookingDate);
@@ -106,6 +133,25 @@ namespace BOXCricket.Controllers
             ViewBag.SlotList = MST_SlotDropdown_List;
             var Slots = MST_SlotDropdown_List;
             return Json(Slots);
+        }
+        #endregion
+
+        #region Dropdown For City 
+        public IActionResult CityDropdown()
+        {
+            DataTable dtCity = dalHomeDAL.dbo_PR_LOC_City_SelectDropDownList();
+
+            List<LOC_CityDropDownModel> LOC_CityDropdownByState_List = new List<LOC_CityDropDownModel>();
+            foreach (DataRow dr in dtCity.Rows)
+            {
+                LOC_CityDropDownModel loc_citydropdownmodel = new LOC_CityDropDownModel();
+                loc_citydropdownmodel.CityID = Convert.ToInt32(dr["CityID"]);
+                loc_citydropdownmodel.CityName = dr["CityName"].ToString();
+                LOC_CityDropdownByState_List.Add(loc_citydropdownmodel);
+            }
+            ViewBag.CityList = LOC_CityDropdownByState_List;
+            var casecade = LOC_CityDropdownByState_List;
+            return Json(casecade);
         }
         #endregion
 
@@ -139,6 +185,18 @@ namespace BOXCricket.Controllers
             #endregion
 
             return View("AdminIndex", dtcounts);
+        }
+        #endregion
+
+        #region BOXCricketFilter
+        public IActionResult BOXCricketFilter(int CityID, decimal HourlyRate, DateTime BookingDate)
+        {
+            #region Load Dropdown For City 
+            CityDropdown();
+            #endregion
+
+            DataTable dt = dalHomeDAL.dbo_PR_MST_BOXCricket_ByFilters(CityID, HourlyRate, BookingDate);
+            return View("BOXCricketList", dt);
         }
         #endregion
 

@@ -25,7 +25,7 @@
         </div>
     }
 
-    <div class="btn-group mb-3">
+    @* <div class="btn-group mb-3">
         <button type="button"
                 class="btn btn-outline-secondary dropdown-toggle"
                 data-bs-toggle="dropdown"
@@ -37,7 +37,8 @@
             <form class="p-4">   
                 <div class="mb-3">
                     <label for="exampleFormControlSelect1" class="form-label">City Id</label>
-                    <Select type="text" class="form-select" aria-label="Default select example">
+                    <Select type="text" class="form-select" aria-label="Default select example"
+                            asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
                         <option value="">Select City</option>
                     </Select>
                 </div>
@@ -56,7 +57,7 @@
                 <button type="button" class="btn btn-secondary">Clear</button>
             </form>
         </div>
-    </div>
+    </div> *@
 
     <!-- Grid Card -->
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
@@ -109,9 +110,9 @@
                                 <div class="d-sm-flex justify-content-sm-between align-items-center ">
                                     <!-- Price -->
                                     <div class="hstack gap-2">
-                                        <h5 class="fw-normal text-success mb-0">&#8377;1500</h5>
+                                        <h5 class="fw-normal text-success mb-0">&#8377;@dr["MinimumDiscountedRate"]</h5>
                                         <small>/per Hour</small>
-                                        <span class="text-decoration-line-through">&#8377;1800</span>
+                                        <span class="text-decoration-line-through">&#8377;@dr["MinimumActualRate"]</span>
                                     </div>
                                     <!-- Button -->
                                     <div class="mt-2 mt-sm-0">

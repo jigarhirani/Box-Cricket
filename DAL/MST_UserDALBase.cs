@@ -6,7 +6,6 @@ namespace BOXCricket.DAL
 {
     public class MST_UserDALBase : DAL_Helper
     {
-
         #region Method: dbo_PR_MST_User_Insert
         public Boolean dbo_PR_MST_User_Insert(string ConnStr, string FirstName, string LastName, string Password, string Email, string Contact, string? ProfilePhotoPath, int CountryID, int StateID, int CityID, DateTime? Created, DateTime? Modified)
         {
@@ -75,8 +74,6 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@CountryID", SqlDbType.Int, CountryID);
                 sqlDB.AddInParameter(dbCMD, "@StateID", SqlDbType.Int, StateID);
                 sqlDB.AddInParameter(dbCMD, "@CityID", SqlDbType.Int, CityID);
-                //sqlDB.AddInParameter(dbCMD, "@IsAdmin", SqlDbType.Bit, IsAdmin);
-                //sqlDB.AddInParameter(dbCMD, "@IsActive", SqlDbType.Bit, IsActive);
                 sqlDB.AddInParameter(dbCMD, "ProfilePhotoPath", SqlDbType.NVarChar, ProfilePhotoPath);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
 

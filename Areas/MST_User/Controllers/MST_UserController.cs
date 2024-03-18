@@ -1,7 +1,9 @@
 ﻿using BOXCricket.Areas.MST_User.Models;
 using BOXCricket.BAL;
 using BOXCricket.DAL;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using System.Data;
 using static BOXCricket.Models.LOC_DropDownModel;
 
@@ -67,6 +69,7 @@ namespace BOXCricket.Areas.MST_User.Controllers
                         HttpContext.Session.SetString("UserID", dr["UserID"].ToString());
                         HttpContext.Session.SetString("Password", dr["Password"].ToString());
                         HttpContext.Session.SetString("IsAdmin", dr["IsAdmin"].ToString());
+                        HttpContext.Session.SetString("IsEmailConfirmed", dr["IsEmailConfirmed"].ToString());
                         HttpContext.Session.SetString("ProfilePhotoPath", dr["ProfilePhotoPath"].ToString());
                         break;
                     }
@@ -78,14 +81,22 @@ namespace BOXCricket.Areas.MST_User.Controllers
                 }
                 if (HttpContext.Session.GetString("Email") != null && HttpContext.Session.GetString("Password") != null)
                 {
-                    if (CommonVariables.IsAdmin() == false)
+                    if (CommonVariables.IsEmailConfirmed() == true)
                     {
-                        return RedirectToAction("Index", "Home");
+                        if (CommonVariables.IsAdmin() == false)
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            return RedirectToAction("AdminIndex", "Home");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("AdminIndex", "Home");
+                        TempData["emailverificationMessage"] = "Email is not verified try after verifying email";
                     }
+
                 }
             }
             return RedirectToAction("Login", "MST_User");
@@ -221,6 +232,8 @@ namespace BOXCricket.Areas.MST_User.Controllers
             if (modelMST_User.UserID == null)
             {
                 result = dalMST_UserDALBase.dbo_PR_MST_User_Insert(str, modelMST_User.FirstName, modelMST_User.LastName, modelMST_User.Password, modelMST_User.Email, modelMST_User.Contact, modelMST_User.ProfilePhotoPath, modelMST_User.CountryID, modelMST_User.StateID, modelMST_User.CityID, null, null);
+                string Email = modelMST_User.Email;
+                SendConfirmationEmail(Email);
             }
             else
             {
@@ -332,6 +345,91 @@ namespace BOXCricket.Areas.MST_User.Controllers
             ViewBag.CityList = LOC_CityDropdownByState_List;
             var casecade = LOC_CityDropdownByState_List;
             return Json(casecade);
+        }
+        #endregion
+
+        #region Generate Token
+        public string GenerateToken(int length)
+        {
+            const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var random = new Random();
+            var chars = new char[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                chars[i] = validChars[random.Next(validChars.Length)];
+            }
+
+            return new string(chars);
+        }
+        #endregion
+
+        #region Method TO Send Email
+        public void SendEmail(string Email, string Subject, string Message)
+        {
+            try
+            {
+                var emailToSend = new MimeMessage();
+                emailToSend.From.Add(MailboxAddress.Parse("blind.basic@gmail.com"));
+                emailToSend.To.Add(MailboxAddress.Parse(Email));
+                emailToSend.Subject = Subject;
+                emailToSend.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = Message };
+                using (var emailClient = new SmtpClient())
+                {
+                    emailClient.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+                    emailClient.Authenticate("blind.basic@gmail.com", "iysftklggldpdbrh");
+                    emailClient.Send(emailToSend);
+                    emailClient.Disconnect(true);
+                }
+            }
+            catch (Exception)
+            {
+                TempData["successMessage"] = "Some error has occurred";
+            }
+        }
+        #endregion
+
+        #region Send Confirmation Email
+        public IActionResult SendConfirmationEmail(string Email)
+        {
+            try
+            {
+                var token = GenerateToken(64); // Generate a 64-character token
+                                               // Store the token along with the user's email in the database
+
+                var confirmationLink = Url.Action("ConfirmEmail", "MST_User", new { email = Email, token = token }, Request.Scheme);
+
+                string subject = "Confirm your email address";
+                string message = $"Please confirm your email address by clicking this link: <a href='{confirmationLink}'>Confirm Email</a>";
+
+                SendEmail(Email, subject, message);
+
+                TempData["successMessage"] = "Confirmation email sent successfully";
+                return RedirectToAction("Login", "MST_Login");
+            }
+            catch (Exception)
+            {
+                TempData["successMessage"] = "Some error has occurred";
+                return RedirectToAction("Login", "MST_Login");
+            }
+        }
+
+        #endregion
+
+        #region Validation of  email and Token
+        public IActionResult ConfirmEmail(string Email, string token)
+        {
+            if (Email != null && token != null)
+            {
+                if (Convert.ToBoolean(dalMST_UserDAL.dbo_PR_MST_User_VarificationToken_UpdateByPK(Email, token)))
+                    TempData["successMessage"] = "Email Verified you can login now";
+                return RedirectToAction("Login", "MST_User");
+            }
+            else
+            {
+                TempData["errorMessage"] = "Email Verification failed";
+                return RedirectToAction("Login", "MST_User");
+            }
         }
         #endregion
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BOXCricket")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec0aa6b1fe35291be7f3ac840f480e8cdab16cbf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BOXCricket")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BOXCricket")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -295,6 +295,5 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         }
         #endregion
 
-
     }
 }

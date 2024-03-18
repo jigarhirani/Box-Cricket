@@ -122,5 +122,25 @@ namespace BOXCricket.DAL
             }
         }
         #endregion
+
+        #region Method: dbo_PR_MST_User_VarificationToken_UpdateByPK
+        public bool? dbo_PR_MST_User_VarificationToken_UpdateByPK(string Email, string token)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_VarificationToken_UpdateByPK");
+                sqlDB.AddInParameter(dbCMD, "Email", SqlDbType.VarChar, Email);
+                sqlDB.AddInParameter(dbCMD, "VarificationToken", SqlDbType.NVarChar, token);
+
+                int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
+                return (vReturnValue == -1 ? false : true);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

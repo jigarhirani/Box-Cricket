@@ -2,10 +2,19 @@
     Layout = "~/Views/Shared/_Layout_Login.cshtml";
 }
 @model BOXCricket.Areas.MST_User.Models.MST_UserModel
-
-<div class="container-xxl">
+@{
+    var emailverificationMessage = TempData["emailverificationMessage"]?.ToString();
+}
+<div class="container-xxl">    
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
+            @if (!string.IsNullOrWhiteSpace(emailverificationMessage))
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    @emailverificationMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
             <!-- Register -->
             <div class="card">
                 <div class="card-body">

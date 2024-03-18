@@ -8,7 +8,6 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 
-
 var app = builder.Build();
 
 

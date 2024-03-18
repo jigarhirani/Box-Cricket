@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj": {}
+    "D:\\Repos\\BOXCricket\\BOXCricket.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj": {
+    "D:\\Repos\\BOXCricket\\BOXCricket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
+        "projectUniqueName": "D:\\Repos\\BOXCricket\\BOXCricket.csproj",
         "projectName": "BOXCricket",
-        "projectPath": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
+        "projectPath": "D:\\Repos\\BOXCricket\\BOXCricket.csproj",
         "packagesPath": "C:\\Users\\hiran\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\Box-Cricket\\obj\\",
+        "outputPath": "D:\\Repos\\BOXCricket\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hiran\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[6.3.2, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.16, )"
@@ -73,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

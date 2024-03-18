@@ -57,6 +57,30 @@
             return false;
         }
 
+        public static bool? IsEmailConfirmed()
+        {
+            // Retrieve session value
+            string isEmailConfirmed = _httpContextAccessor.HttpContext.Session.GetString("IsEmailConfirmed");
+
+            // Check if session value is not null or empty
+            if (!string.IsNullOrEmpty(isEmailConfirmed))
+            {
+                // Parse session value into boolean
+                if (bool.TryParse(isEmailConfirmed, out bool IsEmailConfirmed))
+                {
+                    return IsEmailConfirmed;
+                }
+                else
+                {
+                    // Log or handle invalid session value
+                    throw new InvalidOperationException("Invalid value stored in session for 'IsEmailConfirmed'.");
+                }
+            }
+
+            // Default value if session value is not set
+            return false;
+        }
+
         public static string? ProfilePhotoPath()
         {
             string? ProfilePhotoPath = null;

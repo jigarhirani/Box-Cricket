@@ -51,6 +51,27 @@ namespace BOXCricket.DAL
         }
         #endregion
 
+        #region Method: dbo_PR_MST_Slot_Dropdown
+        public DataTable dbo_PR_MST_Slot_Dropdown()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Slot_Dropdown");
+                DataTable dtSlot = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtSlot.Load(dr);
+                }
+                return dtSlot;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion 
+
         #region Method: dbo_PR_MST_Slot_Dropdown_Validation_ByDate
         public DataTable dbo_PR_MST_Slot_Dropdown_Validation_ByDate(int GroundID, DateTime BookingDate)
         {
@@ -116,6 +137,66 @@ namespace BOXCricket.DAL
                 }
 
                 return dtcounts;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Method: dbo_PR_MST_BOXCricket_ByFilters
+        public DataTable dbo_PR_MST_BOXCricket_ByFilters(int CityID, decimal HourlyRate, DateTime BookingDate)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_ByFilters");
+                sqlDB.AddInParameter(dbCMD, "OwnerID", SqlDbType.Int, CommonVariables.UserID());
+                if (CityID != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "CityID", SqlDbType.Int, CityID);
+                }
+
+                if (HourlyRate != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "HourlyRate", SqlDbType.Decimal, HourlyRate);
+                }
+
+                if (BookingDate != null)
+                {
+                    sqlDB.AddInParameter(dbCMD, "BookingDate", SqlDbType.DateTime, BookingDate);
+                }
+
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Method: dbo_PR_LOC_City_SelectDropDownList
+        public DataTable dbo_PR_LOC_City_SelectDropDownList()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_LOC_City_SelectDropDownList");
+                DataTable dtCity = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtCity.Load(dr);
+                }
+
+                return dtCity;
             }
             catch (Exception)
             {
