@@ -4,6 +4,7 @@
 @model BOXCricket.Areas.MST_User.Models.MST_UserModel
 @{
     var emailverificationMessage = TempData["emailverificationMessage"]?.ToString();
+    var successMessage = TempData["successMessage"]?.ToString();
 }
 <div class="container-xxl">    
     <div class="authentication-wrapper authentication-basic container-p-y">
@@ -12,6 +13,13 @@
             {
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     @emailverificationMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (!string.IsNullOrWhiteSpace(successMessage))
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    @successMessage
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             }

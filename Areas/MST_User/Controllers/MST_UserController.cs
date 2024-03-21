@@ -231,9 +231,15 @@ namespace BOXCricket.Areas.MST_User.Controllers
 
             if (modelMST_User.UserID == null)
             {
-                result = dalMST_UserDALBase.dbo_PR_MST_User_Insert(str, modelMST_User.FirstName, modelMST_User.LastName, modelMST_User.Password, modelMST_User.Email, modelMST_User.Contact, modelMST_User.ProfilePhotoPath, modelMST_User.CountryID, modelMST_User.StateID, modelMST_User.CityID, null, null);
+                #region to initiate Token Generation and Verification mail send
                 string Email = modelMST_User.Email;
-                SendConfirmationEmail(Email);
+                var token = GenerateToken(32); // Generate a 64-character token
+                                               // Store the token along with the user's email in the database
+                modelMST_User.VarificationToken = token;
+                SendConfirmationEmail(Email, token);
+                #endregion
+
+                result = dalMST_UserDALBase.dbo_PR_MST_User_Insert(str, modelMST_User.FirstName, modelMST_User.LastName, modelMST_User.Password, modelMST_User.Email, modelMST_User.Contact, modelMST_User.ProfilePhotoPath, modelMST_User.CountryID, modelMST_User.StateID, modelMST_User.CityID, modelMST_User.VarificationToken, null, null);
             }
             else
             {
@@ -390,13 +396,10 @@ namespace BOXCricket.Areas.MST_User.Controllers
         #endregion
 
         #region Send Confirmation Email
-        public IActionResult SendConfirmationEmail(string Email)
+        public IActionResult SendConfirmationEmail(string Email, string token)
         {
             try
             {
-                var token = GenerateToken(64); // Generate a 64-character token
-                                               // Store the token along with the user's email in the database
-
                 var confirmationLink = Url.Action("ConfirmEmail", "MST_User", new { email = Email, token = token }, Request.Scheme);
 
                 string subject = "Confirm your email address";
