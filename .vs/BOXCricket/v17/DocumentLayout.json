@@ -1,7 +1,28 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Repos\\BOXCricket\\",
-  "Documents": [],
+  "WorkspaceRootPath": "D:\\GitHub\\Box-Cricket\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\github\\box-cricket\\areas\\mst_boxcricket\\controllers\\mst_boxcricketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:areas\\mst_boxcricket\\controllers\\mst_boxcricketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\github\\box-cricket\\areas\\mst_user\\controllers\\mst_usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:areas\\mst_user\\controllers\\mst_usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\github\\box-cricket\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\github\\box-cricket\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|d:\\github\\box-cricket\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}|BOXCricket.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +30,74 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MST_UserController.cs",
+              "DocumentMoniker": "D:\\GitHub\\Box-Cricket\\Areas\\MST_User\\Controllers\\MST_UserController.cs",
+              "RelativeDocumentMoniker": "Areas\\MST_User\\Controllers\\MST_UserController.cs",
+              "ToolTip": "D:\\GitHub\\Box-Cricket\\Areas\\MST_User\\Controllers\\MST_UserController.cs",
+              "RelativeToolTip": "Areas\\MST_User\\Controllers\\MST_UserController.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAEwMwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T17:45:37.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\GitHub\\Box-Cricket\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\GitHub\\Box-Cricket\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-21T13:27:39.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MST_BOXCricketController.cs",
+              "DocumentMoniker": "D:\\GitHub\\Box-Cricket\\Areas\\MST_BOXCricket\\Controllers\\MST_BOXCricketController.cs",
+              "RelativeDocumentMoniker": "Areas\\MST_BOXCricket\\Controllers\\MST_BOXCricketController.cs",
+              "ToolTip": "D:\\GitHub\\Box-Cricket\\Areas\\MST_BOXCricket\\Controllers\\MST_BOXCricketController.cs",
+              "RelativeToolTip": "Areas\\MST_BOXCricket\\Controllers\\MST_BOXCricketController.cs",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAAANgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T13:25:15.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\GitHub\\Box-Cricket\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "D:\\GitHub\\Box-Cricket\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-21T13:01:26.923Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\Box-Cricket\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\GitHub\\Box-Cricket\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAqwAcAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T13:00:49.636Z",
+              "EditorCaption": ""
             }
           ]
         }
