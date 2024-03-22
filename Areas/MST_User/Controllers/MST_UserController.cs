@@ -21,9 +21,12 @@ namespace BOXCricket.Areas.MST_User.Controllers
         #region Config
 
         private IConfiguration Configuration;
-        public MST_UserController(IConfiguration _configuration)
+        private IWebHostEnvironment webHostEnvironment;
+
+        public MST_UserController(IConfiguration _configuration, IWebHostEnvironment _webHostEnvironment)
         {
             Configuration = _configuration;
+            webHostEnvironment = _webHostEnvironment;
         }
 
         #endregion
@@ -206,13 +209,10 @@ namespace BOXCricket.Areas.MST_User.Controllers
             #region File section
             if (modelMST_User.File != null)
             {
-                string FilePath = "wwwroot\\UploadPhoto";
+                Random r = new Random();
+                int random = r.Next();
+                string FilePath = "wwwroot\\uploadphoto/profile";
                 string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
-
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
 
                 string fileNameWithPath = Path.Combine(path, modelMST_User.File.FileName);
 

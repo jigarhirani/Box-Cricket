@@ -11403,11 +11403,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
+      "projectUniqueName": "D:\\BOXCricket\\BOXCricket.csproj",
       "projectName": "BOXCricket",
-      "projectPath": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
+      "projectPath": "D:\\BOXCricket\\BOXCricket.csproj",
       "packagesPath": "C:\\Users\\hiran\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub\\Box-Cricket\\obj\\",
+      "outputPath": "D:\\BOXCricket\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hiran\\AppData\\Roaming\\NuGet\\NuGet.Config",

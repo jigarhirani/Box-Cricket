@@ -14,9 +14,11 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         MST_BOXCricketDALBase dalMST_BOXCricketDALBase = new MST_BOXCricketDALBase();
         MST_BOXCricketDAL dalMST_BOXCricketDAL = new MST_BOXCricketDAL();
 
-        public MST_BOXCricketController()
-        {
 
+        private IWebHostEnvironment webHostEnvironment;
+        public MST_BOXCricketController(IWebHostEnvironment _webHostEnvironment)
+        {
+            webHostEnvironment = _webHostEnvironment;
         }
 
         #region Select All 
@@ -116,34 +118,27 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
                     var BOXCricketImage = (IFormFile)modelMST_BOXCricket.GetType().GetProperty(BOXCricketImageProperty).GetValue(modelMST_BOXCricket);
                     var BOXCricketImagePath = (string)modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).GetValue(modelMST_BOXCricket);
 
-                    if (BOXCricketImagePath != null)
+                    if (BOXCricketImage != null)
                     {
-                        modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, BOXCricketImagePath);
-                    }
-                    else
-                    {
-                        if (BOXCricketImage != null)
+                        // Determine uploaded BOXCricketImage type and create folder according to file type
+                        string FilePath = "wwwroot\\uploadphoto/boxcricket/";
+                        //string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                        string path = Path.Combine(webHostEnvironment.ContentRootPath, FilePath);
+
+                        // Upload BOXCricketImage to the root directory of the project
+                        string folderPath = Path.Combine(path, BOXCricketImage.FileName);
+                        using (var stream = new FileStream(folderPath, FileMode.Create))
                         {
-                            // Determine uploaded BOXCricketImage type and create folder according to file type
-                            string filePath = System.IO.Path.GetExtension(BOXCricketImage.FileName);
-                            string directoryPath = @"D:\Repos\Admin_Panel\wwwroot\" + filePath;
-
-                            // Check if directory exists, if not then create it
-                            if (!Directory.Exists(directoryPath))
-                            {
-                                Directory.CreateDirectory(directoryPath);
-                            }
-
-                            // Upload BOXCricketImage to the root directory of the project
-                            string folderPath = Path.Combine("wwwroot/" + filePath + "/", BOXCricketImage.FileName);
-                            using (FileStream fs = System.IO.File.Create(folderPath))
-                            {
-                                BOXCricketImage.CopyTo(fs);
-                            }
-
-                            // Store BOXCricketImage path in the model
-                            modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, "/" + filePath + "/" + BOXCricketImage.FileName);
+                            BOXCricketImage.CopyTo(stream);
                         }
+                        //using (FileStream fs = System.IO.File.Create(folderPath))
+                        //{
+                        //    BOXCricketImage.CopyTo(fs);
+                        //}
+
+                        // Store BOXCricketImage path in the model
+                        //modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, "/" + FilePath + "/" + BOXCricketImage.FileName);
+                        modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, FilePath.Replace("wwwroot\\", "/") + BOXCricketImage.FileName);
                     }
                 }
                 #endregion

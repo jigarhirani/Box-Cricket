@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.7.34202.233
+VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOXCricket", "BOXCricket.csproj", "{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOXCricket", "BOXCricket.csproj", "{EA4F7916-BCC2-412F-A1D6-E38683B8BC6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{501B6653-70C8-4FFF-8F6A-84F0495AD3CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4F7916-BCC2-412F-A1D6-E38683B8BC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4F7916-BCC2-412F-A1D6-E38683B8BC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4F7916-BCC2-412F-A1D6-E38683B8BC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4F7916-BCC2-412F-A1D6-E38683B8BC6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AAB50A58-FC28-4039-8ACF-C2B87E4E5D32}
+		SolutionGuid = {DEC41474-BE5B-4EEE-A7F6-0E587931C1C3}
 	EndGlobalSection
 EndGlobal

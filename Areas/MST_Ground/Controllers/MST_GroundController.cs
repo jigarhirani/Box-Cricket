@@ -14,9 +14,10 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         MST_GroundDALBase dalMST_GroundDALBase = new MST_GroundDALBase();
         MST_GroundDAL dalMST_GroundDAL = new MST_GroundDAL();
 
-        public MST_GroundController()
+        private IWebHostEnvironment webHostEnvironment;
+        public MST_GroundController(IWebHostEnvironment _webHostEnvironment)
         {
-
+            webHostEnvironment = _webHostEnvironment;
         }
 
         #region Select All 
@@ -113,34 +114,23 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
                     var groundImage = (IFormFile)modelMST_Ground.GetType().GetProperty(groundImageProperty).GetValue(modelMST_Ground);
                     var groundImagePath = (string)modelMST_Ground.GetType().GetProperty(groundImagePathProperty).GetValue(modelMST_Ground);
 
-                    if (groundImagePath != null)
+                    if (groundImage != null)
                     {
-                        modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, groundImagePath);
-                    }
-                    else
-                    {
-                        if (groundImage != null)
+                        // Determine uploaded GroundImage type and create folder according to file type
+                        string FilePath = "wwwroot\\uploadphoto/ground/";
+                        string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+
+                        // Upload GroundImage to the root directory of the project
+                        string folderPath = Path.Combine(path, groundImage.FileName);
+                        using (var stream = new FileStream(folderPath, FileMode.Create))
                         {
-                            // Determine uploaded GroundImage type and create folder according to file type
-                            string filePath = System.IO.Path.GetExtension(groundImage.FileName);
-                            string directoryPath = @"D:\Repos\Admin_Panel\wwwroot\" + filePath;
-
-                            // Check if directory exists, if not then create it
-                            if (!Directory.Exists(directoryPath))
-                            {
-                                Directory.CreateDirectory(directoryPath);
-                            }
-
-                            // Upload GroundImage to the root directory of the project
-                            string folderPath = Path.Combine("wwwroot/" + filePath + "/", groundImage.FileName);
-                            using (FileStream fs = System.IO.File.Create(folderPath))
-                            {
-                                groundImage.CopyTo(fs);
-                            }
-
-                            // Store GroundImage path in the model
-                            modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, "/" + filePath + "/" + groundImage.FileName);
+                            groundImage.CopyTo(stream);
                         }
+
+                        // Store GroundImage path in the model
+                        //modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, "/" + FilePath + "/" + groundImage.FileName);
+                        modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, FilePath.Replace("wwwroot\\", "/") + groundImage.FileName);
+
                     }
                 }
                 #endregion
