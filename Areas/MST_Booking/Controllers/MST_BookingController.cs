@@ -1,4 +1,6 @@
 ﻿using BOXCricket.Areas.MST_Booking.Models;
+using BOXCricket.BAL;
+using BOXCricket.CF;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -6,7 +8,7 @@ using static BOXCricket.Models.MST_DropDownModel;
 
 namespace BOXCricket.Areas.MST_Booking.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     [Area("MST_Booking")]
     [Route("MST_Booking/[controller]/[action]")]
     public class MST_BookingController : Controller
@@ -20,7 +22,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         }
 
         #region Select All By Owner
-        public IActionResult BookingList()
+        public IActionResult Index()
         {
             ViewBag.IsMyBookingPage = false;
 
@@ -37,7 +39,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             #endregion
 
             DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAll_ByOwner();
-            return View("BookingList", dt);
+            return View("Index", dt);
         }
         #endregion
 
@@ -59,7 +61,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             #endregion
 
             DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAll_ByUserID();
-            return View("BookingList", dt);
+            return View("Index", dt);
         }
         #endregion 
 
@@ -102,12 +104,12 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
                 if (modelMST_Booking.BookingID == null)
                 {
                     if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_Insert(modelMST_Booking)))
-                        TempData["successMessage"] = "Record Inserted Successfully";
-                    return RedirectToAction("BookingList");
+                        TempData["successMessage"] = "Record Inserted Successfully.";
+                    return RedirectToAction("Index");
                 }
             }
-            TempData["errorMessage"] = "Some error has occurred";
-            return RedirectToAction("BookingList");
+            TempData["errorMessage"] = "Some error has occurred!";
+            return RedirectToAction("Index");
         }
 
         #endregion
@@ -140,7 +142,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             }
             #endregion
 
-            return View("BookingList");
+            return View("Index");
         }
         #endregion
 
@@ -152,12 +154,21 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             {
                 if (Convert.ToBoolean(dalMST_BookingDALBase.dbo_PR_MST_Booking_StatusUpdateByPK(modelMST_BookingStatusUpdate)))
                     TempData["successMessage"] = "Booking Status Updated Successfully";
-                return RedirectToAction("BookingList");
+                return RedirectToAction("Index");
             }
-            TempData["errorMessage"] = "Some error has occurred";
-            return RedirectToAction("BookingList");
+            TempData["errorMessage"] = "Some error has occurred!";
+            return RedirectToAction("Index");
         }
 
+        #endregion
+
+        #region Export Excel
+        public IActionResult WriteDataToExcel(MST_BookingModel modelMST_Bookin)
+        {
+            DataTable dt = dalMST_BookingDALBase.dbo_PR_MST_Booking_SelectAll_ByOwner();
+
+            return CommonFunctions.ExportExcel(dt);
+        }
         #endregion
 
         #region Dropdown For BOXCricketDropDown 
@@ -277,6 +288,8 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
         #region BookingSearch by filters
         public IActionResult BookingSearch(string UserName, int GroundID, int BOXCricketID, string Status)
         {
+            ViewBag.IsMyBookingPage = true;
+
             #region Dropdown For BOXCricket 
 
             BOXCricketDropDown();
@@ -290,8 +303,7 @@ namespace BOXCricket.Areas.MST_Booking.Controllers
             #endregion
 
             DataTable dt = dalMST_BookingDAL.dbo_PR_MST_Booking_Search_ByFilters(UserName, GroundID, BOXCricketID, Status);
-            return View("BookingList", dt);
-
+            return View("Index", dt);
         }
         #endregion
 

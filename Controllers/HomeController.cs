@@ -52,6 +52,8 @@ namespace BOXCricket.Controllers
         }
         #endregion
 
+        #region Booking Add Page Methods
+
         [CheckAccess]
         #region Add Booking
         public IActionResult BookingAdd(int GroundID, int BOXCricketID)
@@ -80,13 +82,15 @@ namespace BOXCricket.Controllers
                 if (modelBooking.BookingID == null)
                 {
                     if (Convert.ToBoolean(dalHomeDALBase.dbo_PR_MST_Booking_Insert(modelBooking)))
-                        TempData["successMessage"] = "Record Inserted Successfully";
+                        TempData["successMessage"] = "Record Inserted Successfully.";
                     return RedirectToAction("Index");
                 }
             }
-            TempData["errorMessage"] = "Some error has occurred";
+            TempData["errorMessage"] = "Some error has occurred!";
             return RedirectToAction("Index");
         }
+        #endregion
+
         #endregion
 
         [CheckAccess]
@@ -171,9 +175,32 @@ namespace BOXCricket.Controllers
             return Json(TotalRate);
         }
 
+        #endregion        
+
+        #region BOXCricket Filter
+        public IActionResult BOXCricketFilter(int CityID, decimal HourlyRate)
+        {
+            #region Load Dropdown For City 
+            CityDropdown();
+            #endregion
+
+            DataTable dt = dalHomeDAL.dbo_PR_MST_BOXCricket_ByFilters(CityID, HourlyRate);
+            return View("Index", dt);
+        }
         #endregion
 
-        #region AdminIndex Page load
+        #region Ground Filter
+        public IActionResult GroundFilter(int GroundCapacity, decimal PerHourPrice)
+        {
+            DataTable dt = dalHomeDAL.dbo_PR_MST_Ground_ByFilters(GroundCapacity, PerHourPrice);
+            return View("Grounds", dt);
+        }
+        #endregion
+
+        #region AdminIndex Page Load Method
+
+        #region GO TO AdminIndex Page
+        [CheckAccess]
         public IActionResult AdminIndex()
         {
             ViewBag.UserID = HttpContext.Session.GetString("UserID");
@@ -188,22 +215,99 @@ namespace BOXCricket.Controllers
         }
         #endregion
 
-        #region BOXCricketFilter
-        public IActionResult BOXCricketFilter(int CityID, decimal HourlyRate, DateTime BookingDate)
+        #region GetBookingsData for chart
+        [HttpGet]
+        public List<object> GetBookingsData(string? selectedBookingTrendValue)
         {
-            #region Load Dropdown For City 
-            CityDropdown();
-            #endregion
+            DataTable dt = dalHomeDAL.dbo_PR_GetBookingCountsByWeekdays(selectedBookingTrendValue);
 
-            DataTable dt = dalHomeDAL.dbo_PR_MST_BOXCricket_ByFilters(CityID, HourlyRate, BookingDate);
-            return View("BOXCricketList", dt);
+            List<object> data = new List<object>();
+
+            List<string> weekdays = new List<string>();
+            List<int> bookings = new List<int>();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                weekdays.Add(Convert.ToString(dr["Weekday"]));
+                bookings.Add(Convert.ToInt32(dr["TotalBookings"]));
+            }
+
+            data.Add(weekdays);
+            data.Add(bookings);
+
+            return data;
         }
         #endregion
 
+        #region GetRevenueData for chart
+        [HttpGet]
+        public List<object> GetRevenueData(string? selectedRevenueTrendValue)
+        {
+            DataTable dt = dalHomeDAL.dbo_PR_GetRevenueByPeriod(selectedRevenueTrendValue);
+
+            List<object> data = new List<object>();
+
+            List<string> dates = new List<string>();
+            List<decimal> revenue = new List<decimal>();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                dates.Add(((DateTime)dr["BookingDate"]).ToString("dd-MM-yyyy"));
+                revenue.Add(Convert.ToDecimal(dr["TotalRevenue"]));
+            }
+
+            data.Add(dates);
+            data.Add(revenue);
+
+            return data;
+        }
+        #endregion
+
+        #region Get Top Customers
+        [HttpGet]
+        public List<object> GetTopCustomersList(string? selectedTopCustomersValue)
+        {
+            DataTable dt = dalHomeDAL.dbo_PR_GetTopUserDetailsByPeriod(selectedTopCustomersValue);
+
+            List<object> userList = new List<object>();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                var user = new
+                {
+                    UserName = dr["UserName"].ToString(),
+                    Contact = dr["Contact"].ToString(),
+                    ProfilePhotoPath = dr["ProfilePhotoPath"].ToString(),
+                    Email = dr["Email"].ToString(),
+                    BookingCount = Convert.ToInt32(dr["BookingCount"])
+                };
+
+                userList.Add(user);
+            }
+            return userList;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Exception Heandling
+
+        #region Error
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        #endregion
+
+        #region Page Not Found
+        public IActionResult PageNotFound()
+        {
+            return View("PageNotFound");
+        }
+        #endregion
+
+        #endregion
     }
 }

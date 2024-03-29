@@ -1,0 +1,42 @@
+﻿<div class="btn-group mb-3">
+    <button type="button"
+            class="btn btn-outline-secondary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+        Filters
+    </button>
+    <div class="dropdown-menu dropdown-menu-end w-px-300">
+        <form asp-controller="Home" asp-action="GroundFilter" class="p-4">
+            <div class="mb-3">
+                <label class="form-label" for="basic-default">
+                    Ground Capacity
+                </label>
+                <input type="number" value="0" class="form-control" name="GroundCapacity" id="searchGroundCapacity"
+                       placeholder="Enter Ground Capacity" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default">
+                    Per Hour Price
+                </label>
+                <input type="text" class="form-control" name="PerHourPrice" id="PerHourPrice"
+                       placeholder="Enter Per Hour Price" />
+            </div>@* 
+            <div class="mb-3">
+                <label for="html5-date-input" class="form-label">Date</label>
+                <input class="form-control" type="date" name="BookingDate" id="BookingDate" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default">
+                    Slot
+                </label>
+                <Select type="text" class="form-select" aria-label="Default select example"
+                        asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))">
+                    <option value="">Select the Slot</option>
+                </Select>
+            </div> *@
+            <button type="submit" class="btn btn-primary">Apply</button>
+            <button type="button" class="btn btn-secondary">Clear</button>
+        </form>
+    </div>
+</div>

@@ -6,6 +6,18 @@
  */
 :root,
 [data-bs-theme='light'] {
+    --bs-facebook: #3b5998;
+    --bs-twitter: #1da1f2;
+    --bs-google-plus: #dd4b39;
+    --bs-instagram: #e1306c;
+    --bs-linkedin: #0077b5;
+    --bs-github: #333;
+    --bs-dribbble: #ea4c89;
+    --bs-pinterest: #cb2027;
+    --bs-slack: #4a154b;
+    --bs-reddit: #ff4500;
+    --bs-youtube: #ff0000;
+    --bs-vimeo: #1ab7ea;
     --bs-blue: #007bff;
     --bs-indigo: #6610f2;
     --bs-purple: #696cff;

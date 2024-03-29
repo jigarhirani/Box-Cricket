@@ -68,7 +68,7 @@
                                             </Select>
                                             <span asp-validation-for="SlotNO" class="text-danger"></span>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
@@ -79,7 +79,7 @@
 
                                 <div class="demo-inline-spacing">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a asp-action="RateList" class="btn btn-secondary ms-2">Cancel</a>
+                                    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
                                 </div>
                             </form>
                         </div>
@@ -92,10 +92,9 @@
     <div class="content-backdrop fade"></div>
 </div>
 <!-- Content wrapper -->
-
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 
 
 @section scripts {

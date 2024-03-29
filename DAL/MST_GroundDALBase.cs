@@ -74,8 +74,8 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundImagePath3", SqlDbType.VarChar, modelMST_Ground.GroundImagePath3);
                 sqlDB.AddInParameter(dbCMD, "@GroundImagePath4", SqlDbType.VarChar, modelMST_Ground.GroundImagePath4);
                 sqlDB.AddInParameter(dbCMD, "@IsAllowedBooking", SqlDbType.Bit, modelMST_Ground.IsAllowedBooking);
-                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
-                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now);
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
@@ -136,7 +136,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@GroundImagePath3", SqlDbType.VarChar, modelMST_Ground.GroundImagePath3);
                 sqlDB.AddInParameter(dbCMD, "@GroundImagePath4", SqlDbType.VarChar, modelMST_Ground.GroundImagePath4);
                 sqlDB.AddInParameter(dbCMD, "@IsAllowedBooking", SqlDbType.Bit, modelMST_Ground.IsAllowedBooking);
-                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);

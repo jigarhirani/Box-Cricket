@@ -9,171 +9,219 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BOXCricket
 build_property.RootNamespace = BOXCricket
-build_property.ProjectDir = D:\BOXCricket\
+build_property.ProjectDir = D:\Repos\BOXCricket\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\BOXCricket
+build_property.MSBuildProjectDirectory = D:\Repos\BOXCricket
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/BOXCricket/Areas/MST_Booking/Views/MST_Booking/BookingAdd.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/MST_Booking/BookingAdd.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcTVNUX0Jvb2tpbmdcQm9va2luZ0FkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Booking/Views/MST_Booking/BookingList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcTVNUX0Jvb2tpbmdcQm9va2luZ0xpc3QuY3NodG1s
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/MST_Booking/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcTVNUX0Jvb2tpbmdcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Booking/Views/Shared/_BookingStatusEdit.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/Shared/_BookingList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcU2hhcmVkXF9Cb29raW5nTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/Shared/_BookingListFilterForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcU2hhcmVkXF9Cb29raW5nTGlzdEZpbHRlckZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/Shared/_BookingStatusEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcU2hhcmVkXF9Cb29raW5nU3RhdHVzRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Booking/Views/Shared/_Model.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcU2hhcmVkXF9Nb2RlbC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/BOXCricket/Areas/MST_Booking/Views/_ViewImports.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Booking/Views/_ViewStart.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Booking/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0Jvb2tpbmdcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_BOXCricket/Views/MST_BOXCricket/BOXCricketAddEdit.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_BOXCricket/Views/MST_BOXCricket/BOXCricketAddEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0JPWENyaWNrZXRcVmlld3NcTVNUX0JPWENyaWNrZXRcQk9YQ3JpY2tldEFkZEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_BOXCricket/Views/MST_BOXCricket/BOXCricketList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0JPWENyaWNrZXRcVmlld3NcTVNUX0JPWENyaWNrZXRcQk9YQ3JpY2tldExpc3QuY3NodG1s
+[D:/Repos/BOXCricket/Areas/MST_BOXCricket/Views/MST_BOXCricket/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0JPWENyaWNrZXRcVmlld3NcTVNUX0JPWENyaWNrZXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_BOXCricket/Views/_ViewImports.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_BOXCricket/Views/Shared/_BOXCricketList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0JPWENyaWNrZXRcVmlld3NcU2hhcmVkXF9CT1hDcmlja2V0TGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_BOXCricket/Views/Shared/_BOXCricketListFilterForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0JPWENyaWNrZXRcVmlld3NcU2hhcmVkXF9CT1hDcmlja2V0TGlzdEZpbHRlckZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_BOXCricket/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0JPWENyaWNrZXRcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_BOXCricket/Views/_ViewStart.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_BOXCricket/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0JPWENyaWNrZXRcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Ground/Views/MST_Ground/GroundAddEdit.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Ground/Views/MST_Ground/GroundAddEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0dyb3VuZFxWaWV3c1xNU1RfR3JvdW5kXEdyb3VuZEFkZEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Ground/Views/MST_Ground/GroundList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0dyb3VuZFxWaWV3c1xNU1RfR3JvdW5kXEdyb3VuZExpc3QuY3NodG1s
+[D:/Repos/BOXCricket/Areas/MST_Ground/Views/MST_Ground/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0dyb3VuZFxWaWV3c1xNU1RfR3JvdW5kXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Ground/Views/_ViewImports.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Ground/Views/Shared/_GroundList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0dyb3VuZFxWaWV3c1xTaGFyZWRcX0dyb3VuZExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_Ground/Views/Shared/_GroundListFilterForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0dyb3VuZFxWaWV3c1xTaGFyZWRcX0dyb3VuZExpc3RGaWx0ZXJGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_Ground/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0dyb3VuZFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Ground/Views/_ViewStart.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Ground/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX0dyb3VuZFxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Rate/Views/MST_Rate/RateAddEdit.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Rate/Views/MST_Rate/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1JhdGVcVmlld3NcTVNUX1JhdGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_Rate/Views/MST_Rate/RateAddEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1JhdGVcVmlld3NcTVNUX1JhdGVcUmF0ZUFkZEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Rate/Views/MST_Rate/RateList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1JhdGVcVmlld3NcTVNUX1JhdGVcUmF0ZUxpc3QuY3NodG1s
+[D:/Repos/BOXCricket/Areas/MST_Rate/Views/Shared/_RateList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1JhdGVcVmlld3NcU2hhcmVkXF9SYXRlTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Rate/Views/_ViewImports.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Rate/Views/Shared/_RateListFilterForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1JhdGVcVmlld3NcU2hhcmVkXF9SYXRlTGlzdEZpbHRlckZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_Rate/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1JhdGVcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_Rate/Views/_ViewStart.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_Rate/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1JhdGVcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_User/Views/MST_User/ChangePassword.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_User/Views/MST_User/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_User/Views/MST_User/ForgotPassword.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_User/Views/MST_User/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcRm9yZ290UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_User/Views/MST_User/Login.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_User/Views/MST_User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_User/Views/MST_User/Profile.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_User/Views/MST_User/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_User/Views/MST_User/SingUp.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcU2luZ1VwLmNzaHRtbA==
+[D:/Repos/BOXCricket/Areas/MST_User/Views/MST_User/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcUmVzZXRQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_User/Views/_ViewImports.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_User/Views/MST_User/SignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcTVNUX1VzZXJcU2lnblVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Areas/MST_User/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Areas/MST_User/Views/_ViewStart.cshtml]
+[D:/Repos/BOXCricket/Areas/MST_User/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Home/AdminIndex.cshtml]
+[D:/Repos/BOXCricket/Views/Home/AdminIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbkluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Home/Grounds.cshtml]
+[D:/Repos/BOXCricket/Views/Home/Grounds.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHcm91bmRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Home/Index.cshtml]
+[D:/Repos/BOXCricket/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Home/Privacy.cshtml]
+[D:/Repos/BOXCricket/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Home/UserBookingAdd.cshtml]
+[D:/Repos/BOXCricket/Views/Home/UserBookingAdd.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2VyQm9va2luZ0FkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Home/UserBookingList.cshtml]
+[D:/Repos/BOXCricket/Views/Home/UserBookingList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2VyQm9va2luZ0xpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Shared/Error.cshtml]
+[D:/Repos/BOXCricket/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Shared/_Footer.cshtml]
+[D:/Repos/BOXCricket/Views/Shared/PageNotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhZ2VOb3RGb3VuZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Views/Shared/_BOXCricketListFilterForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9CT1hDcmlja2V0TGlzdEZpbHRlckZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Views/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Shared/_Header.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXIuY3NodG1s
+[D:/Repos/BOXCricket/Views/Shared/_GroundListFilterForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Hcm91bmRMaXN0RmlsdGVyRm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Shared/_Layout_Login.cshtml]
+[D:/Repos/BOXCricket/Views/Shared/_Layout_Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Shared/_Navbar.cshtml]
+[D:/Repos/BOXCricket/Views/Shared/_Navbar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OYXZiYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Repos/BOXCricket/Views/Shared/_ShowAlertInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaG93QWxlcnRJbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Views/Shared/_Sidebar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaWRlYmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/BOXCricket/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/_ViewImports.cshtml]
+[D:/Repos/BOXCricket/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/_ViewStart.cshtml]
+[D:/Repos/BOXCricket/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BOXCricket/Views/Shared/_Layout.cshtml]
+[D:/Repos/BOXCricket/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-572zae06r9

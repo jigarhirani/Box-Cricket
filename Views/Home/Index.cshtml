@@ -3,61 +3,12 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    var successMessage = TempData["successMessage"]?.ToString();
-    var errorMessage = TempData["errorMessage"]?.ToString();
-}
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
 
-    @if (!string.IsNullOrWhiteSpace(successMessage))
-    {
-        <div class="alert alert-success alert-dismissible" role="alert">
-            @successMessage
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
-    else if (!string.IsNullOrWhiteSpace(errorMessage))
-    {
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            @errorMessage
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
-
-    @* <div class="btn-group mb-3">
-        <button type="button"
-                class="btn btn-outline-secondary dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false">
-            Filters
-        </button>
-        <div class="dropdown-menu dropdown-menu-end w-px-300">
-            <form class="p-4">   
-                <div class="mb-3">
-                    <label for="exampleFormControlSelect1" class="form-label">City Id</label>
-                    <Select type="text" class="form-select" aria-label="Default select example"
-                            asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
-                        <option value="">Select City</option>
-                    </Select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="basic-default">
-                        Per Hour Price
-                    </label>
-                    <input type="text" class="form-control" name="PerHourPrice" id="PerHourPrice"
-                           placeholder="Enter Per Hour Price" />
-                </div>
-                <div class="mb-3">
-                    <label for="html5-date-input" class="form-label">Date</label>
-                    <input class="form-control" type="date" name="BookingDate" id="BookingDate" />
-                </div>
-                <button type="submit" class="btn btn-primary">Apply</button>
-                <button type="button" class="btn btn-secondary">Clear</button>
-            </form>
-        </div>
-    </div> *@
+    @Html.Partial("_ShowAlertInfo")
+    
+    @Html.Partial("_BOXCricketListFilterForm")
 
     <!-- Grid Card -->
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
@@ -112,12 +63,12 @@
                                     <div class="hstack gap-2">
                                         <h5 class="fw-normal text-success mb-0">&#8377;@dr["MinimumDiscountedRate"]</h5>
                                         <small>/per Hour</small>
-                                        <span class="text-decoration-line-through">&#8377;@dr["MinimumActualRate"]</span>
+                                        <span class="text-decoration-line-through">&#8377;@dr["MinimumActualRate"]</span>                                        
                                     </div>
                                     <!-- Button -->
                                     <div class="mt-2 mt-sm-0">
                                         <a asp-action="Grounds" asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
-                                            class="btn btn-outline-primary  mb-0">Ground Details</a>
+                                           class="btn btn-outline-primary  mb-0">Ground Details</a>                                        
                                     </div>
                                 </div>
                             </div>
@@ -129,14 +80,3 @@
     </div>
 </div>
 <!-- / Content -->
-
-<script>
-    // Initialize the carousel
-    var myCarousel = document.getElementById('imageSlider');
-    var carousel = new bootstrap.Carousel(myCarousel);
-
-    // Optional: You can also handle slide events if needed
-    myCarousel.addEventListener('slid.bs.carousel', function () {
-        // Handle slide event if needed
-    });
-</script>

@@ -8,6 +8,11 @@ namespace BOXCricket.BAL
         //When User ID is not availale or removed from session, it will redirect to login page
         public void OnAuthorization(AuthorizationFilterContext filterContext)
         {
+            var rd = filterContext.RouteData;
+            string currentAction = rd.Values["action"].ToString();
+            string currentController = rd.Values["controller"].ToString();
+            //string currentArea = rd.DataTokens["area"].ToString();
+
             if (filterContext.HttpContext.Session.GetString("UserID") == null)
             {
                 filterContext.Result = new RedirectResult("~/MST_User/MST_User/Login");

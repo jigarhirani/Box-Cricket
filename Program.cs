@@ -1,5 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -9,6 +11,14 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 
 var app = builder.Build();
+
+app.UseStatusCodePages(ctx =>
+{
+    if (ctx.HttpContext.Response.StatusCode == 404)
+        ctx.HttpContext.Response.Redirect("/Home/PageNotFound");
+
+    return Task.CompletedTask;
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

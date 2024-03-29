@@ -1,0 +1,28 @@
+﻿@if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        @Html.Raw(TempData["errorMessage"])
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        @Html.Raw(TempData["successMessage"])
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (TempData["emailverificationMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        @Html.Raw(TempData["emailverificationMessage"])
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (TempData["infoMessage"] != null)
+{
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        @Html.Raw(TempData["infoMessage"])
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}

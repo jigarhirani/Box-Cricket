@@ -1,4 +1,5 @@
 ﻿using BOXCricket.Areas.MST_Ground.Models;
+using BOXCricket.BAL;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -6,7 +7,7 @@ using static BOXCricket.Models.MST_DropDownModel;
 
 namespace BOXCricket.Areas.MST_Ground.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     [Area("MST_Ground")]
     [Route("MST_Ground/[controller]/[action]")]
     public class MST_GroundController : Controller
@@ -21,11 +22,11 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         }
 
         #region Select All 
-        public IActionResult GroundList()
+        public IActionResult Index()
         {
             BOXCricketDropDown();
             DataTable dt = dalMST_GroundDALBase.dbo_PR_MST_Ground_SelectAll_ByUserID();
-            return View("GroundList", dt);
+            return View("Index", dt);
         }
         #endregion
 
@@ -33,8 +34,8 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
         public IActionResult Delete(int GroundID)
         {
             if (Convert.ToBoolean(dalMST_GroundDALBase.dbo_PR_MST_Ground_DeleteByPK(GroundID)))
-                return RedirectToAction("GroundList");
-            return View("GroundList");
+                return RedirectToAction("Index");
+            return View("Index");
         }
 
         #endregion
@@ -99,7 +100,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
 
         #region Save 
         [HttpPost]
-        public IActionResult Save(MST_GroundModel modelMST_Ground)
+        public async Task<IActionResult> Save(MST_GroundModel modelMST_Ground)
         {
 
             if (ModelState.IsValid)
@@ -124,11 +125,10 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
                         string folderPath = Path.Combine(path, groundImage.FileName);
                         using (var stream = new FileStream(folderPath, FileMode.Create))
                         {
-                            groundImage.CopyTo(stream);
+                            await groundImage.CopyToAsync(stream);
                         }
 
                         // Store GroundImage path in the model
-                        //modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, "/" + FilePath + "/" + groundImage.FileName);
                         modelMST_Ground.GetType().GetProperty(groundImagePathProperty).SetValue(modelMST_Ground, FilePath.Replace("wwwroot\\", "/") + groundImage.FileName);
 
                     }
@@ -138,14 +138,14 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
                 if (modelMST_Ground.GroundID == null)
                 {
                     if (Convert.ToBoolean(dalMST_GroundDALBase.dbo_PR_MST_Ground_Insert(modelMST_Ground)))
-                        TempData["successMessage"] = "Record Inserted Successfully";
-                    return RedirectToAction("GroundList");
+                        TempData["successMessage"] = "Record Inserted Successfully.";
+                    return RedirectToAction("Index");
                 }
                 else
                 {
                     if (Convert.ToBoolean(dalMST_GroundDALBase.dbo_PR_MST_Ground_UpdateByPK(modelMST_Ground)))
                         TempData["successMessage"] = "Record Updated Successfully";
-                    return RedirectToAction("GroundList");
+                    return RedirectToAction("Index");
                 }
             }
             TempData["errorMessage"] = "Some error has occurred";
@@ -180,7 +180,7 @@ namespace BOXCricket.Areas.MST_Ground.Controllers
             #endregion
 
             DataTable dt = dalMST_GroundDAL.dbo_PR_MST_Ground_Search_ByFilter(GroundName, GroundCapacity, IsAllowedBooking, BOXCricketID);
-            return View("GroundList", dt);
+            return View("Index", dt);
 
         }
         #endregion       

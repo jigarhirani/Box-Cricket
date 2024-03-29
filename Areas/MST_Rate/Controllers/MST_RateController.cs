@@ -1,4 +1,5 @@
 ﻿using BOXCricket.Areas.MST_Rate.Models;
+using BOXCricket.BAL;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -6,7 +7,7 @@ using static BOXCricket.Models.MST_DropDownModel;
 
 namespace BOXCricket.Areas.MST_Rate.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     [Area("MST_Rate")]
     [Route("MST_Rate/[controller]/[action]")]
     public class MST_RateController : Controller
@@ -20,7 +21,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         }
 
         #region Select All 
-        public IActionResult RateList()
+        public IActionResult Index()
         {
             #region Dropdown For BOXCricket 
 
@@ -41,7 +42,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
             #endregion
 
             DataTable dt = dalMST_RateDALBase.dbo_PR_MST_Rate_SelectAll_ByUserID();
-            return View("RateList", dt);
+            return View("Index", dt);
         }
         #endregion
 
@@ -49,14 +50,14 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
         public IActionResult Delete(int RateID)
         {
             if (Convert.ToBoolean(dalMST_RateDALBase.dbo_PR_MST_Rate_DeleteByPK(RateID)))
-                return RedirectToAction("RateList");
-            return View("RateList");
+                return RedirectToAction("Index");
+            return View("Index");
         }
 
         #endregion
 
         #region Add/Edit
-        public IActionResult Add(int? RateID)
+        public IActionResult RateAddEdit(int? RateID)
         {
             #region Dropdown For BOXCricket 
 
@@ -114,18 +115,18 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
                 if (modelMST_Rate.RateID == null)
                 {
                     if (Convert.ToBoolean(dalMST_RateDALBase.dbo_PR_MST_Rate_Insert(modelMST_Rate)))
-                        TempData["successMessage"] = "Record Inserted Successfully";
-                    return RedirectToAction("RateList");
+                        TempData["successMessage"] = "Record Inserted Successfully.";
+                    return RedirectToAction("Index");
                 }
                 else
                 {
                     if (Convert.ToBoolean(dalMST_RateDALBase.dbo_PR_MST_Rate_UpdateByPK(modelMST_Rate)))
                         TempData["successMessage"] = "Record Updated Successfully";
-                    return RedirectToAction("RateList");
+                    return RedirectToAction("Index");
                 }
             }
-            TempData["errorMessage"] = "Some error has occurred";
-            return RedirectToAction("RateList");
+            TempData["errorMessage"] = "Some error has occurred!";
+            return RedirectToAction("Index");
         }
         #endregion       
 
@@ -225,7 +226,7 @@ namespace BOXCricket.Areas.MST_Rate.Controllers
             #endregion
 
             DataTable dt = dalMST_RateDAL.dbo_PR_MST_Rate_Search_ByFilters(DayOfWeek, HourlyRate, SlotNO, BOXCricketID, GroundID);
-            return View("RateList", dt);
+            return View("Index", dt);
 
         }
         #endregion

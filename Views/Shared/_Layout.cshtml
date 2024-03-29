@@ -32,7 +32,7 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="~/assets/vendor/libs/apex-charts/apex-charts.css" />
-
+    <script src="~/assets/js/custom.js"></script>
 
     <!-- Page CSS -->
     <!-- Helpers -->
@@ -41,6 +41,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="~/assets/js/config.js"></script>
 
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -52,8 +54,8 @@
                 <div class="container layout-container">
                     <!-- Layout container -->
                     <div class="layout-page">
-                        <!-- Header -->
-                        @Html.Partial("_Header")
+                        <!-- Navbar -->
+                        @Html.Partial("_Navbar")
                         <!-- / Header -->
                         <!-- Content wrapper -->
                         <div class="content-wrapper">
@@ -78,13 +80,13 @@
             <!-- Layout wrapper -->
             <div class="layout-wrapper layout-content-navbar">
                 <div class="layout-container">
-                    <!-- Nevbar -->
-                    @Html.Partial("_Navbar")
-                    <!-- / Nevbar -->
+                    <!-- sidebar -->
+                    @Html.Partial("_Sidebar")
+                    <!-- / sidebar -->
                     <!-- Layout container -->
                     <div class="layout-page">
-                        <!-- Header -->
-                        @Html.Partial("_Header")
+                        <!-- Navbar -->
+                        @Html.Partial("_Navbar")
                         <!-- / Header -->
                         <!-- Content wrapper -->
                         <div class="content-wrapper">
@@ -136,23 +138,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
+    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function updateTime() {
-            const now = new Date();
-            let hours = now.getHours();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // Handle midnight (0 hours)
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-            document.getElementById('clock').textContent = timeString;
-            requestAnimationFrame(updateTime);
-        }
-
-        // Initial call to display time immediately
-        updateTime();
+        document.addEventListener('DOMContentLoaded', function () {
+            function updateTime() {
+                const now = new Date();
+                let hours = now.getHours();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // Handle midnight (0 hours)
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+                const clockElement = document.getElementById('clock');
+                if (clockElement) {
+                    clockElement.textContent = timeString;
+                }
+                requestAnimationFrame(updateTime);
+            }
+            // Initial call to display time immediately
+            updateTime();
+        });
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)

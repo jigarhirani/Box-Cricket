@@ -1,0 +1,29 @@
+﻿<div class="btn-group mb-3">
+    <button type="button"
+            class="btn btn-outline-secondary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+        Filters
+    </button>
+    <div class="dropdown-menu dropdown-menu-end w-px-300">
+        <form asp-controller="Home" asp-action="BOXCricketFilter" class="p-4">
+            <div class="mb-3">
+                <label for="exampleFormControlSelect1" class="form-label">City Id</label>
+                <Select type="text" class="form-select" name="CityID" aria-label="Default select example"
+                        asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
+                    <option value="">Select City</option>
+                </Select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default">
+                    Per Hour Price
+                </label>
+                <input type="text" class="form-control" name="PerHourPrice" id="PerHourPrice"
+                       placeholder="Enter Per Hour Price" />
+            </div>
+            <button type="submit" class="btn btn-primary">Apply</button>
+            <button type="button" class="btn btn-secondary">Clear</button>
+        </form>
+    </div>
+</div>

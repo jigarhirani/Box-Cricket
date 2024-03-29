@@ -26,14 +26,11 @@ namespace BOXCricket.Areas.MST_User.Models
         [Required(ErrorMessage = "Enter Your Phone No.")]
         public string Contact { get; set; }
 
-        [Required(ErrorMessage = "Please choose the Country.")]
-        public int CountryID { get; set; }
+        public int? CountryID { get; set; }
 
-        [Required(ErrorMessage = "Please choose the State.")]
-        public int StateID { get; set; }
+        public int? StateID { get; set; }
 
-        [Required(ErrorMessage = "Please choose the City.")]
-        public int CityID { get; set; }
+        public int? CityID { get; set; }
 
         public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
@@ -42,8 +39,6 @@ namespace BOXCricket.Areas.MST_User.Models
 
         public string? VarificationToken { get; set; }
 
-        [Required(ErrorMessage = "Please upload your profile photo")]
-        [DisplayName("Profile Photo")]
         public IFormFile? File { get; set; }
 
         public string? ProfilePhotoPath { get; set; }
@@ -68,4 +63,17 @@ namespace BOXCricket.Areas.MST_User.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class MST_User_PasswrodReset
+    {
+        [Required(ErrorMessage = "Please Enter the New Password")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$",
+            ErrorMessage = "Password should contain at least one lowercase letter, one uppercase letter, one digit, and one special character. Minimum length is 8 characters.")]
+        public string NewPassword { get; set; }
+
+        [Required(ErrorMessage = "Please Confirm the Password")]
+        [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        public string? Email { get; set; }
+    }
 }

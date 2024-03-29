@@ -1,0 +1,195 @@
+﻿@using System.Data
+@using BOXCricket.Areas.MST_Booking.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Bookings /</span> Bookings List</h4>
+                
+                <partial name="_ShowAlertInfo" />
+
+                <div class="card mb-md-4">
+                    <div class="card-header flex-column flex-md-row d-flex justify-content-between align-items-center">
+                        <div class="head-label text-left">
+                            <h5 class="card-title mb-0">
+                                <i class='bx bx-search-alt-2'></i> Search
+                            </h5>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="card-body">
+                        <partial name="_BookingListFilterForm" />
+                    </div>
+                </div>            
+
+                <!-- Hoverable Table rows -->
+                <div class="card">
+                    <div class="card-header flex-column flex-md-row d-flex justify-content-between align-items-center">
+                        <div class="head-label text-left">
+                            <h5 class="card-title mb-0"><i class='bx bx-search-alt-2'></i> Search Result</h5>
+                        </div>
+                        <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                            <button id="exportButton" class="btn dropdown-toggle btn-outline-primary me-2" tabindex="0" aria-controls="DataTables_Table_0"
+                                    type="button" aria-haspopup="dialog" aria-expanded="false">
+                                <span>
+                                    <i class="bx bx-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span>
+                                </span>
+                            </button>
+
+                            <div id="exportDropdown" class="dropdown-menu dt-button-collection" aria-modal="true" role="dialog" style="display: none;">
+                                <div role="menu">
+                                    <a class="dt-button dropdown-item buttons-print" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span><i class="bx bx-printer me-1"></i>Print</span></a>
+                                    <a class="dt-button dropdown-item buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" asp-area="MST_Booking" asp-controller="MST_Booking" asp-action="WriteDataToExcel"><span><i class="bx bx-file me-1"></i>Csv</span></a>
+                                    <a class="dt-button dropdown-item buttons-pdf buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span><i class="bx bxs-file-pdf me-1"></i>Pdf</span></a>
+                                </div>
+                            </div>
+                            @if (ViewBag.IsMyBookingPage)
+                            {
+                                <a asp-action="Index" asp-controller="MST_Booking" class="btn btn-info me-sm-2">All Bookings</a>
+                            }
+                            else
+                            {
+                                <a asp-action="SelectAllMyBooking" asp-controller="MST_Booking" class="btn btn-info me-sm-2">My Bookings</a>
+                            }
+                            <a asp-action="Add" class="dt-button create-new btn btn-success" tabindex="0"
+                               aria-controls="DataTables_Table_0">
+                                <span>
+                                    <i class="bx bx-plus me-sm-1"></i>
+                                    <span class="d-none d-sm-inline-block">Add New Booking</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <partial name="_BookingList" />
+                </div>
+                <!--/ Hoverable Table rows -->
+            </div>
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+</div>
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+<!-- / Layout wrapper -->
+<!-- Modal Backdrop -->
+<div class="col-lg-4 col-md-3">
+    <div class="mt-3">
+        <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function funOnBOXCricketChange() {
+        var BOXCricketID = $("#BOXCricketID").val();
+
+        $("#GroundID").empty();
+        $("#GroundID").append($("<option></option>").val("").html("Select Ground"));
+        if (BOXCricketID !== "") {
+            $.ajax(
+                {
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("GroundDropDownByBOXCricket", "MST_Booking")" + "?&BOXCricketID=" + BOXCricketID,
+                    data: {},
+                    dataType: "json",
+                    success: function (Result) {
+                        $.each(Result, function (index, item) {
+                            $("#GroundID").append($("<option></option>").val(item.groundID).html(item.groundName));
+
+                        });
+                    },
+                    error: function (err) {
+                        //alert(err.toString();
+                        alert("Error while fetch data");
+                    }
+                }
+            )
+        }
+        else {
+            // If BOXCricketID is empty, load all grounds
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "@Url.Action("GroundDropDown", "MST_Booking")",
+                data: {},
+                dataType: "json",
+                success: function (Result) {
+                    $.each(Result, function (index, item) {
+                        $("#GroundID").append($("<option></option>").val(item.groundID).html(item.groundName));
+                    });
+                },
+                error: function (err) {
+                    //alert(err.toString();
+                    alert("Error while fetching data");
+                }
+            });
+        }
+    }  
+
+    function loadPopup(bookingID) {
+        $.ajax({
+            url: '@Url.Action("_BookingStatusEdit", "MST_Booking")',
+            type: 'GET',
+            data: { bookingID: bookingID },
+            success: function (data) {
+                $('#backDropModal .modal-content').html(data); // Replace 'response' with 'data'
+                $('#backDropModal').modal('show');
+            },
+            error: function () {
+                alert('Error loading popup');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('[data-confirm]');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const confirmationMessage = this.getAttribute('data-confirm');
+                if (!confirm(confirmationMessage)) {
+                    e.preventDefault(); // Cancel the form submission if the user cancels the confirmation
+                }
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var exportButton = document.getElementById('exportButton');
+        var exportDropdown = document.getElementById('exportDropdown');
+
+        exportButton.addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent the click event from reaching the document
+            if (exportDropdown.style.display === 'block') {
+                exportDropdown.style.display = 'none';
+            } else {
+                exportDropdown.style.display = 'block';
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            if (event.target !== exportButton && event.target !== exportDropdown) {
+                exportDropdown.style.display = 'none';
+            }
+        });
+    });
+
+</script>+

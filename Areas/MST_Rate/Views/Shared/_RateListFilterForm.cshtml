@@ -1,0 +1,66 @@
+﻿<form asp-action="RateSearch" asp-controller="MST_Rate" asp-area="MST_Rate" class="row mb-3">
+
+    <div class="row">
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="BOXCricketID">BOXCricket</label>
+                <select class="form-select" name="BOXCricketID" id="BOXCricketID" aria-label="Select BOXCricket" asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                    <option value="" selected>Select BOXCricket</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="GroundID">Ground</label>
+                <select class="form-select" name="GroundID" id="GroundID" aria-label="Select Ground" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                    <option disabled selected>Select Ground</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="DayOfWeek">Day Of Week</label>
+                <select class="form-select" name="DayOfWeek" id="DayOfWeek" aria-label="Select Day Of Week">
+                    <option disabled selected>Select Day Of Week</option>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="SlotNO">Slot</label>
+                <select class="form-select" name="SlotNO" id="SlotNO" aria-label="Select Slot" asp-items="@(new SelectList(ViewBag.SlotList, "SlotNO", "SlotDetails"))">
+                    <option disabled selected>Select Slot</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="HourlyRate">Hourly Rate</label>
+                <input type="text" class="form-control" name="HourlyRate" id="HourlyRate" placeholder="Hourly Rate" />
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-1 mb-2">
+        <div class="form-group">
+            <label class="">&nbsp;</label>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-outline-success">Search</button>
+                <input type="reset" value="Reset" class="btn btn-outline-secondary ms-2" />
+            </div>
+        </div>
+    </div>
+
+</form>

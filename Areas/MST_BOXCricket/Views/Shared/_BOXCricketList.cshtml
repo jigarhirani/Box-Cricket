@@ -1,0 +1,59 @@
+﻿@using System.Data
+<div class="table-responsive text-nowrap">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="sticky-left">BOXCricket Name</th>
+                <th>Owner Name</th>
+                <th>Address</th>
+                <th>Country Name</th>
+                <th>State Name</th>
+                <th>City Name</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th class="sticky-right">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+            @{
+                if (Model.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in Model.Rows)
+                    {
+                        <tr>
+                            <td class="sticky-left">@dr["BOXCricketName"]</td>
+                            <td>@dr["OwnerName"]</td>
+                            <td>@dr["Address"]</td>
+                            <td>@dr["CountryName"]</td>
+                            <td>@dr["StateName"]</td>
+                            <td>@dr["CityName"]</td>
+                            <td>@dr["Created"]</td>
+                            <td>@dr["Modified"]</td>
+                            <td class="sticky-right">
+                                <a class="btn btn-icon btn-warning" asp-action="Add"
+                                   asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])">
+                                    <i class="bx bx-pencil"></i>
+                                </a>
+                                <a class="btn btn-icon btn-danger" asp-action="Delete"
+                                   asp-route-BOXCricketID="@Convert.ToInt32(@dr["BOXCricketID"])"
+                                   data-confirm="Are you sure you want to delete this BOXCricket?">
+                                    <i class="bx bx-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <p class="col-form-label">No Record Found</p>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+</div>

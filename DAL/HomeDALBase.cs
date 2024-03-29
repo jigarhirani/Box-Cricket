@@ -65,8 +65,8 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@BookingAmount", SqlDbType.Decimal, modelBooking.BookingAmount);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelBooking.Status);
                 sqlDB.AddInParameter(dbCMD, "@Remarks", SqlDbType.VarChar, modelBooking.Remarks);
-                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
-                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now);
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);

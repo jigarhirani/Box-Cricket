@@ -1,4 +1,5 @@
 ﻿using BOXCricket.Areas.MST_BOXCricket.Models;
+using BOXCricket.BAL;
 using BOXCricket.DAL;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -6,7 +7,7 @@ using static BOXCricket.Models.LOC_DropDownModel;
 
 namespace BOXCricket.Areas.MST_BOXCricket.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     [Area("MST_BOXCricket")]
     [Route("MST_BOXCricket/[controller]/[action]")]
     public class MST_BOXCricketController : Controller
@@ -22,10 +23,10 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         }
 
         #region Select All 
-        public IActionResult BOXCricketList()
+        public IActionResult Index()
         {
             DataTable dt = dalMST_BOXCricketDALBase.dbo_PR_MST_BOXCricket_SelectAll_ByOwnerID();
-            return View("BOXCricketList", dt);
+            return View("Index", dt);
         }
         #endregion
 
@@ -33,8 +34,8 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         public IActionResult Delete(int BOXCricketID)
         {
             if (Convert.ToBoolean(dalMST_BOXCricketDALBase.dbo_PR_MST_BOXCricket_DeleteByPK(BOXCricketID)))
-                return RedirectToAction("BOXCricketList");
-            return View("BOXCricketList");
+                return RedirectToAction("Index");
+            return View("Index");
         }
 
         #endregion
@@ -104,7 +105,7 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
 
         #region Save 
         [HttpPost]
-        public IActionResult Save(MST_BOXCricketModel modelMST_BOXCricket)
+        public async Task<IActionResult> Save(MST_BOXCricketModel modelMST_BOXCricket)
         {
             if (ModelState.IsValid)
             {
@@ -129,15 +130,10 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
                         string folderPath = Path.Combine(path, BOXCricketImage.FileName);
                         using (var stream = new FileStream(folderPath, FileMode.Create))
                         {
-                            BOXCricketImage.CopyTo(stream);
+                            await BOXCricketImage.CopyToAsync(stream);
                         }
-                        //using (FileStream fs = System.IO.File.Create(folderPath))
-                        //{
-                        //    BOXCricketImage.CopyTo(fs);
-                        //}
 
                         // Store BOXCricketImage path in the model
-                        //modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, "/" + FilePath + "/" + BOXCricketImage.FileName);
                         modelMST_BOXCricket.GetType().GetProperty(BOXCricketImagePathProperty).SetValue(modelMST_BOXCricket, FilePath.Replace("wwwroot\\", "/") + BOXCricketImage.FileName);
                     }
                 }
@@ -147,16 +143,16 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
                 {
                     if (Convert.ToBoolean(dalMST_BOXCricketDALBase.dbo_PR_MST_BOXCricket_Insert(modelMST_BOXCricket)))
                         TempData["successMessage"] = "Record Inserted Successfully";
-                    return RedirectToAction("BOXCricketList");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
                     if (Convert.ToBoolean(dalMST_BOXCricketDALBase.dbo_PR_MST_BOXCricket_UpdateByPK(modelMST_BOXCricket)))
                         TempData["successMessage"] = "Record Updated Successfully";
-                    return RedirectToAction("BOXCricketList");
+                    return RedirectToAction("Index");
                 }
             }
-            TempData["errorMessage"] = "Some error has occurred";
+            TempData["errorMessage"] = "Some error has occurred!";
             return RedirectToAction("Add");
         }
         #endregion
@@ -203,7 +199,7 @@ namespace BOXCricket.Areas.MST_BOXCricket.Controllers
         public IActionResult BOXCricketSearch(string BOXCricketName)
         {
             DataTable dt = dalMST_BOXCricketDAL.dbo_PR_MST_BOXCricket_Search_ByFilters(BOXCricketName);
-            return View("BOXCricketList", dt);
+            return View("Index", dt);
 
         }
         #endregion

@@ -1,0 +1,50 @@
+﻿<form asp-action="BookingSearch" asp-controller="MST_Booking" asp-area="MST_Booking" class="row mb-3">
+    <div class="row">
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="BOXCricketID">Select BOXCricket</label>
+                <select class="form-select" name="BOXCricketID" id="BOXCricketID" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                    <option value="" selected>Select BOXCricket</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="GroundID">Select Ground</label>
+                <select class="form-select" name="GroundID" id="GroundID" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.GroundList, "GroundID", "GroundName"))">
+                    <option disabled selected>Select Ground</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="Status">Select Booking Status</label>
+                <select class="form-select" name="Status" id="Status" aria-label="Default select example">
+                    <option disabled selected>Select Booking Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Confirm">Confirmed</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="UserName">User Name</label>
+                <input type="text" class="form-control" name="UserName" id="UserName" placeholder="User Name" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-1 mb-2">
+        <div class="form-group">
+            <label class="">&nbsp;</label>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-outline-success">Search</button>
+                <input type="reset" value="Reset" class="btn btn-outline-secondary ms-2" />
+            </div>
+        </div>
+    </div>
+</form>

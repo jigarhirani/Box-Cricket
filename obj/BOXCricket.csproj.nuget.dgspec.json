@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\BOXCricket\\BOXCricket.csproj": {}
+    "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj": {}
   },
   "projects": {
-    "D:\\BOXCricket\\BOXCricket.csproj": {
+    "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BOXCricket\\BOXCricket.csproj",
+        "projectUniqueName": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
         "projectName": "BOXCricket",
-        "projectPath": "D:\\BOXCricket\\BOXCricket.csproj",
+        "projectPath": "D:\\GitHub\\Box-Cricket\\BOXCricket.csproj",
         "packagesPath": "C:\\Users\\hiran\\.nuget\\packages\\",
-        "outputPath": "D:\\BOXCricket\\obj\\",
+        "outputPath": "D:\\GitHub\\Box-Cricket\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hiran\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.102.2, )"
+            },
             "EnterpriseLibrary.Data.NetCore": {
               "target": "Package",
               "version": "[6.3.2, )"
@@ -52,6 +56,10 @@
             "MailKit": {
               "target": "Package",
               "version": "[4.4.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[6.0.28, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -66,6 +74,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.16, )"
+            },
+            "PDFsharp": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [

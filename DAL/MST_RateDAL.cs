@@ -1,5 +1,4 @@
-﻿
-using BOXCricket.BAL;
+﻿using BOXCricket.BAL;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;

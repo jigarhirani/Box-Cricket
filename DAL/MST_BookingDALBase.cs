@@ -67,8 +67,8 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@BookingAmount", SqlDbType.Decimal, modelMST_Bookings.BookingAmount);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_Bookings.Status);
                 sqlDB.AddInParameter(dbCMD, "@Remarks", SqlDbType.VarChar, modelMST_Bookings.Remarks);
-                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
-                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now);
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
@@ -113,7 +113,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "BookingID", SqlDbType.Int, modelMST_BookingStatusUpdate.BookingID);
                 sqlDB.AddInParameter(dbCMD, "@Status", SqlDbType.VarChar, modelMST_BookingStatusUpdate.Status);
                 sqlDB.AddInParameter(dbCMD, "@Remarks", SqlDbType.VarChar, modelMST_BookingStatusUpdate.Remarks);
-                sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);

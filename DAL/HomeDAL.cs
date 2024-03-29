@@ -145,14 +145,85 @@ namespace BOXCricket.DAL
         }
         #endregion
 
+        #region Method: dbo_PR_GetBookingCountsByWeekdays        
+        public DataTable dbo_PR_GetBookingCountsByWeekdays(string? selectedBookingTrendValue)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_GetBookingCountsByWeekday");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                sqlDB.AddInParameter(dbCMD, "TimePeriodType", SqlDbType.VarChar, selectedBookingTrendValue);
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Method: dbo_PR_GetRevenueByPeriod        
+        public DataTable dbo_PR_GetRevenueByPeriod(string? selectedRevenueTrendValue)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_GetRevenueByPeriod");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                sqlDB.AddInParameter(dbCMD, "TimePeriodType", SqlDbType.VarChar, selectedRevenueTrendValue);
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Method: dbo_PR_GetTopUserDetailsByPeriod
+        public DataTable dbo_PR_GetTopUserDetailsByPeriod(string? selectedTopCustomersValue)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_GetTopUserDetailsByPeriod");
+                sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
+                sqlDB.AddInParameter(dbCMD, "TimePeriodType", SqlDbType.VarChar, selectedTopCustomersValue);
+                DataTable dtcounts = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dtcounts.Load(dr);
+                }
+
+                return dtcounts;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region Method: dbo_PR_MST_BOXCricket_ByFilters
-        public DataTable dbo_PR_MST_BOXCricket_ByFilters(int CityID, decimal HourlyRate, DateTime BookingDate)
+        public DataTable dbo_PR_MST_BOXCricket_ByFilters(int CityID, decimal HourlyRate)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_BOXCricket_ByFilters");
-                sqlDB.AddInParameter(dbCMD, "OwnerID", SqlDbType.Int, CommonVariables.UserID());
                 if (CityID != 0)
                 {
                     sqlDB.AddInParameter(dbCMD, "CityID", SqlDbType.Int, CityID);
@@ -163,9 +234,36 @@ namespace BOXCricket.DAL
                     sqlDB.AddInParameter(dbCMD, "HourlyRate", SqlDbType.Decimal, HourlyRate);
                 }
 
-                if (BookingDate != null)
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
                 {
-                    sqlDB.AddInParameter(dbCMD, "BookingDate", SqlDbType.DateTime, BookingDate);
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Method: dbo_PR_MST_Ground_ByFilters
+        public DataTable dbo_PR_MST_Ground_ByFilters(int GroundCapacity, decimal PerHourPrice)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_Ground_ByFilters");
+                if (GroundCapacity != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "Capacity", SqlDbType.Int, GroundCapacity);
+                }
+
+                if (PerHourPrice != 0)
+                {
+                    sqlDB.AddInParameter(dbCMD, "HourlyRate", SqlDbType.Decimal, PerHourPrice);
                 }
 
                 DataTable dt = new DataTable();

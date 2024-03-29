@@ -65,8 +65,8 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@CityID", SqlDbType.Int, modelMST_BOXCricket.CityID);
                 sqlDB.AddInParameter(dbCMD, "@BOXCricketImagePath1", SqlDbType.VarChar, modelMST_BOXCricket.BOXCricketImagePath1);
                 sqlDB.AddInParameter(dbCMD, "@BOXCricketImagePath2", SqlDbType.VarChar, modelMST_BOXCricket.BOXCricketImagePath2);
-                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
-                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "Created", SqlDbType.DateTime, DateTime.Now);
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
@@ -118,7 +118,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "@CityID", SqlDbType.Int, modelMST_BOXCricket.CityID);
                 sqlDB.AddInParameter(dbCMD, "@BOXCricketImagePath1", SqlDbType.VarChar, modelMST_BOXCricket.BOXCricketImagePath1);
                 sqlDB.AddInParameter(dbCMD, "@BOXCricketImagePath2", SqlDbType.VarChar, modelMST_BOXCricket.BOXCricketImagePath2);
-                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);

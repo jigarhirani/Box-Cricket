@@ -7,20 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="EnterpriseLibrary.Data.NetCore" Version="6.3.2" />
     <PackageReference Include="MailKit" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.24">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="PDFsharp" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\MST_BOXCricket\Data\" />
     <Folder Include="Areas\MST_BOXCricket\Models\" />
-    <Folder Include="Areas\MST_BOXCricket\Views\" />
     <Folder Include="wwwroot\uploadphoto\boxcricket\" />
     <Folder Include="wwwroot\uploadphoto\ground\" />
     <Folder Include="wwwroot\uploadphoto\profile\" />

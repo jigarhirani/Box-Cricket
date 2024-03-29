@@ -33,6 +33,30 @@ namespace BOXCricket.DAL
         }
         #endregion
 
+        #region Method: dbo_PR_MST_User_Select_ByEmail
+        public DataTable dbo_PR_MST_User_Select_ByEmail(string ConnStr, string Email)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_Select_ByEmail");
+                sqlDB.AddInParameter(dbCMD, "Email", SqlDbType.VarChar, Email);
+
+                DataTable dt = new DataTable();
+                using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+                {
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region Method: dbo_PR_MST_Ground_SelectbyDropdown
         public DataTable dbo_PR_LOC_Country_SelectByDropdownList()
         {
@@ -111,7 +135,7 @@ namespace BOXCricket.DAL
                 sqlDB.AddInParameter(dbCMD, "UserID", SqlDbType.Int, CommonVariables.UserID());
                 sqlDB.AddInParameter(dbCMD, "CurruntPassword", SqlDbType.VarChar, modelMST_User_PasswordChange.CurruntPassword);
                 sqlDB.AddInParameter(dbCMD, "NewPassword", SqlDbType.VarChar, modelMST_User_PasswordChange.NewPassword);
-                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss"));
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
 
                 int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
                 return (vReturnValue == -1 ? false : true);
@@ -123,13 +147,34 @@ namespace BOXCricket.DAL
         }
         #endregion
 
-        #region Method: dbo_PR_MST_User_VarificationToken_UpdateByPK
-        public bool? dbo_PR_MST_User_VarificationToken_UpdateByPK(string Email, string token)
+        #region Method: dbo_PR_MST_User_PasswordReset_Update
+        public bool? dbo_PR_MST_User_PasswordReset_Update(string Email, MST_User_PasswrodReset modelMST_User_PasswrodReset)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnStr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_VarificationToken_UpdateByPK");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_PasswordReset_Update");
+                sqlDB.AddInParameter(dbCMD, "Email", SqlDbType.VarChar, Email);
+                sqlDB.AddInParameter(dbCMD, "NewPassword", SqlDbType.VarChar, modelMST_User_PasswrodReset.NewPassword);
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
+
+                int vReturnValue = sqlDB.ExecuteNonQuery(dbCMD);
+                return (vReturnValue == -1 ? false : true);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Method: dbo_PR_MST_User_EmailVarification_UpdateByPK
+        public bool? dbo_PR_MST_User_EmailVarification_UpdateByPK(string Email, string token)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_EmailVarification_UpdateByPK");
                 sqlDB.AddInParameter(dbCMD, "Email", SqlDbType.VarChar, Email);
                 sqlDB.AddInParameter(dbCMD, "VarificationToken", SqlDbType.NVarChar, token);
 
@@ -139,6 +184,27 @@ namespace BOXCricket.DAL
             catch (Exception)
             {
                 return null;
+            }
+        }
+        #endregion
+
+        #region Method: dbo_PR_MST_User_VarificationToken_UpdateByEmail
+        public Boolean dbo_PR_MST_User_VarificationToken_UpdateByEmail(string Email, string VarificationToken)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(ConnStr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_MST_User_VarificationToken_UpdateByEmail");
+                sqlDB.AddInParameter(dbCMD, "Email", SqlDbType.VarChar, Email);
+                sqlDB.AddInParameter(dbCMD, "VarificationToken", SqlDbType.NVarChar, VarificationToken);
+                sqlDB.AddInParameter(dbCMD, "Modified", SqlDbType.DateTime, DateTime.Now);
+
+                Boolean result = Convert.ToBoolean(sqlDB.ExecuteNonQuery(dbCMD));
+                return result;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
         #endregion

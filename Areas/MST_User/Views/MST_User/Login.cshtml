@@ -2,27 +2,10 @@
     Layout = "~/Views/Shared/_Layout_Login.cshtml";
 }
 @model BOXCricket.Areas.MST_User.Models.MST_UserModel
-@{
-    var emailverificationMessage = TempData["emailverificationMessage"]?.ToString();
-    var successMessage = TempData["successMessage"]?.ToString();
-}
 <div class="container-xxl">    
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
-            @if (!string.IsNullOrWhiteSpace(emailverificationMessage))
-            {
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    @emailverificationMessage
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            }
-            @if (!string.IsNullOrWhiteSpace(successMessage))
-            {
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    @successMessage
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            }
+            @Html.Partial("_ShowAlertInfo")
             <!-- Register -->
             <div class="card">
                 <div class="card-body">
@@ -123,10 +106,23 @@
 
                     <p class="text-center">
                         <span>New on our platform?</span>
-                        <a asp-action="SingUp">
+                        <a asp-action="SignUp">
                             <span>Create an account</span>
                         </a>
                     </p>
+
+                    <div class="divider my-4">
+                        <div class="divider-text">or</div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-outline-dark" asp-area="MST_User" asp-controller="MST_User" asp-action="LoginWithGoogle" role="button" style="text-transform:none;">
+                            <img width="20px" style="margin-bottom:0px; margin-right:5px;" alt="Google sign-in" src="~/assets/img/icons/brands/google.png" />
+                            Login with Google
+                        </a>
+                    </div>
+
                 </div>
             </div>
             <!-- /Register -->

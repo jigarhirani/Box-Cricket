@@ -1,0 +1,44 @@
+﻿<form asp-action="GroundSearch" asp-controller="MST_Ground" asp-area="MST_Ground" class="row mb-3">
+    <div class="row">
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="BOXCricketID">Select BOXCricket</label>
+                <select class="form-select" name="BOXCricketID" id="BOXCricketID" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.BOXCricketList, "BOXCricketID", "BOXCricketName"))" onchange="funOnBOXCricketChange();">
+                    <option value="" selected>Select BOXCricket</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="searchGroundName">Ground Name</label>
+                <input type="text" class="form-control" name="GroundName" id="searchGroundName" placeholder="Ground Name" />
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="searchGroundCapacity">Ground Capacity</label>
+                <input type="text" class="form-control" name="GroundCapacity" id="searchGroundCapacity" placeholder="Ground Capacity" />
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="form-group">
+                <label for="IsAllowedBooking">Ground Status</label>
+                <select class="form-select" name="IsAllowedBooking" id="IsAllowedBooking" aria-label="Default select example">
+                    <option selected disabled>Select Ground Status</option>
+                    <option value="1">Allowed To Book</option>
+                    <option value="0">Not Allowed To Book</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-1 mb-2">
+        <div class="form-group">
+            <label class="">&nbsp;</label>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-outline-success">Search</button>
+                <input type="reset" value="Reset" class="btn btn-outline-secondary ms-2" />
+            </div>
+        </div>
+    </div>
+</form>

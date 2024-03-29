@@ -112,7 +112,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save</button>
-                                <a asp-action="BOXCricketList" class="btn btn-secondary ms-2">Cancel</a>
+                                <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
                             </form>
                         </div>
                     </div>
@@ -213,14 +213,6 @@
             // Clear the file input to allow selecting the same file again
             document.getElementById('upload2').value = '';
         });
-
-        //Display Preview of selected image 3
-        upload3.onchange = evt => {
-            const [file] = upload3.files
-            if (file) {
-                uploadedAvatar3.src = URL.createObjectURL(file);
-            }
-        }
 
     </script>
     @{

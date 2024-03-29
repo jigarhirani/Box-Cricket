@@ -1,0 +1,78 @@
+﻿@using System.Data
+<div class="table-responsive text-nowrap">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="sticky-left">Ground Name</th>
+                <th>BOX Cricket Name</th>
+                <th>Booked By</th>
+                <th>Booking Date</th>
+                <th>Timings</th>
+                <th>Total Slots Booked</th>
+                <th>BookingAmount</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th class="sticky-right">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+            @{
+                if (Model.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in Model.Rows)
+                    {
+                        <tr>
+                            <td class="sticky-left">@dr["GroundName"]</td>
+                            <td>@dr["BOXCricketName"]</td>
+                            <td>@dr["UserName"]</td>
+                            <td>@Convert.ToDateTime(dr["BookingDate"]).ToString("dd-MM-yy")</td>
+                            <td>@dr["SlotDetails"]</td>
+                            <td>@dr["TotalSlotsBooked"]</td>
+                            <td>@dr["BookingAmount"]</td>
+                            @{
+                                var status = dr["Status"].ToString();
+                                string statusClass = "";
+                                switch (status)
+                                {
+                                    case "Confirmed":
+                                        statusClass = "badge bg-label-success me-1";
+                                        break;
+                                    case "Pending":
+                                        statusClass = "badge bg-label-warning me-1";
+                                        break;
+                                    case "Rejected":
+                                        statusClass = "badge bg-label-danger me-1";
+                                        break;
+                                    case "Completed":
+                                        statusClass = "badge bg-label-primary me-1";
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            <td><span class="@statusClass">@status</span></td>
+                            <td>@dr["Created"]</td>
+                            <td>@dr["Modified"]</td>
+                            <td class="sticky-right">
+                                <a class="btn btn-icon btn-warning" onclick="loadPopup(@Convert.ToInt32(@dr["BookingID"]))">
+                                    <i class='bx bx-pencil'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9" class="text-center">
+                            <p class="col-form-label">No Record Found</p>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+</div>
